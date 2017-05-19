@@ -1,0 +1,11 @@
+<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 row-margin-20">
+	<a href="{{ url('opportunities',$category->slug) }}">
+		<img class="img-responsive btn-block custom-rounded" src="{{asset('public/img-category')}}/{{ $category->image}}" alt="{{ $category->name }}">
+	</a>
+
+	<h1 class="title-services">
+		<a href="{{ url('opportunities',$category->slug) }}">
+			{{ $category->name }} ({{$category->startups()->count()}})
+		</a>
+	</h1>
+</div>
