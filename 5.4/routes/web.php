@@ -44,7 +44,7 @@ Route::get('categories', function(){
  |
  |-----------------------------------
  | Opportunities
- |--------- -------------------------
+ |-----------------------------------
  */
 Route::get('opportunities','IndexController@opportunities');
 
@@ -52,7 +52,7 @@ Route::get('opportunities','IndexController@opportunities');
  |
  |-----------------------------------
  | Investors
- |--------- -------------------------
+ |-----------------------------------
  */
 Route::get('investors','IndexController@investors');
 
@@ -60,8 +60,8 @@ Route::get('investors','IndexController@investors');
 /* 
  |
  |-----------------------------------
- | Startupss
- |--------- -------------------------
+ | Startups
+ |-----------------------------------
  */
 Route::get('startups','IndexController@startups');
 
@@ -71,7 +71,7 @@ Route::get('startups','IndexController@startups');
  |
  |-----------------------------------
  | Portfolio
- |--------- -------------------------
+ |-----------------------------------
  */
 Route::get('portfolio','IndexController@portfolio');
 
@@ -79,7 +79,7 @@ Route::get('portfolio','IndexController@portfolio');
  |
  |-----------------------------------
  | Verify Account
- |--------- -------------------------
+ |-----------------------------------
  */
 Route::get('verify/account/{confirmation_code}', 'IndexController@getVerifyAccount')->where('confirmation_code','[A-Za-z0-9]+');
 
@@ -106,7 +106,7 @@ Route::get('/register/investor', 'Auth\RegisterController@investor');
  |
  |-----------------------------------------------
  | Ajax Request
- |--------- -------------------------------------
+ |-----------------------------------------------
  */
 Route::get('ajax/investments', 'AjaxController@investments');
 Route::get('ajax/startup/updates', 'AjaxController@updatesstartup');
@@ -118,7 +118,7 @@ Route::get('ajax/search', 'AjaxController@search');
  |
  |-----------------------------------
  | Details startup
- |--------- -------------------------
+ |-----------------------------------
  */
 Route::group(['middleware' => 'pending'], function() {
 
@@ -129,7 +129,7 @@ Route::group(['middleware' => 'pending'], function() {
  |
  |-----------------------------------
  | User Views 
- |--------- -------------------------
+ |-----------------------------------
  */
 Route::group(['middleware' => 'auth'], function() {
 	
@@ -200,7 +200,7 @@ Route::group(['middleware' => 'auth'], function() {
  |
  |-----------------------------------
  | Admin Panel
- |--------- -------------------------
+ |-----------------------------------
  */
 Route::group(['middleware' => 'role'], function() {
 	
@@ -287,7 +287,7 @@ Route::group(['middleware' => 'role'], function() {
  |
  |-----------------------------------
  | Investments
- |--------- -------------------------
+ |-----------------------------------
  */
 Route::get('invest/{id}/{slug?}','investmentsController@show');
 Route::post('invest/{id}','investmentsController@send');
@@ -310,7 +310,7 @@ Route::post('invest/{id}','investmentsController@send');
  |
  |------------------------
  | Pages Static Custom
- |--------- --------------
+ |------------------------
  */
 Route::get('page/{page}', function( $page ){
 	

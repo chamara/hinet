@@ -1,7 +1,7 @@
     <!-- Bootstrap core CSS --> 
     <link href="{{ asset('public/bootstrap/css/bootstrap.css')}}" rel="stylesheet" type="text/css" />
 
-    <!-- Custom CSS-->
+    <!-- Custom CSS -->
     <link href="{{ asset('public/css/main.css') }}" rel="stylesheet">
     
     <!-- Font Awesome CSS -->
@@ -16,5 +16,5 @@
     <!-- Sweet Alert -->
     <link href="{{ asset('public/plugins/sweetalert/sweetalert.css')}}" rel="stylesheet" type="text/css" />
 
-    <!-- New CSS-->
+    <!-- New CSS -->
     <link href="{{ asset('public/css/new.css') }}" rel="stylesheet">

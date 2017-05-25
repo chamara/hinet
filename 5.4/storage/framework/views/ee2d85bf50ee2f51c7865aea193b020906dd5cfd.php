@@ -1,28 +1,28 @@
 <!--Extend App Layout-->
-@extends('app')
+
 
 <!--Page Title-->
-@section('title')Register Investor - @endsection
+<?php $__env->startSection('title'); ?>Register Investor - <?php $__env->stopSection(); ?>
 
 <!--Main Content-->
-@section('content')
+<?php $__env->startSection('content'); ?>
 
 <!--Container-->
 <div class="container margin-bottom-40 margin-top-40">
   <div class="text-center margin-bottom-40">
-    <img src="{{ asset('public/img/logo-dark.png') }}" class="login-logo"/>
+    <img src="<?php echo e(asset('public/img/logo-dark.png')); ?>" class="login-logo"/>
   </div>
 
   <!-- Login form -->
   <div class="login-form">
     <!-- Form errors -->
-    @include('errors.errors-forms')
+    <?php echo $__env->make('errors.errors-forms', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 
     <!-- Start Form -->
-    <form action="{{ url('register') }}" method="post" name="form" id="signup_form">
+    <form action="<?php echo e(url('register')); ?>" method="post" name="form" id="signup_form">
 
       <!-- CSRF Token -->
-      <input type="hidden" name="_token" value="{{ csrf_token() }}">
+      <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
       <input type="hidden" name="role" value="investor">                   
 
       <!-- Full Name-->
@@ -57,7 +57,8 @@
 
   <a href="#" onclick="history.back();" class="text-center btn-block margin-top-10 back_btn"><i class="fa fa-long-arrow-left"></i>Back</a>
 </div>
-@endsection
+<?php $__env->stopSection(); ?>
 
 <!-- Include Javascript -->  
-@include('includes.javascript-password-validation')
+<?php echo $__env->make('includes.javascript-password-validation', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+<?php echo $__env->make('app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
