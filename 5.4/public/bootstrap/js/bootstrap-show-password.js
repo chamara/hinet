@@ -73,8 +73,6 @@
             .attr('class', this.$element.attr('class'))
             .attr('style', this.$element.attr('style'))
             .attr('placeholder', this.$element.attr('placeholder'))
-            .attr('name', this.$element.attr('name'))
-            .attr('id', this.$element.attr('id'))
             .css('display', this.$element.css('display'))
             .val(this.$element.val()).hide();
 

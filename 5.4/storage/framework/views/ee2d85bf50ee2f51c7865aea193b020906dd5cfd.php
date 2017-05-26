@@ -27,12 +27,12 @@
 
       <!-- Full Name-->
       <div class="form-group">
-        <input type="text" class="form-control input-lg" name="name" placeholder="Full Name" required>
+        <input type="text" class="form-control input-lg" id="name" name="name" placeholder="Full Name" required>
       </div>
 
       <!-- Email -->
       <div class="form-group">
-        <input type="text" class="form-control input-lg" name="email" placeholder="Email" required>
+       <input type="text" class="form-control input-lg" id="email" name="email" placeholder="Email" required>
       </div>
 
       <!-- Password -->
@@ -42,7 +42,7 @@
 
       <!-- Confirm Password -->
       <div class="form-group">
-        <input type="password" class="form-control input-lg" id="confirm_password" name="password_confirmation" placeholder="Confirm Password" required>
+        <input type="password" class="form-control input-lg" id="password_confirmation" name="password_confirmation" placeholder="Confirm Password" required>
         <span id='message'></span>
       </div>
 

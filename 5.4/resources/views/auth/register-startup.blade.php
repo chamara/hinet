@@ -44,7 +44,7 @@
 
      <!-- Confirm Password -->
      <div class="form-group">
-       <input type="password" class="form-control input-lg" id="confirm_password" name="password_confirmation" placeholder="Confirm Password" required>
+       <input type="password" class="form-control input-lg" id="password_confirmation" name="password_confirmation" placeholder="Confirm Password" required>
        <span id='message'></span>
      </div>
 
