@@ -49,6 +49,7 @@ jQuery(document).ready(function($){
             if(password1.val() == '')
             {
                 passwordsInfo.removeClass().addClass('weakpass').html("Please specify a password.").css({'color':'red', 'font-size':'13px'});
+                password.setCustomValidity("Please specify a password");
                 if (password2.val !== '') {
                     password2.val('');
                 }
@@ -56,6 +57,7 @@ jQuery(document).ready(function($){
             else if(VryStrongPass.test(password1.val()))
             {
                 passwordsInfo.removeClass().addClass('vrystrongpass').html("Very Strong Password!").css({'color':'green', 'font-size':'13px'});
+                password.setCustomValidity("");
                 if (password2.val !== '') {
                     password2.val('');
                 }                
@@ -63,6 +65,7 @@ jQuery(document).ready(function($){
             else if(StrongPass.test(password1.val()))
             {
                 passwordsInfo.removeClass().addClass('strongpass').html("Strong Password!").css({'color':'green', 'font-size':'13px'});
+                password.setCustomValidity("");
                 if (password2.val !== '') {
                     password2.val('');
                 }                
@@ -70,6 +73,7 @@ jQuery(document).ready(function($){
             else if(MediumPass.test(password1.val()))
             {
                 passwordsInfo.removeClass().addClass('goodpass').html("Good Password!").css({'color':'green', 'font-size':'13px'});
+                password.setCustomValidity("");
                 if (password2.val !== '') {
                     password2.val('');
                 }                
@@ -77,13 +81,18 @@ jQuery(document).ready(function($){
             else if(WeakPass.test(password1.val()))
             {
                 passwordsInfo.removeClass().addClass('stillweakpass').html("Weak Password! (Enter digits to make it stronger)").css({'color':'green', 'font-size':'13px'});
+                password.setCustomValidity("");
                 if (password2.val !== '') {
                     password2.val('');
-                }
+                }                
             }
             else
             {
                 passwordsInfo.removeClass().addClass('weakpass').html("Password must be 6 or more characters").css({'color':'red', 'font-size':'13px'});
+                password.setCustomValidity("Password must be 6 or more characters");
+                if (password2.val !== '') {
+                    password2.val('');
+                }                
             }
         });
         
@@ -95,10 +104,12 @@ jQuery(document).ready(function($){
                 //if(WeakPass.test(password1.val()))
                 {
                     passwordsInfo.removeClass().addClass('weakpass').html("Password must be 6 or more characters").css({'color':'red', 'font-size':'13px'});
+                    password.setCustomValidity("Password must be 6 or more characters");
                 }
                 else
                 {
                     passwordsInfo.removeClass().addClass('weakpass').html("Passwords do not match!").css({'color':'red', 'font-size':'13px'});
+                    password_confirmation.setCustomValidity("Passwords Don't Match");
                 }
             }
             else
@@ -107,10 +118,12 @@ jQuery(document).ready(function($){
                 //if(WeakPass.test(password1.val()))
                 {
                     passwordsInfo.removeClass().addClass('weakpass').html("Password must be 6 or more characters").css({'color':'red', 'font-size':'13px'});
+                    password.setCustomValidity("Password must be 6 or more characters");
                 }
                 else
                 {
                     passwordsInfo.removeClass().addClass('weakpass').html("Passwords match!").css({'color':'green', 'font-size':'13px'});
+                    password_confirmation.setCustomValidity("");
                 }
             }
         });
