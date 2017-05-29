@@ -54,9 +54,10 @@
                   <label class="col-sm-2 control-label">Investor</label>
                   <div class="col-sm-10">
                     <select name="startup_id" class="form-control">
-                      @foreach( $user as $user )
+                      <!--commented out 29 May 2017 as it returns an error page if another investor is selected. Is this ok?-->
+                      <!--@foreach( $user as $user )
                       <option value="{{ $user->id }}">{{ $user->name }}</option>
-                      @endforeach
+                      @endforeach-->
                       <option value="1">Offline Investor</option>
                     </select>
                   </div>
