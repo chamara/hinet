@@ -50,7 +50,7 @@ class AdminSettingsTableSeeder extends Seeder
                 'min_width_height_image' => '800x400',
                 'fee_investment' => 6,
                 'auto_approve_startups' => '1',
-                'disable_startups_reg' => '0',
+                'disable_startups_reg' => 'off',
                 'created_at' => '2017-05-29 06:06:48',
                 'updated_at' => '2017-05-29 06:06:48',
             ),

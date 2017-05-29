@@ -5,9 +5,11 @@
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
   <section class="content-header">
-    <h4>Admin<i class="fa fa-angle-right margin-separator"></i>Pages (<?php echo e($data->count()); ?>)
+    <h4>
+     Admin<i class="fa fa-angle-right margin-separator"></i>Pages (<?php echo e($data->count()); ?>)
+     <a href="<?php echo e(url('panel/admin/pages/create')); ?>" class="btn btn-sm btn-success no-shadow pull-right"><i class="glyphicon glyphicon-plus myicon-right"></i> Add Post
+     </a>
     </h4>
-    
   </section>
 
   <!-- Main content -->
@@ -26,16 +28,10 @@
     <div class="col-xs-12">
       <div class="box">
         <div class="box-header">
-          <h3 class="box-title">Pages</h3>
-          <div class="box-tools">
-            <a href="<?php echo e(url('panel/admin/pages/create')); ?>" class="btn btn-sm btn-success no-shadow pull-right">
-             <i class="glyphicon glyphicon-plus myicon-right"></i>Add New
-           </a>
-         </div>
-       </div>
-       
-       
-       
+          <h3 class="box-title"> 
+            Posts
+          </h3>
+        </div>      
        <div class="box-body table-responsive no-padding">
         <table class="table table-hover">
          <tbody>

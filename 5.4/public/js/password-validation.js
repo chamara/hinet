@@ -80,7 +80,12 @@ jQuery(document).ready(function($){
             }
             else if(WeakPass.test(password1.val()))
             {
-                passwordsInfo.removeClass().addClass('stillweakpass').html("Weak Password! (Enter digits to make it stronger)").css({'color':'green', 'font-size':'13px'});
+                if(password1.val().match(/^\d+$/)) {
+                    passwordsInfo.removeClass().addClass('stillweakpass').html("Weak Password! (Enter letters to make it stronger)").css({'color':'green', 'font-size':'13px'});
+                }
+                else {
+                    passwordsInfo.removeClass().addClass('stillweakpass').html("Weak Password! (Enter digits to make it stronger)").css({'color':'green', 'font-size':'13px'});
+                }
                 password.setCustomValidity("");
                 if (password2.val !== '') {
                     password2.val('');
@@ -100,8 +105,8 @@ jQuery(document).ready(function($){
 
             if(password1.val() !== password2.val())
             {
+                //if(WeakPass.test(password1.val())) --doesn't work                
                 if (password1.val().length < 6)
-                //if(WeakPass.test(password1.val())) --doesn't work
                 {
                     passwordsInfo.removeClass().addClass('weakpass').html("Password must be 6 or more characters").css({'color':'red', 'font-size':'13px'});
                     password.setCustomValidity("Password must be 6 or more characters");

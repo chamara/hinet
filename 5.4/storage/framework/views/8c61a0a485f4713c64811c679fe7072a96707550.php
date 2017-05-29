@@ -5,7 +5,7 @@
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h4>Admin
-      <i class="fa fa-angle-right margin-separator"></i>Payment Settings
+      <i class="fa fa-angle-right margin-separator"></i>Payments
     </h4>
 
   </section>

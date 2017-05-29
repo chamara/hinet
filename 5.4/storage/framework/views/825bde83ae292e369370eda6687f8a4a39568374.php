@@ -6,8 +6,8 @@
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h4>
-     Admin<i class="fa fa-angle-right margin-separator"></i>Investments(<?php echo e($data->total()); ?>)
-     <a href="<?php echo e(url('panel/admin/investment/add')); ?>" class="btn btn-sm btn-success no-shadow pull-right"><i class="glyphicon glyphicon-plus myicon-right"></i> Add offline investment
+     Admin<i class="fa fa-angle-right margin-separator"></i>Investments (<?php echo e($data->total()); ?>)
+     <a href="<?php echo e(url('panel/admin/investment/add')); ?>" class="btn btn-sm btn-success no-shadow pull-right"><i class="glyphicon glyphicon-plus myicon-right"></i> Add Offline Investment
      </a>
    </h4>
 

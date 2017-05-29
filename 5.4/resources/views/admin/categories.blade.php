@@ -4,9 +4,13 @@
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
-  <section class="content-header">
-    <h4>Admin<i class="fa fa-angle-right margin-separator"></i>Categories</h4>  
-  </section>
+    <section class="content-header">
+      <h4>
+       Admin<i class="fa fa-angle-right margin-separator"></i>Categories
+       <a href="{{ url('panel/admin/categories/add') }}" class="btn btn-sm btn-success no-shadow pull-right"><i class="glyphicon glyphicon-plus myicon-right"></i> Add Category
+       </a>
+     </h4>    
+    </section>
 
   <!-- Main content -->
   <section class="content">
@@ -24,26 +28,20 @@
       <div class="col-xs-12">
         <div class="box">
           <div class="box-header">
-            <h3 class="box-title">Categories</h3>
-            <div class="box-tools">
-              <a href="{{ url('panel/admin/categories/add') }}" class="btn btn-sm btn-success no-shadow pull-right">
-                <i class="glyphicon glyphicon-plus myicon-right"></i>Add New
-              </a>
-            </div>
-          </div>
-
-
-
+            <h3 class="box-title"> 
+              Categories                     
+            </h3>
+          </div>        
           <div class="box-body table-responsive no-padding">
             <table class="table table-hover">
               <tbody>
 
                 @if( $totalCategories !=  0 )
                 <tr>
-                  <th>ID</th>
-                  <th>Name</th>
-                  <th>Actions</th>
-                  <th>Status</th>
+                  <th class='active'>ID</th>
+                  <th class='active'>Name</th>
+                  <th class='active'>Actions</th>
+                  <th class='active'>Status</th>
                 </tr>
 
                 @foreach( $categories as $category )

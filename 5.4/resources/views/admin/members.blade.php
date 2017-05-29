@@ -7,7 +7,7 @@
   <section class="content-header">
     <h4>Admin<i class="fa fa-angle-right margin-separator"></i>Members ({{$data->total()}})
       <a href="{{{ url('panel/admin/member/add') }}}" class="btn btn-sm btn-success no-shadow pull-right">
-        <i class="glyphicon glyphicon-plus myicon-right"></i>Add New
+        <i class="glyphicon glyphicon-plus myicon-right"></i>Add Member
       </a>
     </h4>
 

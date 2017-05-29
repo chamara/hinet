@@ -6,7 +6,7 @@
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h4>Admin
-      <i class="fa fa-angle-right margin-separator"></i>Social	
+      <i class="fa fa-angle-right margin-separator"></i>Profiles-Social
     </h4>
   </section>
 
