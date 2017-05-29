@@ -281,6 +281,7 @@ class AdminController extends Controller {
 		$sql->email_admin         	= $request->email_admin;
 		$sql->auto_approve_startups = $request->auto_approve_startups;
 		$sql->disable_startups_reg  = $request->disable_startups_reg;
+		$sql->disable_investors_reg = $request->disable_investors_reg;		
 		$sql->captcha               = $request->captcha;
 		$sql->email_verification 	= $request->email_verification;
 		$sql->result_request      	= $request->result_request;

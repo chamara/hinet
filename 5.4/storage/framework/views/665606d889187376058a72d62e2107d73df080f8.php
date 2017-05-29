@@ -35,7 +35,7 @@ if( Auth::check() ){
         <?php if( Auth::check() ): ?>
 
         <?php if( $userAuth->role == 'admin'): ?> 
-        <li><a href="<?php echo e(url('panel/admin')); ?>">Admin</a></li>
+        <li><a href="<?php echo e(url('panel/admin')); ?>">Admins</a></li>
         <?php endif; ?>
 
         <!-- Investor List -->
@@ -66,11 +66,23 @@ if( Auth::check() ){
 
 
        <?php else: ?> 
-       <!-- Logged Out List -->
-       <li><a href="<?php echo e(url('/startups')); ?>">Startups</a></li>
-       <li><a href="<?php echo e(url('/investors')); ?>">Investors</a></li>
-       <li><a href="<?php echo e(url('/login')); ?>">Login</a></li>
-       <li><a href="<?php echo e(url('/register')); ?>">Sign Up</a></li>
+          <!-- Logged Out List -->
+          <li><a href="<?php echo e(url('/startups')); ?>">Startups</a></li>
+          <li><a href="<?php echo e(url('/investors')); ?>">Investors</a></li>
+
+          <li><a href="<?php echo e(url('/login')); ?>">Login</a></li>
+
+          <?php if($settings->disable_startups_reg == 'yes' && $settings->disable_investors_reg == 'no'): ?>
+            <li><a href="<?php echo e(url('/register/investor')); ?>">Investor Sign Up</a></li>
+
+          <?php elseif($settings->disable_startups_reg == 'no' && $settings->disable_investors_reg == 'yes'): ?>
+            <li><a href="<?php echo e(url('/register/startup')); ?>">Register Startup</a></li>
+
+          <?php elseif($settings->disable_startups_reg == 'no' && $settings->disable_investors_reg == 'no'): ?>
+            <li><a href="<?php echo e(url('/register')); ?>">Sign Up</a></li>
+          <?php else: ?>
+          <?php endif; ?>       
+
        <?php endif; ?>
      </ul>
    </div>

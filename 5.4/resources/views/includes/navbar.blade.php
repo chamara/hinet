@@ -35,7 +35,7 @@ if( Auth::check() ){
         @if( Auth::check() )
 
         @if( $userAuth->role == 'admin') 
-        <li><a href="{{ url('panel/admin') }}">Admin</a></li>
+        <li><a href="{{ url('panel/admin') }}">Admins</a></li>
         @endif
 
         <!-- Investor List -->
@@ -66,11 +66,23 @@ if( Auth::check() ){
 
 
        @else 
-       <!-- Logged Out List -->
-       <li><a href="{{ url('/startups') }}">Startups</a></li>
-       <li><a href="{{ url('/investors') }}">Investors</a></li>
-       <li><a href="{{ url('/login') }}">Login</a></li>
-       <li><a href="{{ url('/register') }}">Sign Up</a></li>
+          <!-- Logged Out List -->
+          <li><a href="{{ url('/startups') }}">Startups</a></li>
+          <li><a href="{{ url('/investors') }}">Investors</a></li>
+
+          <li><a href="{{ url('/login') }}">Login</a></li>
+
+          @if ($settings->disable_startups_reg == 'yes' && $settings->disable_investors_reg == 'no')
+            <li><a href="{{ url('/register/investor') }}">Investor Sign Up</a></li>
+
+          @elseif ($settings->disable_startups_reg == 'no' && $settings->disable_investors_reg == 'yes')
+            <li><a href="{{ url('/register/startup') }}">Register Startup</a></li>
+
+          @elseif ($settings->disable_startups_reg == 'no' && $settings->disable_investors_reg == 'no')
+            <li><a href="{{ url('/register') }}">Sign Up</a></li>
+          @else
+          @endif       
+
        @endif
      </ul>
    </div>

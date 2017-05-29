@@ -1,3 +1,6 @@
+<!-- Admin Settings -->
+<?php $settings = App\Models\AdminSettings::first();?>
+
 <!--Extend App Layout-->
 @extends('app')
 
@@ -15,14 +18,18 @@
   <div class="signup-form">
     <h1 class=" margin-bottom-40 text-center"></h1>
 
+    @if ($settings->disable_startups_reg == 'no')
+      <div class="form-group">
+        <a href="{{ url('/register/startup') }}" class="btn btn-block btn-lg btn-main custom-rounded">Create Startup Profile</a>
+      </div>
+    @endif
 
-    <div class="form-group">
-      <a href="{{ url('/register/startup') }}" class="btn btn-block btn-lg btn-main custom-rounded">Create Startup Profile</a>
-    </div>
+    @if ($settings->disable_investors_reg == 'no')
+      <div class="form-group">
+        <a href="{{ url('/register/investor') }}" class="btn btn-block btn-lg btn-main custom-rounded">Request to Join as Investor</a>
+      </div>
+    @endif
 
-    <div class="form-group">
-      <a href="{{ url('/register/investor') }}" class="btn btn-block btn-lg btn-main custom-rounded">Request to Join as Investor</a>
-    </div>
     <hr>
     <p>Already registered? <a href="{{ url('/login') }}">Login</a></p>
   </div>

@@ -1,3 +1,6 @@
+<!-- Admin Settings -->
+<?php $settings = App\Models\AdminSettings::first();?>
+
 <!--Extend App Layout--> 
 
 
@@ -39,7 +42,18 @@
     </form>
     <hr>
     <p><a href="<?php echo e(url('/password/reset')); ?>">Forgot Password?</a></p>
-    <p>Don't have an account yet?<a href="<?php echo e(url('/register')); ?>"> Sign Up</a></p>
+
+    <?php if($settings->disable_startups_reg == 'yes' && $settings->disable_investors_reg == 'no'): ?>
+      <p>Don't have an account yet?<a href="<?php echo e(url('/register/investor')); ?>"> Investor Sign up </a></p>
+
+    <?php elseif($settings->disable_startups_reg == 'no' && $settings->disable_investors_reg == 'yes'): ?>
+      <p>Don't have an account yet?<a href="<?php echo e(url('/register/startup')); ?>"> Register Startup</a></p>
+
+    <?php elseif($settings->disable_startups_reg == 'no' && $settings->disable_investors_reg == 'no'): ?>
+      <p>Don't have an account yet?<a href="<?php echo e(url('/register')); ?>"> Sign Up </a></p>
+    <?php else: ?>
+    <?php endif; ?>
+
   </div>
 </div>
 <?php $__env->stopSection(); ?>

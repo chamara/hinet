@@ -80,51 +80,56 @@ $settings = App\Models\AdminSettings::first();
           <li class="header">Menu</li>
           
           <!-- Links -->
-          <li @if(Request::is('panel/admin')) class="active" @endif>
+          <li @if( Request::is('panel/admin' )) class="active" @endif>
            <a href="{{ url('panel/admin') }}"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
          </li><
          
          <!-- Links -->
-         <li @if( Request::is('panel/admin/settings')) class="active" @endif> 
+         <li @if( Request::is('panel/admin/settings' )) class="active" @endif> 
            <a href="{{ url('panel/admin/settings') }}"><i class="fa fa-cogs"></i> <span>Settings</span></a>
          </li><!-- ./Links -->
          
          <!-- Links -->
-         <li @if(Request::is('panel/admin/categories')) class="active" @endif>
+         <li @if( Request::is('panel/admin/categories' )) class="active" @endif>
            <a href="{{ url('panel/admin/categories') }}"><i class="fa fa-list-ul"></i> <span>Categories</span></a>
          </li><!-- ./Links -->
          
          <!-- Links -->
-         <li @if(Request::is('panel/admin/startups')) class="active" @endif>
+         <li @if( Request::is('panel/admin/startups' )) class="active" @endif>
            <a href="{{ url('panel/admin/startups') }}"><i class="ion ion-speakerphone"></i> <span>Startups</span></a>
          </li><!-- ./Links -->
          
          
          <!-- Links -->
-         <li class="@if( Request::is('panel/admin/investments') ) active @endif">
+         <li @if( Request::is('panel/admin/investments' ) ) class="active" @endif">
            <a href="{{ url('panel/admin/investments') }}"><i class="ion ion-cash"></i> <span>Investments</span></a>
          </li><!-- ./Links -->
 
          <!-- Links -->
-         <li @if(Request::is('panel/admin/members')) class="active" @endif>
+         <li @if( Request::is('panel/admin/members' )) class="active" @endif>
            <a href="{{ url('panel/admin/members') }}"><i class="glyphicon glyphicon-user"></i> <span>Members</span></a>
          </li><!-- ./Links -->
          
          <!-- Links -->
-         <li @if(Request::is('panel/admin/pages')) class="active" @endif>
+         <li @if( Request::is('panel/admin/pages' )) class="active" @endif>
            <a href="{{ url('panel/admin/pages') }}"><i class="glyphicon glyphicon-file"></i> <span>Posts</span></a>
          </li><!-- ./Links -->
          
          <!-- Links -->
-         <li @if(Request::is('panel/admin/payments')) class="active" @endif>
+         <li @if( Request::is('panel/admin/payments' )) class="active" @endif>
            <a href="{{ url('panel/admin/payments') }}"><i class="fa fa-credit-card"></i> <span>Payment Settings</span></a>
          </li><!-- ./Links -->
          
          <!-- Links -->
-         <li @if(Request::is('panel/admin/profiles-social')) class="active" @endif>
+         <li @if( Request::is('panel/admin/profiles-social' )) class="active" @endif>
            <a href="{{ url('panel/admin/profiles-social') }}"><i class="fa fa-share-alt"></i> <span>Social Profiles</span></a>
          </li><!-- ./Links -->
-         
+
+         <!-- Links -->
+         <li @if( Request::is('panel/admin/profiles-social' )) class="active" @endif>
+           <a href="{{ url('logout') }}"><i class="glyphicon glyphicon-log-out"></i> <span>Logout</span></a>
+         </li><!-- ./Links -->
+
        </ul><!-- /.sidebar-menu -->
      </section>
      <!-- /.sidebar -->

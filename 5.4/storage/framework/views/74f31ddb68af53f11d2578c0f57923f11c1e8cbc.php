@@ -80,51 +80,56 @@ $settings = App\Models\AdminSettings::first();
           <li class="header">Menu</li>
           
           <!-- Links -->
-          <li <?php if(Request::is('panel/admin')): ?> class="active" <?php endif; ?>>
+          <li <?php if( Request::is('panel/admin' )): ?> class="active" <?php endif; ?>>
            <a href="<?php echo e(url('panel/admin')); ?>"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
          </li><
          
          <!-- Links -->
-         <li <?php if( Request::is('panel/admin/settings')): ?> class="active" <?php endif; ?>> 
+         <li <?php if( Request::is('panel/admin/settings' )): ?> class="active" <?php endif; ?>> 
            <a href="<?php echo e(url('panel/admin/settings')); ?>"><i class="fa fa-cogs"></i> <span>Settings</span></a>
          </li><!-- ./Links -->
          
          <!-- Links -->
-         <li <?php if(Request::is('panel/admin/categories')): ?> class="active" <?php endif; ?>>
+         <li <?php if( Request::is('panel/admin/categories' )): ?> class="active" <?php endif; ?>>
            <a href="<?php echo e(url('panel/admin/categories')); ?>"><i class="fa fa-list-ul"></i> <span>Categories</span></a>
          </li><!-- ./Links -->
          
          <!-- Links -->
-         <li <?php if(Request::is('panel/admin/startups')): ?> class="active" <?php endif; ?>>
+         <li <?php if( Request::is('panel/admin/startups' )): ?> class="active" <?php endif; ?>>
            <a href="<?php echo e(url('panel/admin/startups')); ?>"><i class="ion ion-speakerphone"></i> <span>Startups</span></a>
          </li><!-- ./Links -->
          
          
          <!-- Links -->
-         <li class="<?php if( Request::is('panel/admin/investments') ): ?> active <?php endif; ?>">
+         <li <?php if( Request::is('panel/admin/investments' ) ): ?> class="active" <?php endif; ?>">
            <a href="<?php echo e(url('panel/admin/investments')); ?>"><i class="ion ion-cash"></i> <span>Investments</span></a>
          </li><!-- ./Links -->
 
          <!-- Links -->
-         <li <?php if(Request::is('panel/admin/members')): ?> class="active" <?php endif; ?>>
+         <li <?php if( Request::is('panel/admin/members' )): ?> class="active" <?php endif; ?>>
            <a href="<?php echo e(url('panel/admin/members')); ?>"><i class="glyphicon glyphicon-user"></i> <span>Members</span></a>
          </li><!-- ./Links -->
          
          <!-- Links -->
-         <li <?php if(Request::is('panel/admin/pages')): ?> class="active" <?php endif; ?>>
+         <li <?php if( Request::is('panel/admin/pages' )): ?> class="active" <?php endif; ?>>
            <a href="<?php echo e(url('panel/admin/pages')); ?>"><i class="glyphicon glyphicon-file"></i> <span>Posts</span></a>
          </li><!-- ./Links -->
          
          <!-- Links -->
-         <li <?php if(Request::is('panel/admin/payments')): ?> class="active" <?php endif; ?>>
+         <li <?php if( Request::is('panel/admin/payments' )): ?> class="active" <?php endif; ?>>
            <a href="<?php echo e(url('panel/admin/payments')); ?>"><i class="fa fa-credit-card"></i> <span>Payment Settings</span></a>
          </li><!-- ./Links -->
          
          <!-- Links -->
-         <li <?php if(Request::is('panel/admin/profiles-social')): ?> class="active" <?php endif; ?>>
+         <li <?php if( Request::is('panel/admin/profiles-social' )): ?> class="active" <?php endif; ?>>
            <a href="<?php echo e(url('panel/admin/profiles-social')); ?>"><i class="fa fa-share-alt"></i> <span>Social Profiles</span></a>
          </li><!-- ./Links -->
-         
+
+         <!-- Links -->
+         <li <?php if( Request::is('panel/admin/profiles-social' )): ?> class="active" <?php endif; ?>>
+           <a href="<?php echo e(url('logout')); ?>"><i class="glyphicon glyphicon-log-out"></i> <span>Logout</span></a>
+         </li><!-- ./Links -->
+
        </ul><!-- /.sidebar-menu -->
      </section>
      <!-- /.sidebar -->

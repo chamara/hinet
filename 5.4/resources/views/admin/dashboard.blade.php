@@ -46,7 +46,7 @@ $total_investments = App\Models\investments::count();
         <!-- small box -->
         <div class="small-box bg-green">
           <div class="inner">
-            <h3><sup style="font-size: 20px">{{ $settings->currency_symbol }}</sup>{{ \App\Helper::formatNumber( $total_raised_funds ) }}</h3>
+            <h3>{{ $settings->currency_symbol }}{{ number_format( $total_raised_funds, 2 ) }}</h3>
             <p>Raised</p>
           </div>
           <div class="icon">

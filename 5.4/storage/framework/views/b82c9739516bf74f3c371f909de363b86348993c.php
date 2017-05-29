@@ -107,7 +107,7 @@
               <!-- Start Box Body -->
               <div class="box-body">
                 <div class="form-group">
-                  <label class="col-sm-2 control-label">Auto-approve startups</label>
+                  <label class="col-sm-2 control-label">Auto-Approve Startups</label>
                   <div class="col-sm-10">
                    
                     <div class="radio">
@@ -130,24 +130,46 @@
               <!-- Start Box Body -->
               <div class="box-body">
                 <div class="form-group">
-                  <label class="col-sm-2 control-label">Disable registration for startups</label>
+                  <label class="col-sm-2 control-label">Hide Startups Registration Form</label>
                   <div class="col-sm-10">
                     <div class="radio">
                       <label class="padding-zero">
-                          <input type="radio" name="disable_startups_reg" <?php if( $settings->disable_startups_reg == 'off' ): ?> checked="checked" <?php endif; ?> value="off" checked>
+                          <input type="radio" name="disable_startups_reg" <?php if( $settings->disable_startups_reg == 'no' ): ?> checked="checked" <?php endif; ?> value="no" checked>
                           No
                       </label>
                     </div>
 
                     <div class="radio">
                       <label class="padding-zero">
-                        <input type="radio" name="disable_startups_reg" <?php if( $settings->disable_startups_reg == 'on' ): ?> checked="checked" <?php endif; ?> value="on">
+                        <input type="radio" name="disable_startups_reg" <?php if( $settings->disable_startups_reg == 'yes' ): ?> checked="checked" <?php endif; ?> value="yes">
                         Yes
                       </label>
                     </div>
                   </div>
                 </div>
               </div>
+
+              <!-- Start Box Body -->
+              <div class="box-body">
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">Hide Investors Registration Form</label>
+                  <div class="col-sm-10">
+                    <div class="radio">
+                      <label class="padding-zero">
+                          <input type="radio" name="disable_investors_reg" <?php if( $settings->disable_investors_reg == 'no' ): ?> checked="checked" <?php endif; ?> value="no" checked>
+                          No
+                      </label>
+                    </div>
+
+                    <div class="radio">
+                      <label class="padding-zero">
+                        <input type="radio" name="disable_investors_reg" <?php if( $settings->disable_investors_reg == 'yes' ): ?> checked="checked" <?php endif; ?> value="yes">
+                        Yes
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>              
 
               <!-- Start Box Body -->
               <div class="box-body">
@@ -225,7 +247,7 @@
 
               <!-- Start Box Body -->
               <div class="box-body">
-                <div class="form-group margin-zero">
+                <div class="form-group">
                   <label class="col-sm-2 control-label">Max File Size</label>
                   <div class="col-sm-10">
                     <select name="file_size_allowed" class="form-control">

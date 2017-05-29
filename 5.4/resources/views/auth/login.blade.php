@@ -1,3 +1,6 @@
+<!-- Admin Settings -->
+<?php $settings = App\Models\AdminSettings::first();?>
+
 <!--Extend App Layout--> 
 @extends('app')
 
@@ -39,7 +42,18 @@
     </form>
     <hr>
     <p><a href="{{url('/password/reset')}}">Forgot Password?</a></p>
-    <p>Don't have an account yet?<a href="{{ url('/register') }}"> Sign Up</a></p>
+
+    @if ($settings->disable_startups_reg == 'yes' && $settings->disable_investors_reg == 'no')
+      <p>Don't have an account yet?<a href="{{ url('/register/investor') }}"> Investor Sign up </a></p>
+
+    @elseif ($settings->disable_startups_reg == 'no' && $settings->disable_investors_reg == 'yes')
+      <p>Don't have an account yet?<a href="{{ url('/register/startup') }}"> Register Startup</a></p>
+
+    @elseif ($settings->disable_startups_reg == 'no' && $settings->disable_investors_reg == 'no')
+      <p>Don't have an account yet?<a href="{{ url('/register') }}"> Sign Up </a></p>
+    @else
+    @endif
+
   </div>
 </div>
 @endsection

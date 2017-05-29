@@ -54,6 +54,7 @@
                   <label class="col-sm-2 control-label">Investor</label>
                   <div class="col-sm-10">
                     <select name="startup_id" class="form-control">
+                      <!--commented out 29 May 2017 as it returns an error page if another investor is selected. Is this ok?-->
                       <!--<?php $__currentLoopData = $user; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $user): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                       <option value="<?php echo e($user->id); ?>"><?php echo e($user->name); ?></option>
                       <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>-->

@@ -13,7 +13,12 @@
 	<div class="banner-content">
 		<h1 class="title-site margin-bottom-40">Startup Funding Club</h1>
 		<div class="text-center">
-			<a href="{{ url('/register/startup') }}" class="btn btn-lg btn-green">Create Startup Profile</a><a href="{{ url('/register/investor') }}" class="btn text-center btn-lg btn-green margin-left">Join as Investor</a>
+			@if ($settings->disable_startups_reg == 'no')
+				<a href="{{ url('/register/startup') }}" class="btn btn-lg btn-green">Create Startup Profile</a>
+			@endif
+			@if ($settings->disable_investors_reg == 'no')
+				<a href="{{ url('/register/investor') }}" class="btn text-center btn-lg btn-green margin-left">Join as Investor</a>
+			@endif
 		</div>
 	</div>
 </div>

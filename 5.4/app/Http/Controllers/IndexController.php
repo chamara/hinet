@@ -30,7 +30,7 @@ class IndexController extends Controller{
         $data = startups::where('status', 'active')->where('featured', '1')->where('opportunity', '1')->orderBy('id','DESC')->paginate(3);
 		
 		// Return View
-		return view('index.home', ['data' => $data, 'categories' => $categories]);
+		return view('index.home', ['data' => $data, 'categories' => $categories, 'settings' => $settings]);
     }
 	
 
@@ -147,7 +147,7 @@ class IndexController extends Controller{
         $data = startups::where('status', 'active')->where('portfolio', '1')->orderBy('id','DESC')->paginate(100);
         
         // Return View
-        return view('index.startups', ['data' => $data, 'categories' => $categories]);
+        return view('index.startups', ['data' => $data, 'categories' => $categories, 'settings' => $settings]);
     }
 
 
@@ -167,10 +167,16 @@ class IndexController extends Controller{
     }
 
 
+//<<<<--- NAVBAR --->>>>//
+ public function navbar()
+    {
 
-
-
-
-}
+        // Get Data
+        $settings = AdminSettings::first();
+        
+        // Return View
+        return view('includes.navbar', ['settings' => $settings]);
+    }
+ }
 //<<<<--- END CLASS --->>>>//
 

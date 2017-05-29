@@ -5,16 +5,16 @@
 
 
 <!--Page Title-->
-<?php $__env->startSection('title'); ?>For Startups - <?php $__env->stopSection(); ?>
+<?php $__env->startSection('title'); ?>For Investors - <?php $__env->stopSection(); ?>
 
 <!-- Content Section -->
 <?php $__env->startSection('content'); ?>
-<div class="banner-divider banner-green">
+<div class="banner-divider banner-blue">
 	<div class="banner-content">
-		<h1 class="title-site margin-bottom-40">Helping Startups Succeed</h1>
-		<?php if($settings->disable_startups_reg == 'no'): ?>
+		<h1 class="title-site margin-bottom-40">The Trusted Platform for Accredited UK Investors</h1>
+		<?php if($settings->disable_investors_reg == 'no'): ?>
 			<div class="text-center">
-				<a href="<?php echo e(url('/register/startup')); ?>" class="btn btn-lg btn-green custom-rounded">Create Startup Profile</a>
+				<a href="<?php echo e(url('/register/investor')); ?>" class="btn text-center btn-lg btn-blue custom-rounded">Request to join</a>
 			</div>
 		<?php endif; ?>
 	</div>
