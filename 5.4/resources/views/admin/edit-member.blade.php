@@ -101,7 +101,7 @@
           </div>
 
           <ol class="list-group">
-            <li class="list-group-item"> Registered <span class="pull-right color-strong">{{ date('d M, y', strtotime($data->date)) }}</span></li>
+            <li class="list-group-item"> Registered <span class="pull-right color-strong">{{ date('d M, y', strtotime($data->created_at)) }}</span></li>
 
             <li class="list-group-item"> Status <span class="pull-right color-strong">{{ ucfirst($data->status) }}</span></li>
 

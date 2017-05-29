@@ -117,7 +117,7 @@ $total_investments = App\Models\investments::count();
                 <img src="{{ asset('public/avatar').'/'.$user->avatar }}" alt="User Image">
                 <span class="users-list-name">{{ $user->name }}</span>
 
-                <span class="users-list-date">{{ date('d M, y', strtotime($user->date)) }}</span>
+                <span class="users-list-date">{{ date('d M, y', strtotime($user->created_at)) }}</span>
               </li>
               @endforeach
 
@@ -170,7 +170,7 @@ $total_investments = App\Models\investments::count();
                     <span class="label label-{{ $color_status }} pull-right">{{ $txt_status }}</span>
                   </a>
                   <span class="product-description">
-                    {{ $startup->user()->name }} / {{ date('d M, y', strtotime($startup->date)) }}
+                    {{ $startup->user()->name }} / {{ date('d M, y', strtotime($startup->created_at)) }}
                   </span>
                 </div>
               </li><!-- /.item -->
@@ -221,7 +221,7 @@ data: [
 for ( $i=0; $i < 30; ++$i) { 
 
   $date = date('Y-m-d', strtotime('today - '.$i.' days'));
-  $_investments = App\Models\investments::whereRaw("DATE(date) = '".$date."'")->count();
+  $_investments = App\Models\investments::whereRaw("DATE(created_at) = '".$date."'")->count();
 
 //print_r(DB::getQueryLog());
   ?>

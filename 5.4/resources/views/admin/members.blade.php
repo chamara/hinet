@@ -85,7 +85,7 @@
                   <td><img src="{{asset('public/avatar').'/'.$user->avatar}}" width="20" height="20" class="img-circle" /> {{ $user->name }}</td>
                   <td>{{ $user->investments()->count() }}</td>
                   <td>{{ $user->startups()->count() }}</td>
-                  <td>{{ date('d M, y', strtotime($user->date)) }}</td>
+                  <td>{{ date('d M, y', strtotime($user->created_at)) }}</td>
                   <td>
 
                    @if( $user->id <> Auth::user()->id && $user->id <> 1 )

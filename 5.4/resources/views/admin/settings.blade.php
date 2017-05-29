@@ -130,6 +130,30 @@
   </div>
 </div>
 
+  <!-- Start Box Body -->
+  <div class="box-body">
+    <div class="form-group">
+      <label class="col-sm-2 control-label">Disable registration for startups</label>
+      <div class="col-sm-10">
+
+      <div class="radio">
+        <label class="padding-zero">
+          <input type="radio" name="disable_startups_reg" @if( $settings->disable_startups_reg == '0' ) checked="checked" @endif value="0" checked>
+          No
+        </label>
+      </div>
+
+       <div class="radio">
+        <label class="padding-zero">
+          <input type="radio" name="disable_startups_reg" @if( $settings->disable_startups_reg == '1' ) checked="checked" @endif value="1">
+          Yes
+        </label>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
 <!-- Start Box Body -->
 <div class="box-body">
   <div class="form-group">

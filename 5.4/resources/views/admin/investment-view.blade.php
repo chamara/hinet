@@ -71,7 +71,7 @@
 
 							<!-- start -->
 							<dt>Date</dt>
-							<dd>{{date('d M, y', strtotime($data->date))}}</dd>
+							<dd>{{date('d M, y', strtotime($data->created_at))}}</dd>
 							<!-- ./end -->
 
 							<!-- start -->

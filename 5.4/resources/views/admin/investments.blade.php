@@ -46,7 +46,7 @@
               <td><a href="{{url('startup',$investment->startups_id)}}" target="_blank">{{ str_limit($investment->startups()->title, 10, '...') }} <i class="fa fa-external-link-square"></i></a></td>
               <td>{{ $investment->email }}</td>
               <td>{{ $settings->currency_symbol.number_format($investment->investment) }}</td>
-              <td>{{ date('d M, y', strtotime($investment->date)) }}</td>
+              <td>{{ date('d M, y', strtotime($investment->created_at)) }}</td>
               <td> <a href="{{ url('panel/admin/investments',$investment->id) }}" class="btn btn-success btn-xs padding-btn">
                 View
               </a> </td>

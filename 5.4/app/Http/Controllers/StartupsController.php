@@ -337,7 +337,6 @@ class startupsController extends Controller{
 		$sql                 	= new Documents;
 		$sql->filename    		= trim($this->request->filename);
 		$sql->startups_id 		= $this->request->id;
-		$sql->date              = Carbon::now();
 		$sql->path 				= $document;
 		$sql->type 		        = $extension;
 		$sql->filesize 		    = $filesize;
@@ -431,7 +430,6 @@ class startupsController extends Controller{
 		$sql                 	= new Teams;
 		$sql->name    			= trim($this->request->name);
 		$sql->startups_id 		= $this->request->id;
-		$sql->date              = Carbon::now();
 		$sql->avatar 			= $avatar;
 		$sql->title 		    = trim($this->request->title);
 		$sql->linkedin 		    = trim($this->request->linkedin);
@@ -519,7 +517,6 @@ class startupsController extends Controller{
 		$sql                 	= new Updates;
 		$sql->description     	= trim(Helper::checkTextDb($this->request->description));
 		$sql->startups_id 		= $this->request->id;
-		$sql->date              = Carbon::now();
 		$sql->token_id         	= str_random(200);
 		$sql->save();
 

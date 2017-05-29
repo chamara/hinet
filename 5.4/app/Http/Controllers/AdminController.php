@@ -280,6 +280,7 @@ class AdminController extends Controller {
 		$sql->email_no_reply      	= $request->email_no_reply;
 		$sql->email_admin         	= $request->email_admin;
 		$sql->auto_approve_startups = $request->auto_approve_startups;
+		$sql->disable_startups_reg  = $request->disable_startups_reg;
 		$sql->captcha               = $request->captcha;
 		$sql->email_verification 	= $request->email_verification;
 		$sql->result_request      	= $request->result_request;
@@ -287,7 +288,7 @@ class AdminController extends Controller {
 		$sql->min_startup_amount   	= $request->min_startup_amount;
 		$sql->max_startup_amount   	= $request->max_startup_amount;
 		$sql->min_investment_amount = $request->min_investment_amount;
-		$sql->max_investment_amount = $request->max_investment_amount;
+		$sql->max_investment_amount = $request->max_investment_amount;		
 		$sql->save();
 
 

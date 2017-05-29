@@ -11,7 +11,8 @@
 		"cviebrock/image-validator": "^2.0",
 		"laravelcollective/html": "5.4.*",
 		"laravel/cashier": "~7.0",
-        "hazzard/config": "^1.0"
+        "hazzard/config": "^1.0",
+        "orangehill/iseed": "dev-master"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

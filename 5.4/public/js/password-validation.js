@@ -12,16 +12,16 @@ jQuery(document).ready(function($){
     });
 
     //mask/unmask password_confirmation attribute
-    $('#password_confirmation').password().on('show.bs.password', function(e) {
-        $('#eventLog').text('On show event');
-        $('#methods').prop('checked', true);
-    }).on('hide.bs.password', function(e) {
-                $('#eventLog').text('On hide event');
-                $('#methods').prop('checked', false);
-            });
-    $('#methods').click(function() {
-        $('#password_confirmation').password('toggle');
-    });
+    //$('#password_confirmation').password().on('show.bs.password', function(e) {
+    //    $('#eventLog').text('On show event');
+    //    $('#methods').prop('checked', true);
+    //}).on('hide.bs.password', function(e) {
+    //            $('#eventLog').text('On hide event');
+    //            $('#methods').prop('checked', false);
+    //        });
+    //$('#methods').click(function() {
+    //    $('#password_confirmation').password('toggle');
+    //});
 
 
     //Password Strength and check to ensure passwords match
@@ -101,7 +101,7 @@ jQuery(document).ready(function($){
             if(password1.val() !== password2.val())
             {
                 if (password1.val().length < 6)
-                //if(WeakPass.test(password1.val()))
+                //if(WeakPass.test(password1.val())) --doesn't work
                 {
                     passwordsInfo.removeClass().addClass('weakpass').html("Password must be 6 or more characters").css({'color':'red', 'font-size':'13px'});
                     password.setCustomValidity("Password must be 6 or more characters");
@@ -115,7 +115,7 @@ jQuery(document).ready(function($){
             else
             {
                 if (password1.val().length < 6)
-                //if(WeakPass.test(password1.val()))
+                //if(WeakPass.test(password1.val())) --doesn't work
                 {
                     passwordsInfo.removeClass().addClass('weakpass').html("Password must be 6 or more characters").css({'color':'red', 'font-size':'13px'});
                     password.setCustomValidity("Password must be 6 or more characters");

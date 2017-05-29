@@ -5,8 +5,11 @@
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
   <section class="content-header">
-    <h4>Admin<i class="fa fa-angle-right margin-separator"></i> Startups ({{$data->total()}})
-    </h4>
+    <h4>
+     Admin<i class="fa fa-angle-right margin-separator"></i>Startups({{$data->total()}})
+     <a href="{{ url('panel/admin/startup/add') }}" class="btn btn-sm btn-success no-shadow pull-right"><i class="glyphicon glyphicon-plus myicon-right"></i> Add startup
+     </a>
+   </h4>    
   </section>
 
   <!-- Main content -->
@@ -79,7 +82,7 @@
                     <span class="label label-default">Finalized</span>
                     @endif
                   </td>
-                  <td>{{ date('d M, y', strtotime($startup->date)) }}</td>
+                  <td>{{ date('d M, y', strtotime($startup->created_at)) }}</td>
                   <td> <a href="{{ url('panel/admin/startups/edit',$startup->id) }}" class="btn btn-success btn-xs padding-btn">
                     Edit
                   </a> </td>

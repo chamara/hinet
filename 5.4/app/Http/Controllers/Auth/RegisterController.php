@@ -111,7 +111,6 @@ class RegisterController extends Controller
         Startups::create([
             'user_id' => $user->id,
             'title' => $data['startup'],
-            'date' => Carbon::now(),
             'status' => 'active',
             'token_id' => $startuptoken
         ]);

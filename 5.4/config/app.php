@@ -166,6 +166,7 @@ return [
 		Cviebrock\ImageValidator\ImageValidatorServiceProvider::class,
 		Collective\Html\HtmlServiceProvider::class,
 		Laravel\Cashier\CashierServiceProvider::class,
+        Orangehill\Iseed\IseedServiceProvider::class,
 
         /*
          * Package Service Providers...
