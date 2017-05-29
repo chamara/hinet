@@ -35,7 +35,7 @@ if( Auth::check() ){
         @if( Auth::check() )
 
         @if( $userAuth->role == 'admin') 
-        <li><a href="{{ url('panel/admin') }}">Admins</a></li>
+        <li><a href="{{ url('panel/admin') }}">Admin</a></li>
         @endif
 
         <!-- Investor List -->

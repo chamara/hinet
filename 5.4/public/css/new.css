@@ -187,8 +187,8 @@ label{
 .select-filter{
 	margin: 20px;
 	background: white;
-	border:	none;
-	font-size: 18px
+	/* border: none;
+	font-size: 18px */
 }
 
 .website a{

@@ -14,6 +14,8 @@ if($user->role == 'startup'){
 @include('includes.startup-dashboard')
 @elseif( $user->role == 'investor') 
 @include('includes.investor-dashboard')
+@else( $user->role == 'admin')
+@include('includes.admin-dashboard')
 @endif
 
 @if (session('notification'))
@@ -22,7 +24,7 @@ if($user->role == 'startup'){
   {{ session('notification') }}
 </div>
 @endif
-<h1 class="margin-bottom-40">Account</h1>
+<h1 class="margin-bottom-40">Accounts</h1>
 <form action="{{url('upload/avatar')}}" method="POST" id="formAvatar" accept-charset="UTF-8" enctype="multipart/form-data">
   <input type="hidden" name="_token" value="{{ csrf_token() }}">
   <div class="text-center">

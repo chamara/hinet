@@ -10,7 +10,12 @@
 	<div class="banner-content">
 		<h1 class="title-site margin-bottom-40">Current Investment Opportunties</h1>
 		<div class="text-center">
-			<a href="{{ url('/register/startup') }}" class="btn btn-lg btn-green custom-rounded">Learn How to Invest</a>
+			@if(Auth::check())	
+			@else
+				@if ($settings->disable_startups_reg == 'no')		
+					<a href="{{ url('/register/startup') }}" class="btn btn-lg btn-green custom-rounded">Learn How to Invest</a>
+				@endif
+			@endif
 		</div>
 	</div>
 </div>

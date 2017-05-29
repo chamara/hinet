@@ -14,6 +14,8 @@ $data = App\Models\Startups::where('user_id',Auth::user()->id)->firstOrFail();
 @include('includes.startup-dashboard')
 @elseif( $user->role == 'investor') 
 @include('includes.investor-dashboard')
+@else( $user->role == 'admin')
+@include('includes.admin-dashboard')
 @endif
 
 @if (session('notification'))
