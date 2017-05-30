@@ -35,7 +35,7 @@
               <div class="form-group">
                 <label class="col-sm-2 control-label">Title</label>
                 <div class="col-sm-10">
-                  <input type="text" value="{{ old('title') }}" name="title" class="form-control" placeholder="Title">
+                  <input type="text" value="{{ old('title') }}" name="title" id="title" class="form-control" placeholder="Title" required>
                 </div>
               </div>
             </div>
@@ -45,7 +45,7 @@
               <div class="form-group">
                 <label class="col-sm-2 control-label">Slug</label>
                 <div class="col-sm-10">
-                  <input type="text" value="{{ old('slug') }}" name="slug" class="form-control" placeholder="Slug">
+                  <input type="text" value="{{ old('slug') }}" name="slug" id="slug" class="form-control" placeholder="Slug" required>
                 </div>
               </div>
             </div>
@@ -55,8 +55,7 @@
               <div class="form-group">
                 <label class="col-sm-2 control-label">Content</label>
                 <div class="col-sm-10">
-
-                  <textarea name="content"rows="5" cols="40" id="content" class="form-control" placeholder="Content">{{ old('content') }}</textarea>
+                  <textarea name="content" rows="5" cols="40" id="content" class="form-control" placeholder="Content" required>{{ old('content') }}</textarea>
                 </div>
               </div>
             </div>

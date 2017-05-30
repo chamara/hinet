@@ -10,14 +10,14 @@ $total_investments = App\Models\investments::count();
 
 ?>
 
-@extends('admin.layout')
 
-@section('css')
-<link href="{{ asset('public/plugins/morris/morris.css')}}" rel="stylesheet" type="text/css" />
-<link href="{{ asset('public/plugins/jvectormap/jquery-jvectormap-1.2.2.css')}}" rel="stylesheet" type="text/css" />
-@endsection
 
-@section('content')
+<?php $__env->startSection('css'); ?>
+<link href="<?php echo e(asset('public/plugins/morris/morris.css')); ?>" rel="stylesheet" type="text/css" />
+<link href="<?php echo e(asset('public/plugins/jvectormap/jquery-jvectormap-1.2.2.css')); ?>" rel="stylesheet" type="text/css" />
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('content'); ?>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
@@ -34,7 +34,7 @@ $total_investments = App\Models\investments::count();
         <!-- small box -->
         <div class="small-box bg-aqua">
           <div class="inner">
-            <h3>{{ $total_investments }}</h3>
+            <h3><?php echo e($total_investments); ?></h3>
             <p>Investments</p>
           </div>
           <div class="icon">
@@ -47,7 +47,7 @@ $total_investments = App\Models\investments::count();
         <!-- small box -->
         <div class="small-box bg-green">
           <div class="inner">
-            <h3>{{ $settings->currency_symbol }}{{ number_format( $total_raised_funds, 2 ) }}</h3>
+            <h3><?php echo e($settings->currency_symbol); ?><?php echo e(number_format( $total_raised_funds, 2 )); ?></h3>
             <p>Raised</p>
           </div>
           <div class="icon">
@@ -60,7 +60,7 @@ $total_investments = App\Models\investments::count();
         <!-- small box -->
         <div class="small-box bg-yellow">
           <div class="inner">
-            <h3>{{ \App\Helper::formatNumber( \App\Models\User::count() ) }}</h3>
+            <h3><?php echo e(\App\Helper::formatNumber( \App\Models\User::count() )); ?></h3>
             <p>Members</p>
           </div>
           <div class="icon">
@@ -73,7 +73,7 @@ $total_investments = App\Models\investments::count();
         <!-- small box -->
         <div class="small-box bg-red">
           <div class="inner">
-            <h3>{{ \App\Helper::formatNumber( $total_startups ) }}</h3>
+            <h3><?php echo e(\App\Helper::formatNumber( $total_startups )); ?></h3>
             <p>Startups</p>
           </div>
           <div class="icon">
@@ -113,20 +113,20 @@ $total_investments = App\Models\investments::count();
 
           <div class="box-body no-padding">
             <ul class="users-list clearfix">
-              @foreach( $users as $user )
+              <?php $__currentLoopData = $users; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $user): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
               <li>
-                <img src="{{ asset('public/avatar').'/'.$user->avatar }}" alt="User Image">
-                <span class="users-list-name">{{ $user->name }}</span>
+                <img src="<?php echo e(asset('public/avatar').'/'.$user->avatar); ?>" alt="User Image">
+                <span class="users-list-name"><?php echo e($user->name); ?></span>
 
-                <span class="users-list-date">{{ date('d M, y', strtotime($user->created_at)) }}</span>
+                <span class="users-list-date"><?php echo e(date('d M, y', strtotime($user->created_at))); ?></span>
               </li>
-              @endforeach
+              <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
             </ul><!-- /.users-list -->
           </div>
 
           <div class="box-footer text-center">
-            <a href="{{ url('panel/admin/members') }}" class="uppercase">View All Members</a>
+            <a href="<?php echo e(url('panel/admin/members')); ?>" class="uppercase">View All Members</a>
           </div>
 
         </div><!--/.box -->
@@ -142,45 +142,46 @@ $total_investments = App\Models\investments::count();
             </div>
           </div>
 
-          @if( $total_startups != 0 )  
+          <?php if( $total_startups != 0 ): ?>  
           <div class="box-body">
 
             <ul class="products-list product-list-in-box">
 
-              @foreach( $startups as $startup )
+              <?php $__currentLoopData = $startups; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $startup): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
               <li class="item">
                 <div class="product-img">
-                  <img src="{{ asset('public/startups/logo/').'/'.$startup->logo }}" style="height: auto !important;" />
+                  <img src="<?php echo e(asset('public/startups/logo/').'/'.$startup->logo); ?>" style="height: auto !important;" />
                 </div>
                 <div class="product-info">
-                  <a href="{{ url('startup', $startup->id) }}" target="_blank" class="product-title">{{ $startup->title }} 
-                    @if( $startup->status == 'active' && $startup->finalized == 0 )
+                  <a href="<?php echo e(url('startup', $startup->id)); ?>" target="_blank" class="product-title"><?php echo e($startup->title); ?> 
+                    <?php if( $startup->status == 'active' && $startup->finalized == 0 ): ?>
                       <span class="label label-success">Active</span>
-                    @elseif( $startup->status == 'pending' && $startup->finalized == 0 )
+                    <?php elseif( $startup->status == 'pending' && $startup->finalized == 0 ): ?>
                       <span class="label label-warning">Pending</span>
-                    @else
+                    <?php else: ?>
                       <span class="label label-default">Finalized</span>
-                    @endif
+                    <?php endif; ?>
                   </a>
                   <span class="product-description">
-                    {{ $startup->user()->name }} / {{ date('d M, y', strtotime($startup->created_at)) }}
+                    <?php echo e($startup->user()->name); ?> / <?php echo e(date('d M, y', strtotime($startup->created_at))); ?>
+
                   </span>
                 </div>
               </li><!-- /.item -->
-              @endforeach
+              <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </ul>
           </div>
 
           <div class="box-footer text-center">
-            <a href="{{ url('panel/admin/startups') }}" class="uppercase">View All</a>
+            <a href="<?php echo e(url('panel/admin/startups')); ?>" class="uppercase">View All</a>
           </div>
 
-          @else
+          <?php else: ?>
           <div class="box-body">
             <h5>No Results</h5>
           </div>
 
-          @endif
+          <?php endif; ?>
 
         </div>
       </div>
@@ -188,13 +189,13 @@ $total_investments = App\Models\investments::count();
     </div>
   </section>
 </div>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('javascript')
+<?php $__env->startSection('javascript'); ?>
 
 <!-- Morris -->
-<script src="{{ asset('public/plugins/morris/raphael-min.js')}}" type="text/javascript"></script>
-<script src="{{ asset('public/plugins/morris/morris.min.js')}}" type="text/javascript"></script>
+<script src="<?php echo e(asset('public/plugins/morris/raphael-min.js')); ?>" type="text/javascript"></script>
+<script src="<?php echo e(asset('public/plugins/morris/morris.min.js')); ?>" type="text/javascript"></script>
 
 <!-- knob -->
 
@@ -251,4 +252,6 @@ dateFormat: function (x) {
 
 });// <------------ MORRIS
 </script>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('admin.layout', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

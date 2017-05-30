@@ -40,7 +40,7 @@
                 <div class="form-group">
                   <label class="col-sm-2 control-label">Name</label>
                   <div class="col-sm-10">
-                    <input type="text" value="{{ old('name') }}" name="name" class="form-control" placeholder="Name">
+                    <input type="text" value="{{ old('name') }}" id="name" name="name" class="form-control" placeholder="Name" required>
                   </div>
                 </div>
               </div>
@@ -50,7 +50,7 @@
                 <div class="form-group">
                   <label class="col-sm-2 control-label">Slug</label>
                   <div class="col-sm-10">
-                    <input type="text" value="{{ old('slug') }}" name="slug" class="form-control" placeholder="Slug">
+                    <input type="text" value="{{ old('slug') }}" name="slug" id="slug" class="form-control" placeholder="Slug" required>
                   </div>
                 </div>
               </div>

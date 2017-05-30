@@ -66,5 +66,5 @@
 </div>
 @endsection
 
-<!-- Include Javascript -->  
+<!-- Include Javascript -->
 @include('includes.javascript-password-validation')

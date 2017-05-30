@@ -194,9 +194,6 @@ else {
 //<<<<<<<=================== * UPLOAD COVER  * ===============>>>>>>>//
 </script>
 
-
-
-
 <script type="text/javascript">
 
 //<<<<<<<=================== * UPLOAD LOGO  * ===============>>>>>>>//
@@ -250,8 +247,6 @@ else {
 });//<<<<<<<--- * ON * --->>>>>>>>>>>
 //<<<<<<<=================== * UPLOAD LOGO  * ===============>>>>>>>//
 </script>
-
-
 
 <!-- Limit Textarea Function -->
 <script type="text/javascript">

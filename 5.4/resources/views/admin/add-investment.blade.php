@@ -39,7 +39,7 @@
                 <div class="form-group">
                   <label class="col-sm-2 control-label">Startup</label>
                   <div class="col-sm-10">
-                    <select name="startup_id" class="form-control">
+                    <select name="startup_id" id="startup_id" class="form-control" required>
                       @foreach( $data as $startup )
                       <option value="{{ $startup->id }}">{{ $startup->title }}</option>
                       @endforeach
@@ -53,24 +53,22 @@
                 <div class="form-group">
                   <label class="col-sm-2 control-label">Investor</label>
                   <div class="col-sm-10">
-                    <select name="startup_id" class="form-control">
-                      <!--commented out 29 May 2017 as it returns an error page if another investor is selected. Is this ok?-->
-                      <!--@foreach( $user as $user )
+                    <select name="investor_id" id="investor_id" class="form-control" required>
+                      @foreach( $user as $user )
                       <option value="{{ $user->id }}">{{ $user->name }}</option>
-                      @endforeach-->
-                      <option value="1">Offline Investor</option>
+                      @endforeach
+                      <option value="">Offline Investor</option>
                     </select>
                   </div>
                 </div>
               </div>
-
               
               <!-- Start Box Body -->
               <div class="box-body">
                 <div class="form-group">
                   <label class="col-sm-2 control-label">Name</label>
                   <div class="col-sm-10">
-                    <input type="text" name="name" class="form-control" placeholder="Name">
+                    <input type="text" name="name" id="name" class="form-control" placeholder="Name" required>
                   </div>
                 </div>
               </div>
@@ -80,7 +78,7 @@
                 <div class="form-group">
                   <label class="col-sm-2 control-label">Email</label>
                   <div class="col-sm-10">
-                    <input type="text" name="email" class="form-control" placeholder="Email">
+                    <input type="text" name="email" id="email" class="form-control" placeholder="Email" required>
                   </div>
                 </div>
               </div>
@@ -90,22 +88,20 @@
                 <div class="form-group">
                   <label class="col-sm-2 control-label">Investment</label>
                   <div class="col-sm-10">
-                    <input type="number" min="1" autocomplete="off" name="amount" class="form-control onlyNumber" placeholder="Amount">
+                    <input type="number" min="1" autocomplete="off" name="amount" id="amount" class="form-control onlyNumber" placeholder="Amount" required>
                   </div>
                 </div>
               </div>
-
 
               <!-- Start Box Body -->
               <div class="box-body">
                 <div class="form-group">
                   <label class="col-sm-2 control-label">Comment</label>
                   <div class="col-sm-10">
-                    <input type="text" name="comment" class="form-control" placeholder="Comment">
+                    <input type="text" name="comment" class="form-control" placeholder="Comment (Optional)">
                   </div>
                 </div>
               </div>
-
 
               <div class="box-footer">
                 <a href="{{ url('panel/admin/investments') }}" class="btn btn-default">Cancel</a>

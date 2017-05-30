@@ -17,21 +17,16 @@ use Illuminate\Support\Facades\Validator;
 use Image;
 use Mail;
 
-
 //<<<<--- START CLASS --->>>>//
 class AdminController extends Controller {
-
 
 	// Construct Function
 	public function __construct( AdminSettings $settings, Request $request) {
 		$this->settings = $settings::first();
 		$this->request = $request;
 	}
-	
 
-//<<<<--- USERS / MEMBERS --->>>>//
-
-	
+	//<<<<--- USERS / MEMBERS --->>>>//
 	
 	// User Index Function
 	public function index(Request $request) {
@@ -41,8 +36,7 @@ class AdminController extends Controller {
 		if( $query != '' && strlen( $query ) > 2 ) {
 			$data = User::where('name', 'LIKE', '%'.$query.'%')
 			->orderBy('id','desc')->paginate(20);
-		} 
-
+		}
 		 // Else Data is
 		else {
 			$data = User::orderBy('id','desc')->paginate(20);
@@ -51,7 +45,6 @@ class AdminController extends Controller {
 		// Return View
 		return view('admin.members', ['data' => $data,'query' => $query]);
 	}
-
 
 	// User Index Function
 	public function investors(Request $request) {
@@ -73,7 +66,6 @@ class AdminController extends Controller {
 		return view('admin.members', ['data' => $data, 'title' => $title, 'query' => $query]);
 	}
 
-
 	// Edit User Function
 	public function edit($id) {
 		$data = User::findOrFail($id);
@@ -86,42 +78,38 @@ class AdminController extends Controller {
 
 		// Return View
 		return view('admin.edit-member')->withData($data);
-
 	}
-	
 
 	// Update User Function
-	public function update($id, Request $request) {  	
+	public function update($id, Request $request) {
 
 		// Set Variables
 		$user = User::findOrFail($id);	
 		$input = $request->all();
 
 		// If Password Exists
-		if( !empty( $request->password ) )	 {
-
-		// Set Validation Rules
+		if( !empty( $request->password ) ) {
+			// Set Validation Rules
 			$rules = array(
 				'name' => 'required|min:3|max:25',
 				'email'     => 'required|email|unique:users,email,'.$id,
 				'password' => 'min:6',
 				);
 
-		// Hash Password	
+			// Hash Password	
 			$password = \Hash::make($request->password);
-
 		} 
 
 		// Else If Password doesn't exist
 		else {
 
-		// Set Validation Rules	
+			// Set Validation Rules	
 			$rules = array(
 				'name' => 'required|min:3|max:25',
 				'email'     => 'required|email|unique:users,email,'.$id,
 				);
 
-		// No Password Change	
+			// No Password Change	
 			$password = $user->password;
 		}
 
@@ -141,17 +129,12 @@ class AdminController extends Controller {
 
     	// Return Redirect
 		return redirect('panel/admin/members');
-
 	}
 	
-
-
 	// Delete User Function
-	public function destroy($id)
-	{
+	public function destroy($id) {
     	// Find user
 		$user = User::findOrFail($id);
-		
 
 		// If user exists
 		if( $user->id == 1 || $user->id == Auth::user()->id ) {
@@ -159,7 +142,6 @@ class AdminController extends Controller {
 			exit;
 		}
 
-		
 		// Finalize all user startup profiles
 		$allstartups = startups::where('user_id',$id)->update(array('finalized' => '1'));
 		
@@ -176,22 +158,16 @@ class AdminController extends Controller {
 
         // Redirect
 		return redirect('panel/admin/members');
-		
 	}
-
 
     // Add User Function
 	public function add_member() {
-
     	// Return View
 		return view('admin.add-member');
 	}
 
-
-
 	// Store User Function
-	public function storeMember(Request $request){
-
+	public function storeMember(Request $request) {
 		// Validate Rules
 		$this->validate($request, [
 			'name' => 'required|min:3|max:30',
@@ -215,7 +191,6 @@ class AdminController extends Controller {
 		// Save
 		$user->save();
 
-
 		// Success Message
 		\Session::flash('success_message', 'Success');
 
@@ -223,35 +198,24 @@ class AdminController extends Controller {
 		return redirect('panel/admin/members');	
 	}
 
-
-
-//<<<<--- DASHBOARD --->>>>//
-
+	//<<<<--- ADMIN DASHBOARD --->>>>//
 
     // Dashboard Function
 	public function admin() {
-		
 		// Return View Dashboard
-		return view('admin.dashboard');			
+		return view('admin.dashboard');
 	}
-	
 
-
-//<<<<--- SITE SETTINGS --->>>>//
-
+	//<<<<--- SITE SETTINGS --->>>>//
 
 	// Settings Function
 	public function settings() {
-		
 		// Return View Settingss
 		return view('admin.settings')->withSettings($this->settings);
-		
 	}
 	
-
 	// Site Settings Function
 	public function saveSettings(Request $request) {
-
 		// Validate Rules		
 		$rules = array(
 			'title'            		=> 'required',
@@ -281,7 +245,7 @@ class AdminController extends Controller {
 		$sql->email_admin         	= $request->email_admin;
 		$sql->auto_approve_startups = $request->auto_approve_startups;
 		$sql->disable_startups_reg  = $request->disable_startups_reg;
-		$sql->disable_investors_reg = $request->disable_investors_reg;		
+		$sql->disable_investors_reg = $request->disable_investors_reg;
 		$sql->captcha               = $request->captcha;
 		$sql->email_verification 	= $request->email_verification;
 		$sql->result_request      	= $request->result_request;
@@ -289,34 +253,29 @@ class AdminController extends Controller {
 		$sql->min_startup_amount   	= $request->min_startup_amount;
 		$sql->max_startup_amount   	= $request->max_startup_amount;
 		$sql->min_investment_amount = $request->min_investment_amount;
-		$sql->max_investment_amount = $request->max_investment_amount;		
+		$sql->max_investment_amount = $request->max_investment_amount;
 		$sql->save();
-
 
 		// Success Message
 		\Session::flash('success_message', 'Success');
 
-
 		// Return Redirect
 		return redirect('panel/admin/settings');
-
 	}
-	
-//<<<<--- SOCIAL PROFILES --->>>>//
+
+	//<<<<--- SOCIAL PROFILES --->>>>//
 
 	// Social Profiles Function	
 	public function profiles_social(){
-
 		// Return View
 		return view('admin.profiles-social')->withSettings($this->settings);
 	}
-	
 
 	// Update Social Profiles Function	
 	public function update_profiles_social(Request $request) {
 
 		$sql = AdminSettings::find(1);
-		
+
 		// Validate Rules
 		$rules = array(
 			'twitter'    => 'url',
@@ -326,7 +285,7 @@ class AdminController extends Controller {
 			'linkedin'   => 'url',
 			'angellist'  => 'url',
 			);
-		
+
 		// Validate Request
 		$this->validate($request, $rules);
 		
@@ -348,14 +307,10 @@ class AdminController extends Controller {
 		return redirect('panel/admin/profiles-social');
 	}
 
-
-
-
-//<<<<--- INVESTMENTS --->>>>//
+	//<<<<--- INVESTMENTS --->>>>//
 
 	// Investments Function	
-	public function investments(){
-
+	public function investments() {
 		// Get Data
 		$data = investments::orderBy('id','DESC')->paginate(100);
 
@@ -363,10 +318,8 @@ class AdminController extends Controller {
 		return view('admin.investments', ['data' => $data, 'settings' => $this->settings]);
 	}
 	
-
 	// Single Investment Function
-	public function investmentView($id){
-		
+	public function investmentView($id) {
 		// Get Data
 		$data = investments::findOrFail($id);
 
@@ -374,10 +327,9 @@ class AdminController extends Controller {
 		return view('admin.investment-view', ['data' => $data, 'settings' => $this->settings]);
 	}
 
-	 // Add Investment Function
+	// Add Investment Function
 	public function add_investment() {
-
-	// Get Data
+		// Get Data
 		$data = startups::where('status', 'active')->where('opportunity', '1')->orderBy('id','ASC')->paginate(100);
 
 		$user = user::where('role', 'investor')->orderBy('name','ASC')->paginate(100);
@@ -386,10 +338,8 @@ class AdminController extends Controller {
 		return view('admin.add-investment', ['data' => $data, 'user' => $user, 'settings' => $this->settings] );
 	}
 
-
 	// Store Investment Function
-	public function storeInvestment(Request $request){
-
+	public function storeInvestment(Request $request) {
 		$sql 					= new investments;
 		$sql->startups_id     	= $this->request->startup_id;
 		$sql->txn_id            = 'null';
@@ -409,13 +359,10 @@ class AdminController extends Controller {
 		return redirect('panel/admin/investments');	
 	}
 
-	
-	
-//<<<<--- PAYMENT SETTINGS --->>>>//
+	//<<<<--- PAYMENT SETTINGS --->>>>//
 
 	// Payment Settings Function
-	public function payments(){
-
+	public function payments() {
 		//Return View
 		return view('admin.payments-settings')->withSettings($this->settings);
 	}
@@ -423,20 +370,16 @@ class AdminController extends Controller {
 
 	// Store Payment Settings Function
 	public function savePayments(Request $request) {
-		
 		// Set DB	
 		$sql = AdminSettings::find(1);
 		
-
 		// Validate Rules
 		$rules = array(
 			'paypal_account'    => 'email',
 			);
 
-
 		// Validate Request
 		$this->validate($request, $rules);
-		
 
 		// Different Currency Symbols ** Request from Guil 02/03/2017 **
 		switch( $request->currency_code ) {
@@ -450,7 +393,7 @@ class AdminController extends Controller {
 			$currency_symbol  = '£';
 			break;
 		}
-		
+
 		// Store Settings
 		$sql->currency_symbol  		= $currency_symbol;
 		$sql->currency_code    		= $request->currency_code;
@@ -466,10 +409,8 @@ class AdminController extends Controller {
 		// Return redirect
 		return redirect('panel/admin/payments');
 	}
-	
 
-
-//<<<<--- STARTUPS --->>>>//
+	//<<<<--- STARTUPS --->>>>//
 
 	// // Startups Function
 	// public function startups(){
@@ -480,7 +421,53 @@ class AdminController extends Controller {
 	// 	// Return View
 	// 	return view('admin.startups', ['data' => $data, 'settings' => $this->settings]);
 	// }
-	
+
+	// Add Investment Function
+	public function add_startup() {
+		// Get Data
+		$user = user::where('role', 'startup')->orderBy('name','ASC')->paginate(100);
+
+    	// Return View
+		return view('admin.add-startup', ['user' => $user, 'settings' => $this->settings] );
+	}
+
+	// Store Investment Function
+	public function storeStartup(Request $request) {
+
+		// Decode HTML from textarea
+		$description = html_entity_decode($request->description);
+		
+		// Remove <script> tags from textarea
+		$description = Helper::removeTagScript($description);
+
+		// Remove <iframe> tags from textarea
+		$description = Helper::removeTagIframe($description);
+
+		// Trim spaces from textarea
+		$description = trim(Helper::spaces($description));
+
+		// Remove line breaks from description
+		$description = Helper::removeBR($description);
+
+		$sql 				= new startups;
+		$sql->title 		= $request->title;
+		$sql->user_id 		= $request->member_name;
+		$sql->goal 			= $request->goal;
+		$sql->location 		= $request->location;
+		$sql->status 		= $request->status;
+		$sql->description 	= $description;
+		$sql->categories_id = $request->category;
+		$sql->featured 		= $request->featured;
+		$sql->opportunity	= $request->opportunity;
+		$sql->portfolio		= $request->portfolio;
+		$sql->save();
+
+		// Success Message
+		\Session::flash('success_message', 'Success');
+
+		// Return Redirect 
+		return redirect('panel/admin/startups');	
+	}	
 
 	// Startups Function
 	public function startups(Request $request) {
@@ -490,7 +477,7 @@ class AdminController extends Controller {
 		if( $query != '' && strlen( $query ) > 2 ) {
 			$data = startups::where('title', 'LIKE', '%'.$query.'%')
 			->orderBy('id','desc')->paginate(20);
-		} 
+		}
 
 		 // Else Data is
 		else {
@@ -500,11 +487,6 @@ class AdminController extends Controller {
 		// Return View
 		return view('admin.startups', ['data' => $data,'query' => $query, 'settings' => $this->settings]);
 	}
-
-
-
-
-
 
 	// Edit Startup ** Request from Joseph 02/03/2017 - Admin override all content **
 	public function editstartups($id){
@@ -516,10 +498,8 @@ class AdminController extends Controller {
 		return view('admin.edit-startup', ['data' => $data, 'settings' => $this->settings]);
 	}
 	
-
 	// Post Edit Startups
-	public function postEditstartups(Request $request){
-		
+	public function postEditstartups(Request $request) {
 		// Set DB
 		$sql = startups::findOrFail($request->id);
 		
@@ -538,29 +518,25 @@ class AdminController extends Controller {
 		// Remove line breaks from description
 		$description = Helper::removeBR($description);
 
-		
 		// Store Request
 		$sql->title 		= $request->title;
 		$sql->goal 			= $request->goal;
 		$sql->location 		= $request->location;
 		$sql->description 	= $description;
-		$sql->finalized 	= $request->finalized;
-		$sql->categories_id = $request->categories_id;
+		$sql->status 		= $request->status;
+		$sql->categories_id = $request->category;
 		$sql->featured 		= $request->featured;
 		$sql->opportunity	= $request->opportunity;
 		$sql->portfolio		= $request->portfolio;
 		$sql->save();
 
-
 		// Success Message
 		\Session::flash('success_message', 'Success');
 		return redirect('panel/admin/startups');
 	}
-	
 
 	// Delete Startup Function
-	public function deletestartup(Request $request){
-
+	public function deletestartup(Request $request) {
 		// Get Data
 		$data = startups::findOrFail($request->id);
 		
@@ -569,7 +545,7 @@ class AdminController extends Controller {
 		$path_cover     = 'public/startups/cover/';
 		$path_updates 	= 'public/startups/updates/';
 		
-		// Get Startups Updatesv
+		// Get Startups Updates
 		$updates = $data->updates()->get();
 		
 		//Delete Updates
@@ -597,7 +573,6 @@ class AdminController extends Controller {
 		// Delete Startup
 		$data->delete();
 
-
 		// Success Message 
 		\Session::flash('success_message', 'Success');
 
@@ -605,33 +580,26 @@ class AdminController extends Controller {
 		return redirect('panel/admin/startups');
 	}
 
-
-
-//<<<<--- CATEGORIES --->>>>//
+	//<<<<--- CATEGORIES --->>>>//
 
 	// Categories Function
 	public function categories() {
-
 		// Get Data
 		$categories      = Categories::orderBy('name')->get();
 		$totalCategories = count( $categories );
 
 		// Return View
 		return view('admin.categories', compact( 'categories', 'totalCategories' ));
-
 	}
 
 	// Add Category Function
 	public function addCategories() {
-		
 		// Return View
 		return view('admin.add-categories');
-
 	}
 
 	// Store Category Function
 	public function storeCategories(Request $request) {
-		
 		// Set Image Paths
 		$temp            = 'public/temp/'; 
 		$path            = 'public/img-category/';
@@ -652,7 +620,7 @@ class AdminController extends Controller {
 		$this->validate($request, $rules);
 		
 		// If Has Thumbnail
-		if( $request->hasFile('thumbnail') ){
+		if( $request->hasFile('thumbnail') ) {
 
 		// Set Image Data
 			$extension              = $request->file('thumbnail')->getClientOriginalExtension();
@@ -660,25 +628,20 @@ class AdminController extends Controller {
 			$sizeFile               = $request->file('thumbnail')->getSize();
 			$thumbnail              = $request->slug.'-'.str_random(32).'.'.$extension;
 
-
 			// Move Thumbnail to temp folder
 			if( $request->file('thumbnail')->move($temp, $thumbnail) ) {
 
 				// Create Temp Image
 				$image = Image::make($temp.$thumbnail);
 
-
 				// If image is exact dimensions
 				if(  $image->width() == 457 && $image->height() == 359 ) {
-					
 					// Copy to category foler and delete temp
 					\File::copy($temp.$thumbnail, $path.$thumbnail);
 					\File::delete($temp.$thumbnail);
-
-				} 
+				}
 
 				else {
-
 					// Fit Image to dimensions and save to temp folder
 					$image->fit(457, 359)->save($temp.$thumbnail);
 
@@ -686,7 +649,6 @@ class AdminController extends Controller {
 					\File::copy($temp.$thumbnail, $path.$thumbnail);
 					\File::delete($temp.$thumbnail);
 				}
-
 			}
 		}
 		
@@ -697,53 +659,43 @@ class AdminController extends Controller {
 		
 		// If thumbnail
 		if( $request->hasFile('thumbnail') ){
-			$sql->image        = $thumbnail;
+			$sql->image = $thumbnail;
 		}
 
 		else {
-			$sql->image        = 'default.jpg';
+			$sql->image = 'default.jpg';
 		}
 
 		// Save
 		$sql->save();
 
-
 		// Success Message
 		\Session::flash('success_message', 'Success');
 
-
 		// Return Redirect
 		return redirect('panel/admin/categories');
-
 	}
-
 
 	// Edit Category Function
 	public function editCategories($id) {
-		
 		// Get Data
 		$categories        = Categories::find( $id );
 
 		// Return View
 		return view('admin.edit-categories')->with('categories',$categories);
-
 	}
-
 
 	// Update Existing Category Function
 	public function updateCategories( Request $request ) {
-		
 		// Get Data
 		$categories        = Categories::find( $request->id );
 
 		// Set File Paths
 		$temp            = 'public/temp/'; 
-		$path            = 'public/img-category/'; 
-
+		$path            = 'public/img-category/';
 
 	    // If category is null
 		if( !isset($categories) ) {
-
 	    	// Return Redirect
 			return redirect('panel/admin/categories');
 		}
@@ -761,13 +713,12 @@ class AdminController extends Controller {
 			);
 		
 		// Validate Request
-		$this->validate($request, $rules);	
-		
+		$this->validate($request, $rules);
 
 		// If rquest has thumbnail
 		if( $request->hasFile('thumbnail') )	{
 
-		// Set data
+			// Set data
 			$extension              = $request->file('thumbnail')->getClientOriginalExtension();
 			$type_mime_shot   		= $request->file('thumbnail')->getMimeType();
 			$sizeFile               = $request->file('thumbnail')->getSize();
@@ -775,22 +726,17 @@ class AdminController extends Controller {
 
 			// Move Thumbnail to temp folder
 			if( $request->file('thumbnail')->move($temp, $thumbnail) ) {
-
 				// Create Temp Image
 				$image = Image::make($temp.$thumbnail);
 
-
 				// If image is exact dimensions
 				if(  $image->width() == 457 && $image->height() == 359 ) {
-					
 					// Copy to category foler and delete temp
 					\File::copy($temp.$thumbnail, $path.$thumbnail);
 					\File::delete($temp.$thumbnail);
-
 				} 
 
 				else {
-
 					// Fit Image to dimensions and save to temp folder
 					$image->fit(457, 359)->save($temp.$thumbnail);
 
@@ -805,7 +751,6 @@ class AdminController extends Controller {
 		}
 
 		else {
-			
 			// If no thumbnail in request image remains the same
 			$thumbnail = $categories->image;
 		}	
@@ -815,7 +760,7 @@ class AdminController extends Controller {
 		$categories->slug         = $request->slug;
 
 		// If thumbnail
-		if( $request->hasFile('thumbnail') )	{
+		if( $request->hasFile('thumbnail') ) {
 			$categories->image         = $thumbnail;
 		}
 
@@ -827,26 +772,21 @@ class AdminController extends Controller {
 
 		// Return Redirect
 		return redirect('panel/admin/categories');
-
 	}
 	
-
 	// Delete Category Function
-	public function deleteCategories($id){
-		
+	public function deleteCategories($id) {
 		// Get data
 		$categories        = Categories::find( $id );
 		$thumbnail         = 'public/img-category/'.$categories->thumbnail;
 		
 		// If null
 		if( !isset($categories) ) {
-
 			// Retrun Redirect
 			return redirect('panel/admin/categories');
 		} 
 
 		else {
-
 			// Delete Category	
 			$categories->delete();
 			
@@ -859,7 +799,5 @@ class AdminController extends Controller {
 			return redirect('panel/admin/categories');
 		}	
 	}
-
 }
 //<<<<--- END CLASS --->>>>//
-

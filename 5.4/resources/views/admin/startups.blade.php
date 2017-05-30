@@ -75,11 +75,11 @@
                   <td>{{ $settings->currency_symbol.number_format($startup->investments()->sum('investment')) }}</td>
                   <td>
                     @if( $startup->status == 'active' && $startup->finalized == 0 )
-                    <span class="label label-success">Active</span>
+                      <span class="label label-success">Active</span>
                     @elseif( $startup->status == 'pending' && $startup->finalized == 0 )
-                    <span class="label label-warning">Pending</span>
+                      <span class="label label-warning">Pending</span>
                     @else
-                    <span class="label label-default">Finalized</span>
+                      <span class="label label-default">Finalized</span>
                     @endif
                   </td>
                   <td>{{ date('d M, y', strtotime($startup->created_at)) }}</td>

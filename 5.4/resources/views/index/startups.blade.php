@@ -13,8 +13,8 @@
 	<div class="banner-content">
 		<h1 class="title-site margin-bottom-40">Helping Startups Succeed</h1>
 		@if(Auth::check())
+		@else
 			@if ($settings->disable_startups_reg == 'no')
-			@else
 				<div class="text-center">
 					<a href="{{ url('/register/startup') }}" class="btn btn-lg btn-green custom-rounded">Create Startup Profile</a>
 				</div>

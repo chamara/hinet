@@ -217,7 +217,11 @@ Route::group(['middleware' => 'role'], function() {
 	// Startups
 	Route::get('panel/admin/startups','AdminController@startups');
 	Route::post('panel/admin/startups','AdminController@savestartups');
-	
+
+	// Add Startup
+	Route::get('panel/admin/startup/add','AdminController@add_startup');
+	Route::post('panel/admin/startup/add','AdminController@storeStartup');
+
 	// Edit Startup
 	Route::get('panel/admin/startups/edit/{id}','AdminController@editstartups');
 	Route::post('panel/admin/startups/edit/{id}','AdminController@postEditstartups');

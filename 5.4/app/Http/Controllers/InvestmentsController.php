@@ -193,7 +193,6 @@ class investmentsController extends Controller{
 		// Get Startup Data
     	$startup = startups::findOrFail($this->request->startup_id);
 
-
 		// Store investment in DB
     	$sql 					= new investments;
     	$sql->startups_id     	= $startup->id;

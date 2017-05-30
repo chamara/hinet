@@ -44,8 +44,7 @@
         <div class="form-group">
           <label class="col-sm-2 control-label">Currency</label>
           <div class="col-sm-10">
-           <select name="currency_code" class="form-control">
-
+           <select name="currency_code" id="currency_code" class="form-control" required>
             <option @if( $settings->currency_code == 'USD' ) selected="selected" @endif value="USD">USD</option>
             <option @if( $settings->currency_code == 'EUR' ) selected="selected" @endif  value="EUR">EUR</option>
             <option @if( $settings->currency_code == 'GBP' ) selected="selected" @endif value="GBP">GBP</option>
@@ -59,7 +58,7 @@
       <div class="form-group">
         <label class="col-sm-2 control-label">Investment Fee</label>
         <div class="col-sm-10">
-         <select name="fee_investment" class="form-control">
+         <select name="fee_investment" id="fee_investment" class="form-control" required>
           <option @if( $settings->fee_investment == '1' ) selected="selected" @endif value="1">1%</option>
           <option @if( $settings->fee_investment == '2' ) selected="selected" @endif value="2">2%</option>
           <option @if( $settings->fee_investment == '3' ) selected="selected" @endif  value="3">3%</option>
@@ -88,7 +87,7 @@
       <div class="form-group">
         <label class="col-sm-2 control-label">Stripe Secret Key</label>
         <div class="col-sm-10">
-          <input type="text" value="{{ $settings->stripe_secret_key }}" name="stripe_secret_key" class="form-control">
+          <input type="text" value="{{ $settings->stripe_secret_key }}" id="stripe_secret_key" name="stripe_secret_key" class="form-control" required>
           <p class="help-block"><a href="https://stripe.com/dashboard" target="_blank">https://stripe.com/dashboard</a></p>
         </div>
       </div>
@@ -99,7 +98,7 @@
       <div class="form-group">
         <label class="col-sm-2 control-label">Stripe Publishable Key</label>
         <div class="col-sm-10">
-          <input type="text" value="{{ $settings->stripe_public_key }}" name="stripe_public_key" class="form-control">
+          <input type="text" value="{{ $settings->stripe_public_key }}" id="stripe_public_key" name="stripe_public_key" class="form-control" required>
           <p class="help-block"><a href="https://stripe.com/dashboard" target="_blank">https://stripe.com/dashboard</a></p>
         </div>
       </div>

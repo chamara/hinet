@@ -37,7 +37,7 @@
           <div class="form-group">
             <label class="col-sm-2 control-label">Name</label>
             <div class="col-sm-10">
-              <input type="text" value="{{ old('name') }}" name="name" class="form-control" placeholder="Name">
+              <input type="text" value="{{ old('name') }}" name="name" id="name" class="form-control" placeholder="Name" required>
             </div>
           </div>
         </div>
@@ -47,7 +47,7 @@
           <div class="form-group">
             <label class="col-sm-2 control-label">Email</label>
             <div class="col-sm-10">
-              <input type="text" value="{{ old('email') }}" name="email" class="form-control" placeholder="Email">
+              <input type="text" value="{{ old('email') }}" name="email" id="email" class="form-control" placeholder="Email" required>
             </div>
           </div>
         </div>
@@ -57,7 +57,7 @@
           <div class="form-group">
             <label class="col-sm-2 control-label">Role</label>
             <div class="col-sm-10">
-              <select name="role" class="form-control" >
+              <select name="role" id="role" class="form-control" required>
                 <option value="startup">Startup</option>
                 <option value="investor">Investor</option>
                 <option value="admin">Admin</option>
@@ -71,7 +71,7 @@
           <div class="form-group">
             <label class="col-sm-2 control-label">Password</label>
             <div class="col-sm-10">
-              <input type="password" value="" name="password" class="form-control" placeholder="Password">
+              <input type="password" value="" name="password" id="password" class="form-control" placeholder="Password" required>
             </div>
           </div>
         </div>
@@ -81,7 +81,8 @@
           <div class="form-group">
             <label class="col-sm-2 control-label">Confirm Password</label>
             <div class="col-sm-10">
-              <input type="password" value="" name="password_confirmation" class="form-control" placeholder="Confirm Password">
+              <input type="password" value="" name="password_confirmation" id="password_confirmation" class="form-control" placeholder="Confirm Password" required>
+              <span id="result"></span>
             </div>
           </div>
         </div>
@@ -130,8 +131,9 @@
 		    	 	//$('#form' + id).submit();
           }
         });
-
-
   });
 </script>
 @endsection
+
+<!-- Include Javascript -->
+@include('includes.javascript-password-validation')
