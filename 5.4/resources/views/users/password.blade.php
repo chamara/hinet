@@ -39,18 +39,26 @@ $data = App\Models\Startups::where('user_id',Auth::user()->id)->firstOrFail();
   <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
   <div class="form-group has-feedback">
-    <label>Old Password</label>
-    <input type="password" class="form-control input-lg" name="old_password" placeholder="*******">
+    <label>Current Password</label>
+    <input type="password" class="form-control input-lg" id="old_password" name="old_password" placeholder="Current Password" required>
   </div>
 
   <div class="form-group has-feedback">
     <label>New Password</label>
-    <input type="password" class="form-control input-lg" name="password" placeholder="*******">
+    <input type="password" class="form-control input-lg" id="password" name="password" placeholder="New Password" required>
   </div>
+
+  <!-- Confirm Password -->
+  <div class="form-group has-feedback">
+    <input type="password" class="form-control input-lg" id="password_confirmation" name="password_confirmation" placeholder="Confirm Password" required>
+    <span id="result"></span>
+  </div>  
 
   <button type="submit" id="buttonSubmit" class="btn btn-save btn-lg custom-rounded">Update</button>
 </form>
 
-
 @include('includes.dashboard-end')
+
+<!-- Include Javascript -->
+@include('includes.javascript-password-validation')
 @endsection

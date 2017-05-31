@@ -33,7 +33,7 @@
                 <div class="form-group">
                   <label class="col-sm-2 control-label">Name</label>
                   <div class="col-sm-10">
-                    <input type="text" value="{{ $data->name }}" name="name" class="form-control" placeholder="Name">
+                    <input type="text" value="{{ $data->name }}" id="name" name="name" class="form-control" placeholder="Name" required>
                   </div>
                 </div>
               </div>
@@ -44,7 +44,7 @@
                 <div class="form-group">
                   <label class="col-sm-2 control-label">Email</label>
                   <div class="col-sm-10">
-                    <input type="text" value="{{ $data->email }}" name="email" class="form-control" placeholder="Email">
+                    <input type="text" value="{{ $data->email }}" id="email" name="email" class="form-control" placeholder="Email" required>
                   </div>
                 </div>
               </div>
@@ -54,7 +54,7 @@
                 <div class="form-group">
                   <label class="col-sm-2 control-label">Role</label>
                   <div class="col-sm-10">
-                    <select name="role" class="form-control" >
+                    <select id="role" name="role" class="form-control" required>
                       <option @if($data->role == 'investor') selected="selected" @endif value="investor">Investor</option>
                       <option @if($data->role == 'startup') selected="selected" @endif value="startup">Startup</option>
                       <option @if($data->role == 'admin') selected="selected" @endif value="admin">Admin</option>
@@ -68,9 +68,10 @@
                 <div class="form-group">
                   <label class="col-sm-2 control-label">Status</label>
                   <div class="col-sm-10">
-                    <select name="status" class="form-control" >
+                    <select id="status" name="status" class="form-control" required>
                       <option @if($data->status == 'pending') selected="selected" @endif value="pending">Pending</option>
                       <option @if($data->status == 'active') selected="selected" @endif value="active">Active</option>
+                      <option @if($data->status == 'finalized') selected="selected" @endif value="finalized">Finalized</option>                      
                     </select>
                   </div>
                 </div>
@@ -81,7 +82,18 @@
                 <div class="form-group">
                   <label class="col-sm-2 control-label">Password</label>
                   <div class="col-sm-10">
-                    <input type="password" value="" name="password" class="form-control" placeholder="Leave Empty for no change">
+                    <input type="password" value="" id="password" name="password" class="form-control" placeholder="Leave Empty for no change">
+                  </div>
+                </div>
+              </div>
+
+              <!-- Start Box Body -->
+              <div class="box-body">
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">Confirm Password</label>
+                  <div class="col-sm-10">
+                    <input type="password" value="" name="password_confirmation" id="password_confirmation" class="form-control" placeholder="Confirm Password">
+                    <span id="result"></span>
                   </div>
                 </div>
               </div>
@@ -121,7 +133,7 @@
             {!! Form::submit('Delete', ['data-url' => $data->id, 'class' => 'btn btn-lg btn-danger btn-block margin-bottom-10 actionDelete']) !!}
             {!! Form::close() !!}
           </div>
-        </div>   			        		
+        </div>
       </div>
     </div>
   </section>
@@ -129,6 +141,7 @@
 @endsection
 
 @section('javascript')
+
 <script type="text/javascript">
 
   $(".actionDelete").click(function(e) {
@@ -141,7 +154,7 @@
     element.blur();
 
     swal(
-      {   title: "Confirm",  
+      { title: "Confirm",  
       text: "Delete User",
       type: "warning", 
       showLoaderOnConfirm: true,
@@ -160,5 +173,7 @@
 
 </script>
 
-
 @endsection
+
+<!-- Include Javascript -->
+@include('includes.javascript-password-validation')

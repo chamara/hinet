@@ -78,7 +78,7 @@
                   <div class="form-group">
                     <label class="col-sm-2 control-label">Keywords</label>
                     <div class="col-sm-10">
-                      <input type="text" value="{{ $settings->keywords }}" id="tagInput" name="keywords" class="form-control select2">
+                      <input type="text" value="{{ $settings->keywords }}" id="keywords" name="keywords" class="form-control" placeholder="Keywords">
                     </div>
                   </div>
                 </div>
@@ -132,19 +132,21 @@
                 <div class="form-group">
                   <label class="col-sm-2 control-label">Hide Startups Registration Form</label>
                   <div class="col-sm-10">
+
                     <div class="radio">
                       <label class="padding-zero">
-                          <input type="radio" name="disable_startups_reg" @if( $settings->disable_startups_reg == 'no' ) checked="checked" @endif value="no" checked>
-                          No
+                        <input type="radio" name="disable_startups_reg" @if( $settings->disable_startups_reg == 'yes' ) checked="checked" @endif value="yes" checked>
+                        Yes
                       </label>
                     </div>
 
                     <div class="radio">
                       <label class="padding-zero">
-                        <input type="radio" name="disable_startups_reg" @if( $settings->disable_startups_reg == 'yes' ) checked="checked" @endif value="yes">
-                        Yes
+                          <input type="radio" name="disable_startups_reg" @if( $settings->disable_startups_reg == 'no' ) checked="checked" @endif value="no">
+                          No
                       </label>
                     </div>
+
                   </div>
                 </div>
               </div>
@@ -154,19 +156,21 @@
                 <div class="form-group">
                   <label class="col-sm-2 control-label">Hide Investors Registration Form</label>
                   <div class="col-sm-10">
+
                     <div class="radio">
                       <label class="padding-zero">
-                          <input type="radio" name="disable_investors_reg" @if( $settings->disable_investors_reg == 'no' ) checked="checked" @endif value="no" checked>
-                          No
+                        <input type="radio" name="disable_investors_reg" @if( $settings->disable_investors_reg == 'yes' ) checked="checked" @endif value="yes" checked>
+                        Yes
                       </label>
                     </div>
 
                     <div class="radio">
                       <label class="padding-zero">
-                        <input type="radio" name="disable_investors_reg" @if( $settings->disable_investors_reg == 'yes' ) checked="checked" @endif value="yes">
-                        Yes
+                          <input type="radio" name="disable_investors_reg" @if( $settings->disable_investors_reg == 'no' ) checked="checked" @endif value="no">
+                          No
                       </label>
                     </div>
+
                   </div>
                 </div>
               </div>              

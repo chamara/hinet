@@ -153,15 +153,19 @@ $total_investments = App\Models\investments::count();
                   <img src="{{ asset('public/startups/logo/').'/'.$startup->logo }}" style="height: auto !important;" />
                 </div>
                 <div class="product-info">
-                  <a href="{{ url('startup', $startup->id) }}" target="_blank" class="product-title">{{ $startup->title }} 
                     @if( $startup->status == 'active' && $startup->finalized == 0 )
-                      <span class="label label-success">Active</span>
+                      <a href="{{ url('startup', $startup->id) }}" target="_blank" class="product-title">{{ $startup->title }}
+                        <span class="label label-success">Active</span>
+                      </a>
                     @elseif( $startup->status == 'pending' && $startup->finalized == 0 )
-                      <span class="label label-warning">Pending</span>
+                      <div class="product-title">{{ $startup->title }}
+                        <span class="label label-warning">Pending</span>
+                      </div>
                     @else
-                      <span class="label label-default">Finalized</span>
+                      <div class="product-title">{{ $startup->title }}
+                        <span class="label label-default">Finalized</span>
+                      </div>
                     @endif
-                  </a>
                   <span class="product-description">
                     {{ $startup->user()->name }} / {{ date('d M, y', strtotime($startup->created_at)) }}
                   </span>

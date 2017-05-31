@@ -54,8 +54,6 @@
 </div>
 </div>
 
-
-
 <form method="POST" action="" enctype="multipart/form-data" id="formUpdate">  
   <input type="hidden" name="_token" value="{{ csrf_token() }}">
   <input type="hidden" name="id" value="{{ $data->id }}">

@@ -153,15 +153,22 @@ $total_investments = App\Models\investments::count();
                   <img src="<?php echo e(asset('public/startups/logo/').'/'.$startup->logo); ?>" style="height: auto !important;" />
                 </div>
                 <div class="product-info">
-                  <a href="<?php echo e(url('startup', $startup->id)); ?>" target="_blank" class="product-title"><?php echo e($startup->title); ?> 
                     <?php if( $startup->status == 'active' && $startup->finalized == 0 ): ?>
-                      <span class="label label-success">Active</span>
+                      <a href="<?php echo e(url('startup', $startup->id)); ?>" target="_blank" class="product-title"><?php echo e($startup->title); ?>
+
+                        <span class="label label-success">Active</span>
+                      </a>
                     <?php elseif( $startup->status == 'pending' && $startup->finalized == 0 ): ?>
-                      <span class="label label-warning">Pending</span>
+                      <div class="product-title"><?php echo e($startup->title); ?>
+
+                        <span class="label label-warning">Pending</span>
+                      </div>
                     <?php else: ?>
-                      <span class="label label-default">Finalized</span>
+                      <div class="product-title"><?php echo e($startup->title); ?>
+
+                        <span class="label label-default">Finalized</span>
+                      </div>
                     <?php endif; ?>
-                  </a>
                   <span class="product-description">
                     <?php echo e($startup->user()->name); ?> / <?php echo e(date('d M, y', strtotime($startup->created_at))); ?>
 
