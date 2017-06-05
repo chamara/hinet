@@ -42,6 +42,26 @@
               <!-- Start Box Body -->
               <div class="box-body">
                 <div class="form-group">
+                  <label class="col-sm-2 control-label">Logo</label>
+                  <div class="col-sm-10">
+                    <input type="file" name="logo" id="logo" class="form-control input-lg" placeholder="Logo" >
+                  </div>
+                </div>
+              </div>
+
+              <!-- Start Box Body -->
+              <div class="box-body">
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">Cover</label>
+                  <div class="col-sm-10">
+                    <input type="file" name="cover" id="cover" class="form-control input-lg" placeholder="Cover Page" >
+                  </div>
+                </div>
+              </div>              
+
+              <!-- Start Box Body -->
+              <div class="box-body">
+                <div class="form-group">
                   <label class="col-sm-2 control-label">Category</label>
                   <div class="col-sm-10">
                     <select name="category" name="category" id="category" class="form-control">

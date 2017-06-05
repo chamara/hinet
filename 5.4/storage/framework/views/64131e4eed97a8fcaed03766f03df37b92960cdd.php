@@ -57,7 +57,7 @@
                       <?php $__currentLoopData = $user; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $user): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                       <option value="<?php echo e($user->id); ?>"><?php echo e($user->name); ?></option>
                       <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                      <option value="">Offline Investor</option>
+                      <option value="<?php echo e(Auth::user()->id); ?>" selected>Offline Investor</option>
                     </select>
                   </div>
                 </div>
@@ -66,7 +66,7 @@
               <!-- Start Box Body -->
               <div class="box-body">
                 <div class="form-group">
-                  <label class="col-sm-2 control-label">Name</label>
+                  <label class="col-sm-2 control-label" id="lblName" name="lblName">Name</label>
                   <div class="col-sm-10">
                     <input type="text" name="name" id="name" class="form-control" placeholder="Name" required>
                   </div>
@@ -76,7 +76,7 @@
               <!-- Start Box Body -->
               <div class="box-body">
                 <div class="form-group">
-                  <label class="col-sm-2 control-label">Email</label>
+                  <label class="col-sm-2 control-label" id="lblEmail" name="lblEmail">Email</label>
                   <div class="col-sm-10">
                     <input type="text" name="email" id="email" class="form-control" placeholder="Email" required>
                   </div>
@@ -113,6 +113,29 @@
       </div>
     </section>
   </div>
+  <?php $__env->stopSection(); ?>
+
+  <?php $__env->startSection('javascript'); ?>
+  <script type="text/javascript">
+  $(document).ready(function(){
+    $('#investor_id').on('change', function() {
+      if ( this.value == '<?php echo e(Auth::user()->id); ?>')
+      {
+        $("#name").prop('disabled', false);
+        $("#name").val("") ;
+        $("#email").prop('disabled', false);   
+        $("#email").val("");     
+      }
+      else
+      {
+        //$("#name").prop('disabled', true);
+        $("#name").val("<?php echo e($user->name); ?>") ;
+        //$("#email").prop('disabled', true);
+        $("#email").val("<?php echo e($user->email); ?>");
+      }
+    });
+  });
+  </script>
   <?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('admin.layout', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

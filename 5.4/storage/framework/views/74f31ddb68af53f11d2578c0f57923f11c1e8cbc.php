@@ -32,6 +32,9 @@ $settings = App\Models\AdminSettings::first();
   
   <link href="<?php echo e(asset('public/plugins/sweetalert/sweetalert.css')); ?>" rel="stylesheet" type="text/css" />
 
+  <!-- Include CSS -->
+  <?php echo $__env->make('includes.css_general', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+  
   <?php echo $__env->yieldContent('css'); ?>
   
   <script type="text/javascript">

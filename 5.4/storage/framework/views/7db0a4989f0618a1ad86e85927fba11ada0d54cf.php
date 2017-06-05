@@ -42,12 +42,12 @@ if($user->role == 'startup'){
  <!-- Full Name -->
  <div class="form-group has-feedback">
    <label>Full Name</label>
-   <input type="text" class="form-control input-lg" value="<?php echo e(e( $user->name )); ?>" name="full_name" placeholder="Full Name">
+   <input type="text" class="form-control input-lg" value="<?php echo e(e( $user->name )); ?>" id="full_name" name="full_name" placeholder="Full Name" required>
  </div>
 
  <div class="form-group has-feedback">
    <label>Email</label>
-   <input type="email" class="form-control input-lg" value="<?php echo e($user->email); ?>" name="email" placeholder="Email">
+   <input type="email" class="form-control input-lg" value="<?php echo e($user->email); ?>" id="email" name="email" placeholder="Email" required>
  </div>
 
  <button type="submit" id="buttonSubmit" class="btn btn-lg btn-save custom-rounded">Save</button>

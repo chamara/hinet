@@ -57,7 +57,7 @@
                       @foreach( $user as $user )
                       <option value="{{ $user->id }}">{{ $user->name }}</option>
                       @endforeach
-                      <option value="">Offline Investor</option>
+                      <option value="{{ Auth::user()->id }}" selected>Offline Investor</option>
                     </select>
                   </div>
                 </div>
@@ -66,7 +66,7 @@
               <!-- Start Box Body -->
               <div class="box-body">
                 <div class="form-group">
-                  <label class="col-sm-2 control-label">Name</label>
+                  <label class="col-sm-2 control-label" id="lblName" name="lblName">Name</label>
                   <div class="col-sm-10">
                     <input type="text" name="name" id="name" class="form-control" placeholder="Name" required>
                   </div>
@@ -76,7 +76,7 @@
               <!-- Start Box Body -->
               <div class="box-body">
                 <div class="form-group">
-                  <label class="col-sm-2 control-label">Email</label>
+                  <label class="col-sm-2 control-label" id="lblEmail" name="lblEmail">Email</label>
                   <div class="col-sm-10">
                     <input type="text" name="email" id="email" class="form-control" placeholder="Email" required>
                   </div>
@@ -113,4 +113,27 @@
       </div>
     </section>
   </div>
+  @endsection
+
+  @section('javascript')
+  <script type="text/javascript">
+  $(document).ready(function(){
+    $('#investor_id').on('change', function() {
+      if ( this.value == '{{ Auth::user()->id }}')
+      {
+        $("#name").prop('disabled', false);
+        $("#name").val("") ;
+        $("#email").prop('disabled', false);   
+        $("#email").val("");     
+      }
+      else
+      {
+        //$("#name").prop('disabled', true);
+        $("#name").val("{{ $user->name }}") ;
+        //$("#email").prop('disabled', true);
+        $("#email").val("{{ $user->email }}");
+      }
+    });
+  });
+  </script>
   @endsection

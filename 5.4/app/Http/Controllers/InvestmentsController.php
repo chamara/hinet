@@ -16,7 +16,6 @@ use Mail;
 
 //<<<<--- START CLASS --->>>>//
 class investmentsController extends Controller{
-
 	// Construct Function
 	public function __construct( AdminSettings $settings, Request $request) {
 		$this->settings = $settings::first();
@@ -30,7 +29,6 @@ class investmentsController extends Controller{
 
     // Show Startup Function
     public function show($id, $slug = null){
-    	
     	// Get Data
     	$response = startups::where('id',$id)->where('status','active')->firstOrFail();
 
@@ -66,10 +64,8 @@ class investmentsController extends Controller{
     }
 
 
-
     // Make Investment Function
     public function send(){
-    	
     	// Validator Messages
     	$messages = array (
     		'amount.min' => 'Please enter at least the minimum investment of £500',
@@ -112,10 +108,16 @@ class investmentsController extends Controller{
     		if( isset( $this->request->stripeToken ) ) {
     			\Stripe\Stripe::setApiKey($this->settings->stripe_secret_key);
 
-					// Get the credit card details submitted by the form
+				// Get the credit card details submitted by the form
     			$token = $this->request->stripeToken;
 
-					// Create a charge
+                //get the investor assigned to this investment
+                //if( isset($token = $this->request->investor_id) ) {
+                //    $investor_id = $this->request->investor_id;
+                //}
+
+                $token = $this->request->stripeToken;                
+				// Create a charge
     			try {
     				$charge = \Stripe\Charge::create(array(
     					"amount" 		=> $amount,
@@ -189,7 +191,6 @@ class investmentsController extends Controller{
 
     // Make Offline Investment Function
     public function offline(){
-    	
 		// Get Startup Data
     	$startup = startups::findOrFail($this->request->startup_id);
 

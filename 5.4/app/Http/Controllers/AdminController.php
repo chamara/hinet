@@ -343,7 +343,7 @@ class AdminController extends Controller {
 		$sql 					= new investments;
 		$sql->startups_id     	= $this->request->startup_id;
 		$sql->txn_id            = 'null';
-		$sql->user_id           = Auth::user()->id;
+		$sql->user_id           = $this->request->investor_id;
 		$sql->fullname          = $this->request->name;
 		$sql->email             = $this->request->email;
 		$sql->investment        = $this->request->amount;

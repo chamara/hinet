@@ -1,3 +1,4 @@
+
 @extends('admin.layout')
 
 @section('css')
@@ -17,14 +18,6 @@
   <!-- Main content -->
   <section class="content">
     <div class="content">
-
-
-
-
-
-
-
-
       <div class="row">
           <div class="box startups">
             <div class="box-header with-border">
@@ -45,6 +38,26 @@
                   <label class="col-sm-2 control-label">Startup Name</label>
                   <div class="col-sm-10">
                     <input type="text" name="title" id="title" class="form-control" placeholder="Name" required>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Start Box Body -->
+              <div class="box-body">
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">Logo</label>
+                  <div class="col-sm-10">
+                    <input type="file" name="logo" id="logo" class="form-control input-lg">
+                  </div>
+                </div>
+              </div>
+
+              <!-- Start Box Body -->
+              <div class="box-body">
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">Cover</label>
+                  <div class="col-sm-10">
+                    <input type="file" name="cover" id="cover" class="form-control input-lg">
                   </div>
                 </div>
               </div>
