@@ -16,6 +16,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Image;
 use Mail;
+use DB;
 
 //<<<<--- START CLASS --->>>>//
 class AdminController extends Controller {
@@ -340,16 +341,30 @@ class AdminController extends Controller {
 
 	// Store Investment Function
 	public function storeInvestment(Request $request) {
+		if( $this->request->investor_id == Auth::user()->id ) { 
+			$anonymousFlag = '1';
+			$row = array_add(['name' => $this->request->name], 'email', $this->request->email);
+		} else {
+			if( $this->request->anonymous == '') {
+				$anonymousFlag = '0';
+			} else {
+				$anonymousFlag = '1';
+			}
+			$row = User::where('id', $this->request->investor_id)->first();
+		};
+
 		$sql 					= new investments;
 		$sql->startups_id     	= $this->request->startup_id;
 		$sql->txn_id            = 'null';
 		$sql->user_id           = $this->request->investor_id;
-		$sql->fullname          = $this->request->name;
-		$sql->email             = $this->request->email;
+		$sql->fullname          = $row['name'];
+		$sql->email             = $row['email'];
+		$sql->country           = $this->request->country;
+		$sql->postal_code       = $this->request->postal_code;
 		$sql->investment        = $this->request->amount;
 		$sql->payment_gateway  	= 'Offline';
 		$sql->comment           = $this->request->comment;
-		$sql->anonymous         = '1';
+		$sql->anonymous         = $anonymousFlag;
 		$sql->save();
 
 		// Success Message
@@ -366,7 +381,6 @@ class AdminController extends Controller {
 		//Return View
 		return view('admin.payments-settings')->withSettings($this->settings);
 	}
-
 
 	// Store Payment Settings Function
 	public function savePayments(Request $request) {
@@ -404,7 +418,6 @@ class AdminController extends Controller {
 
 		// Success Message
 		\Session::flash('success_message', 'Success');
-
 
 		// Return redirect
 		return redirect('panel/admin/payments');

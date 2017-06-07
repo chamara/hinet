@@ -142,8 +142,8 @@
 
                     <div class="radio">
                       <label class="padding-zero">
-                          <input type="radio" name="disable_startups_reg" @if( $settings->disable_startups_reg == 'no' ) checked="checked" @endif value="no">
-                          No
+                        <input type="radio" name="disable_startups_reg" @if( $settings->disable_startups_reg == 'no' ) checked="checked" @endif value="no">
+                        No
                       </label>
                     </div>
 

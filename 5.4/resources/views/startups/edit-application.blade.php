@@ -40,10 +40,9 @@
     <label>Tax Relief</label>
     <select name="tax" class="form-control input-lg">
       <option value="">Select One</option>
-      <option @if ($data->tax == 'SEIS') selected @endif value="SEIS">SEIS</option>
-      <option @if ($data->tax == 'EIS') selected @endif value="EIS">EIS</option>
-      <option @if ($data->tax == 'SEIS/EIS') selected @endif value="EIS">SEIS/EIS</option>
-      <option @if ($data->tax == 'N/A') selected @endif value="n/a">I Don't Know</option>
+      @foreach( App\Models\TaxReliefs::where('mode','on')->orderBy('id')->get() as $taxreliefstatus )
+        <option value="{{$taxreliefstatus->id}}">{{ $taxreliefstatus->status }}</option>
+      @endforeach
     </select>
   </div>
 

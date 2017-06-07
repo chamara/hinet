@@ -30,4 +30,12 @@ class startups extends Model {
 	public function category() {
 	 	 return $this->belongsTo('App\Models\Categories', 'categories_id'); 
 	 }
+
+	public function status() {
+	 	 return $this->belongsTo('App\Models\Statuses', 'status'); 
+	 }
+
+	public function tax_relief() {
+	 	 return $this->belongsTo('App\Models\TaxReliefs', 'status'); 
+	 }
 }

@@ -1,3 +1,4 @@
+<?php $settings = App\Models\AdminSettings::first(); ?>
 
 @extends('admin.layout')
 
@@ -45,6 +46,16 @@
               <!-- Start Box Body -->
               <div class="box-body">
                 <div class="form-group">
+                  <label class="col-sm-2 control-label">Tagline</label>
+                  <div class="col-sm-10">
+                    <input type="text" name="tagline" id="tagline" class="form-control" placeholder="Tagline" required>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Start Box Body -->
+              <div class="box-body">
+                <div class="form-group">
                   <label class="col-sm-2 control-label">Logo</label>
                   <div class="col-sm-10">
                     <input type="file" name="logo" id="logo" class="form-control input-lg">
@@ -61,6 +72,66 @@
                   </div>
                 </div>
               </div>
+
+              <!-- Start Box Body -->
+              <div class="box-body">
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">Website</label>
+                  <div class="col-sm-10">
+                    <input type="url" name="website" id="website" class="form-control" placeholder="https://www.website-name.com">
+                  </div>
+                </div>
+              </div>
+
+              <!-- Start Box Body -->
+              <div class="box-body">
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">Facebook</label>
+                  <div class="col-sm-10">
+                    <input type="url" name="facebook" id="facebook" class="form-control" placeholder="https://www.facebook.com/account-name">
+                  </div>
+                </div>
+              </div>
+
+              <!-- Start Box Body -->
+              <div class="box-body">
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">Twitter</label>
+                  <div class="col-sm-10">
+                    <input type="url" name="twitter" id="twitter" class="form-control" placeholder="https://www.twitter.com/account-name">
+                  </div>
+                </div>
+              </div>
+
+              <!-- Start Box Body -->
+              <div class="box-body">
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">LinkedIn</label>
+                  <div class="col-sm-10">
+                    <input type="url" name="linkedin" id="linkedin" class="form-control" placeholder="https://www.linkedin.com/account-name">
+                  </div>
+                </div>
+              </div>
+
+              <!-- Start Box Body -->
+              <div class="box-body">
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">Video</label>
+                  <div class="col-sm-10">
+                    <input type="url" name="video" id="video" class="form-control" placeholder="https://www.youtube.com/video-name">
+                  </div>
+                </div>
+              </div>
+
+              <!-- Start Box Body -->
+              <div class="box-body">
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">Short Description</label>
+                  <div class="col-sm-10">
+                    <textarea data-limit="300" rows="5" name="description" id="description" class="form-control" placeholder="Description"></textarea>
+                  </div>
+                </div>
+              </div>              
 
               <!-- Start Box Body -->
               <div class="box-body">
@@ -84,20 +155,10 @@
                   <div class="col-sm-10">
                     <select name="category" id="category" class="form-control" required>
                       <option value="">Select One</option>
-                      @foreach(  App\Models\Categories::where('mode','on')->orderBy('name')->get() as $category )   
+                      @foreach( App\Models\Categories::where('mode','on')->orderBy('name')->get() as $category )   
                       <option value="{{$category->id}}">{{ $category->name }}</option>
                       @endforeach
                     </select>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Start Box Body -->
-              <div class="box-body">
-                <div class="form-group">
-                  <label class="col-sm-2 control-label">Investment Sought</label>
-                  <div class="col-sm-10">
-                    <input type="number" min="1" autocomplete="off" name="goal" id="goal" class="form-control onlyNumber" placeholder="1000000" required>
                   </div>
                 </div>
               </div>
@@ -115,9 +176,53 @@
               <!-- Start Box Body -->
               <div class="box-body">
                 <div class="form-group">
-                  <label class="col-sm-2 control-label">Startup Description</label>
+                  <label class="col-sm-2 control-label">Investment Sought</label>
                   <div class="col-sm-10">
-                    <textarea name="description" rows="5" id="description" class="form-control  tinymce-txt" placeholder="Description"></textarea>
+                    <div class="input-group">
+                    <div class="input-group-addon">{{$settings->currency_symbol}}</div>
+                    <input type="number" min="1" autocomplete="off" name="goal" id="goal" class="form-control onlyNumber" placeholder="1000000" required>
+                  </div>
+                </div>
+                </div>
+              </div>
+
+              <!-- Start Box Body -->
+              <div class="box-body">
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">Equity</label>
+                  <div class="col-sm-10">
+                    <div class="input-group">
+                    <div class="input-group-addon">%</div>
+                    <input type="number" name="equity" id="equity" class="form-control" placeholder="Equity">
+                  </div>
+                </div>
+                </div>
+              </div>
+
+              <!-- Start Box Body -->
+              <div class="box-body">
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">Pre-Money Valuation</label>
+                  <div class="col-sm-10">
+                    <div class="input-group">
+                      <div class="input-group-addon">{{$settings->currency_symbol}}</div>
+                      <input type="number" name="valuation" id="valuation" class="form-control" placeholder="Valuation">
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Start Form Box Body -->
+              <div class="box-body">
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">Tax Relief</label>
+                  <div class="col-sm-10">
+                    <select name="tax" id="tax" class="form-control" required>
+                      <option value="">Select One</option>
+                      @foreach( App\Models\TaxReliefs::where('mode','on')->orderBy('id')->get() as $taxreliefstatus )
+                        <option value="{{$taxreliefstatus->id}}">{{ $taxreliefstatus->status }}</option>
+                      @endforeach
+                    </select>
                   </div>
                 </div>
               </div>
@@ -128,80 +233,11 @@
                   <label class="col-sm-2 control-label">Status</label>
                   <div class="col-sm-10">
                     <select name="status" id="status" class="form-control" required>
-                      <option value="pending">Pending</option>
-                      <option value="active">Active</option>
-                      <option value="finalized">Finialized</option>
+                      <option value="">Select One</option>
+                      @foreach( App\Models\Statuses::where('mode','on')->orderBy('id')->get() as $status )
+                        <option value="{{$status->id}}">{{ $status->status }}</option>
+                      @endforeach
                     </select>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Start Box Body -->
-              <div class="box-body">
-                <div class="form-group">
-                  <label class="col-sm-2 control-label">Opportunity?</label>
-                  <div class="col-sm-10">
-
-                    <div class="radio">
-                      <label class="padding-zero">
-                        <input type="radio" name="opportunity" id="opportunity" value="1" checked>
-                        Yes
-                      </label>
-                    </div>
-
-                    <div class="radio">
-                      <label class="padding-zero">
-                        <input type="radio" name="opportunity" id="opportunity" value="0">
-                        No
-                      </label>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Start Box Body -->
-              <div class="box-body">
-                <div class="form-group">
-                  <label class="col-sm-2 control-label">Portfolio?</label>
-                  <div class="col-sm-10">
-
-                    <div class="radio">
-                      <label class="padding-zero">
-                        <input type="radio" name="portfolio" id="portfolio" value="1" checked>
-                        Yes
-                      </label>
-                    </div>
-
-                    <div class="radio">
-                      <label class="padding-zero">
-                        <input type="radio" name="portfolio" id="portfolio" value="0">
-                        No
-                      </label>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Start Box Body -->
-              <div class="box-body">
-                <div class="form-group">
-                  <label class="col-sm-2 control-label">Featured?</label>
-                  <div class="col-sm-10">
-
-                    <div class="radio">
-                      <label class="padding-zero">
-                        <input type="radio" name="featured" id="featured" value="1" checked>
-                        Yes
-                      </label>
-                    </div>
-
-                    <div class="radio">
-                      <label class="padding-zero">
-                        <input type="radio" name="featured" id="featured" value="0">
-                        No
-                      </label>
-                    </div>
-
                   </div>
                 </div>
               </div>

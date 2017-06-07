@@ -85,7 +85,7 @@ $settings = App\Models\AdminSettings::first();
           <!-- Links -->
           <li <?php if( Request::is('panel/admin' )): ?> class="active" <?php endif; ?>>
            <a href="<?php echo e(url('panel/admin')); ?>"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
-         </li><
+         </li>
          
          <!-- Links -->
          <li <?php if( Request::is('panel/admin/settings' )): ?> class="active" <?php endif; ?>> 

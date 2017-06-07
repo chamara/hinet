@@ -70,9 +70,15 @@
                   <label class="col-sm-2 control-label">Status</label>
                   <div class="col-sm-10">
                     <select id="status" name="status" class="form-control" required>
-                      <option <?php if($data->status == 'pending'): ?> selected="selected" <?php endif; ?> value="pending">Pending</option>
-                      <option <?php if($data->status == 'active'): ?> selected="selected" <?php endif; ?> value="active">Active</option>
-                      <option <?php if($data->status == 'finalized'): ?> selected="selected" <?php endif; ?> value="finalized">Finalized</option>                      
+
+                      <?php $__currentLoopData = App\Models\Statuses::where('mode','on')->orderBy('id')->get(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $status): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                          <option value="<?php echo e($status->id); ?>"
+                          <?php if($status == old('status', $model->option)): ?>
+                              selected="selected"
+                          <?php endif; ?>
+                          ><?php echo e($status); ?></option>
+                      <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
                     </select>
                   </div>
                 </div>

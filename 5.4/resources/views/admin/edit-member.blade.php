@@ -69,9 +69,15 @@
                   <label class="col-sm-2 control-label">Status</label>
                   <div class="col-sm-10">
                     <select id="status" name="status" class="form-control" required>
-                      <option @if($data->status == 'pending') selected="selected" @endif value="pending">Pending</option>
-                      <option @if($data->status == 'active') selected="selected" @endif value="active">Active</option>
-                      <option @if($data->status == 'finalized') selected="selected" @endif value="finalized">Finalized</option>                      
+
+                      @foreach (App\Models\Statuses::where('mode','on')->orderBy('id')->get() as $status)
+                          <option value="{{ $status->id }}"
+                          @if ($status == old('status', $model->option))
+                              selected="selected"
+                          @endif
+                          >{{ $status }}</option>
+                      @endforeach
+
                     </select>
                   </div>
                 </div>

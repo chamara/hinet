@@ -142,8 +142,8 @@
 
                     <div class="radio">
                       <label class="padding-zero">
-                          <input type="radio" name="disable_startups_reg" <?php if( $settings->disable_startups_reg == 'no' ): ?> checked="checked" <?php endif; ?> value="no">
-                          No
+                        <input type="radio" name="disable_startups_reg" <?php if( $settings->disable_startups_reg == 'no' ): ?> checked="checked" <?php endif; ?> value="no">
+                        No
                       </label>
                     </div>
 
@@ -355,5 +355,4 @@
   </script>
 
 <?php $__env->stopSection(); ?>
-
 <?php echo $__env->make('admin.layout', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
