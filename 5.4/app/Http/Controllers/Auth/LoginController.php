@@ -120,7 +120,7 @@ class LoginController extends Controller
 	 */
 	protected function getFailedLoginMessage()
 	{
-		return 'User not found';
+		return 'Email or Password is incorrect';
 	}
 	
 }

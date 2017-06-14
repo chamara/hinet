@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateQuestionsStartupsTable extends Migration
+class CreateSocialNetworksTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,9 @@ class CreateQuestionsStartupsTable extends Migration
      */
     public function up()
     {
-        Schema::create('questions_startups', function (Blueprint $table) {
+        Schema::create('social_networks', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('startups_id')->unsigned()->index();
-            $table->integer('questions_id')->unsigned()->index();
-            $table->text('response', 65535);
+            $table->string('social_network');            
             $table->timestamps();
         });
     }
@@ -29,6 +27,6 @@ class CreateQuestionsStartupsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('questions_startups');
+        Schema::dropIfExists('social_networks');
     }
 }

@@ -306,15 +306,15 @@
                 </div>
               </div>
 
-                    <?php $__currentLoopData = App\Models\Questions::where('mode','on')->orderBy('id')->get(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $question): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                      <div id="TextBoxDiv<?php echo e($loop->iteration); ?>">
-                        <label class="col-sm-2 control-label">Question <?php echo e($loop->iteration); ?></label>
-                        <div class="col-sm-10">
-                          <div style="padding-bottom:2px"><input type="text" id="question_<?php echo e($loop->iteration); ?>" name="question_<?php echo e($loop->iteration); ?>" value="<?php echo e($question->question); ?>" placeholder="Question <?php echo e($loop->iteration); ?>" class="form-control" readOnly></div>
-                          <div style="padding-bottom:10px"><textarea data-limit="300" rows="5" name="response_<?php echo e($loop->iteration); ?>" id="response_<?php echo e($loop->iteration); ?>" placeholder="Response <?php echo e($loop->iteration); ?>" class="form-control"><?php echo e($data->{'response_'.$loop->iteration}); ?></textarea></div>
-                        </div>
-                      </div>
-                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+              <?php $__currentLoopData = App\Models\Questions::all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $question): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                <div id="TextBoxDiv<?php echo e($loop->iteration); ?>">
+                  <label class="col-sm-2 control-label">Question <?php echo e($loop->iteration); ?></label>
+                  <div class="col-sm-10">
+                    <div style="padding-bottom:2px"><input type="text" id="question_<?php echo e($loop->iteration); ?>" name="question_<?php echo e($loop->iteration); ?>" value="<?php echo e($question->question); ?>" placeholder="Question <?php echo e($loop->iteration); ?>" class="form-control" readOnly></div>
+                    <div style="padding-bottom:10px"><textarea data-limit="300" rows="5" name="response_<?php echo e($loop->iteration); ?>" id="response_<?php echo e($loop->iteration); ?>" placeholder="Response <?php echo e($loop->iteration); ?>" class="form-control"><?php echo e($data->{'response_'.$loop->iteration}); ?></textarea></div>
+                  </div>
+                </div>
+              <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
               <div class="box-footer">
                 <a href="<?php echo e(url('panel/admin/startups')); ?>" class="btn btn-default">Cancel</a>

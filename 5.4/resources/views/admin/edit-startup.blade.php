@@ -305,15 +305,15 @@
                 </div>
               </div>
 
-                    @foreach( App\Models\Questions::where('mode','on')->orderBy('id')->get() as $question )
-                      <div id="TextBoxDiv{{ $loop->iteration }}">
-                        <label class="col-sm-2 control-label">Question {{ $loop->iteration }}</label>
-                        <div class="col-sm-10">
-                          <div style="padding-bottom:2px"><input type="text" id="question_{{ $loop->iteration }}" name="question_{{ $loop->iteration }}" value="{{ $question->question }}" placeholder="Question {{ $loop->iteration }}" class="form-control" readOnly></div>
-                          <div style="padding-bottom:10px"><textarea data-limit="300" rows="5" name="response_{{ $loop->iteration }}" id="response_{{ $loop->iteration }}" placeholder="Response {{ $loop->iteration }}" class="form-control">{{ $data->{'response_'.$loop->iteration} }}</textarea></div>
-                        </div>
-                      </div>
-                    @endforeach
+              @foreach( App\Models\Questions::all() as $question )
+                <div id="TextBoxDiv{{ $loop->iteration }}">
+                  <label class="col-sm-2 control-label">Question {{ $loop->iteration }}</label>
+                  <div class="col-sm-10">
+                    <div style="padding-bottom:2px"><input type="text" id="question_{{ $loop->iteration }}" name="question_{{ $loop->iteration }}" value="{{ $question->question }}" placeholder="Question {{ $loop->iteration }}" class="form-control" readOnly></div>
+                    <div style="padding-bottom:10px"><textarea data-limit="300" rows="5" name="response_{{ $loop->iteration }}" id="response_{{ $loop->iteration }}" placeholder="Response {{ $loop->iteration }}" class="form-control">{{ $data->{'response_'.$loop->iteration} }}</textarea></div>
+                  </div>
+                </div>
+              @endforeach
 
               <div class="box-footer">
                 <a href="{{ url('panel/admin/startups') }}" class="btn btn-default">Cancel</a>

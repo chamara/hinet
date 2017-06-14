@@ -65,6 +65,16 @@ class RegisterController extends Controller
 
     //<<<<--- STARTUP REGISTER --->>>>//
 
+    public function register() {
+        
+        // Return View      
+        return view('auth.register');
+        
+    }
+
+
+    //<<<<--- STARTUP REGISTER --->>>>//
+
     public function startup() {
         
         // Return View      

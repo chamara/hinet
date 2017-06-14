@@ -923,7 +923,6 @@ class AdminController extends Controller {
 
 	// Store Function
 	public function storeStatuses(Request $request) {
-
 		$sql 			= new statuses;
 		$sql->status  	= $this->request->status;
 		$sql->table 	= $this->request->table;

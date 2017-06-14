@@ -16,7 +16,6 @@ class CreateQuestionsTable extends Migration
         Schema::create('questions', function (Blueprint $table) {
             $table->increments('id');
             $table->string('question');
-            $table->enum('mode', array('on', 'off'))->nullabel(false)->default('on');
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
         });

@@ -46,22 +46,17 @@
       </select>
   </div>
 
-
   <!-- Start Form Group -->
-
   <div class="form-group">
-    <?php for($i = 1; $i < 16; $i++): ?>
-      <?php $question = 'question_'.$i; ?>
-      <?php $response = 'response_'.$i; ?>
-      <?php if( !empty($data->$question )): ?>
-        <?php $count = $i; ?>
-        <div id="TextBoxDiv<?php echo e($i); ?>">
-            <label><?php echo e($data->$question); ?></label>
-            <div ><textarea data-limit="300" rows="5" name="response_<?php echo e($i); ?>" id="response_<?php echo e($i); ?>" placeholder="Response" class="form-control input-lg"><?php echo e($data->$response); ?></textarea></div>
-          </div>
-          <p></p>
-      <?php endif; ?>
-    <?php endfor; ?>
+    <?php $__currentLoopData = App\Models\Questions::all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $question): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+      <div id="TextBoxDiv<?php echo e($loop->iteration); ?>">
+        <label><?php echo e($question->question); ?></label>
+        <div >
+          <textarea data-limit="300" rows="5" name="response_<?php echo e($loop->iteration); ?>" id="response_<?php echo e($loop->iteration); ?>" placeholder="Response" class="form-control input-lg"><?php echo e($data->{'response_'.$loop->iteration}); ?></textarea>
+        </div>
+      </div>
+      <p></p>
+    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
   </div>
 
   <div class="box-footer">

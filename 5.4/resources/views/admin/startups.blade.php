@@ -70,7 +70,7 @@
                   <td><img src="{{asset('public/startups/logo').'/'.$startup->logo}}" width="20" /> 
                     <a title="{{$startup->title}}" href="{{ url('startup',$startup->id) }}" target="_blank">{{ str_limit($startup->title,20,'...') }} <i class="fa fa-external-link-square"></i></a>
                   </td>
-                  <td>{{$startup->user()->name}}</td>
+                  <td>{{ $startup->user()->name }}</td>
                   <td>{{ $settings->currency_symbol.number_format($startup->goal) }}</td>
                   <td>{{ $settings->currency_symbol.number_format($startup->investments()->sum('investment')) }}</td>
                   <td>
@@ -90,16 +90,14 @@
                 @endforeach
 
                 @else
-                <hr />
-                <h3 class="text-center no-found">No Results Found</h3>
+                  <hr />
+                  <h3 class="text-center no-found">No Results Found</h3>
 
-                @if( isset( $query ) )
-                <div class="col-md-12 text-center padding-bottom-15">
-                  <a href="{{url('panel/admin/startups')}}" class="btn btn-sm btn-danger">Back</a>
-                </div>
-
-                @endif
-
+                  @if( isset( $query ) )
+                    <div class="col-md-12 text-center padding-bottom-15">
+                      <a href="{{url('panel/admin/startups')}}" class="btn btn-sm btn-danger">Back</a>
+                    </div>
+                  @endif
                 @endif
 
               </tbody>

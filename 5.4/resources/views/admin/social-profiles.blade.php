@@ -14,100 +14,99 @@
   <section class="content">
    
     @if(Session::has('success_message'))
-    <div class="alert alert-success">
-     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-      <span aria-hidden="true">×</span>
-    </button>
-    <i class="fa fa-check margin-separator"></i> {{ Session::get('success_message') }}
-  </div>
-  @endif
+      <div class="alert alert-success">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+        <i class="fa fa-check margin-separator"></i> {{ Session::get('success_message') }}
+      </div>
+    @endif
 
   <div class="content">
-    
     <div class="row">
-      
-     <div class="box Startups">
-      <div class="box-header with-border">
-        <h3 class="box-title">Social</h3>
-      </div>
+      <div class="col-md-9">
+        <div class="box Startups">
+          <div class="box-header with-border">
+            <h3 class="box-title">Social</h3>
+          </div>
 
-      <!-- form start -->
-      <form class="form-horizontal" method="POST" action="{{ url('panel/admin/social-profiles') }}" enctype="multipart/form-data">
-       
-       <input type="hidden" name="_token" value="{{ csrf_token() }}">	
-       
-       @include('errors.errors-forms')
-       
-       <!-- Start Box Body -->
-       <div class="box-body">
-        <div class="form-group">
-          <label class="col-sm-2 control-label">Facebook</label>
-          <div class="col-sm-10">
-            <input type="text" value="{{ $settings->facebook }}" name="facebook" id="facebook" class="form-control" placeholder="http://www.facebook.com">
+          <!-- form start -->
+          <form class="form-horizontal" method="POST" action="{{ url('panel/admin/social-profiles') }}" enctype="multipart/form-data">
+           
+           <input type="hidden" name="_token" value="{{ csrf_token() }}">	
+           
+           @include('errors.errors-forms')
+           
+           <!-- Start Box Body -->
+           <div class="box-body">
+            <div class="form-group">
+              <label class="col-sm-2 control-label">Facebook</label>
+              <div class="col-sm-10">
+                <input type="text" value="{{ $settings->facebook }}" name="facebook" id="facebook" class="form-control" placeholder="http://www.facebook.com">
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-      
-      <!-- Start Box Body -->
-      <div class="box-body">
-        <div class="form-group">
-          <label class="col-sm-2 control-label">Twitter</label>
-          <div class="col-sm-10">
-            <input type="text" value="{{ $settings->twitter }}" name="twitter" id="twitter" class="form-control" placeholder="http://www.twitter.com">
+          
+          <!-- Start Box Body -->
+          <div class="box-body">
+            <div class="form-group">
+              <label class="col-sm-2 control-label">Twitter</label>
+              <div class="col-sm-10">
+                <input type="text" value="{{ $settings->twitter }}" name="twitter" id="twitter" class="form-control" placeholder="http://www.twitter.com">
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-      
-      <!-- Start Box Body -->
-      <div class="box-body">
-        <div class="form-group">
-          <label class="col-sm-2 control-label">Google Plus</label>
-          <div class="col-sm-10">
-            <input type="text" value="{{ $settings->googleplus }}" name="googleplus" id="googleplus" class="form-control" placeholder="http://www.google.com">
+          
+          <!-- Start Box Body -->
+          <div class="box-body">
+            <div class="form-group">
+              <label class="col-sm-2 control-label">Google Plus</label>
+              <div class="col-sm-10">
+                <input type="text" value="{{ $settings->googleplus }}" name="googleplus" id="googleplus" class="form-control" placeholder="http://www.google.com">
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-      
-      <!-- Start Box Body -->
-      <div class="box-body">
-        <div class="form-group">
-          <label class="col-sm-2 control-label">Instagram</label>
-          <div class="col-sm-10">
-            <input type="text" value="{{ $settings->instagram }}" name="instagram" id="instagram" class="form-control" placeholder="http://www.instagram.com">
+          
+          <!-- Start Box Body -->
+          <div class="box-body">
+            <div class="form-group">
+              <label class="col-sm-2 control-label">Instagram</label>
+              <div class="col-sm-10">
+                <input type="text" value="{{ $settings->instagram }}" name="instagram" id="instagram" class="form-control" placeholder="http://www.instagram.com">
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
 
-      <!-- Start Box Body -->
-      <div class="box-body">
-        <div class="form-group">
-          <label class="col-sm-2 control-label">Linkedin</label>
-          <div class="col-sm-10">
-            <input type="text" value="{{ $settings->linkedin }}" name="linkedin" id="linkedin" class="form-control" placeholder="http://www.linkedin.com">
+          <!-- Start Box Body -->
+          <div class="box-body">
+            <div class="form-group">
+              <label class="col-sm-2 control-label">Linkedin</label>
+              <div class="col-sm-10">
+                <input type="text" value="{{ $settings->linkedin }}" name="linkedin" id="linkedin" class="form-control" placeholder="http://www.linkedin.com">
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
 
-      <!-- Start Box Body -->
-      <div class="box-body">
-        <div class="form-group">
-          <label class="col-sm-2 control-label">AngelList</label>
-          <div class="col-sm-10">
-            <input type="text" value="{{ $settings->angellist }}" name="angellist" id="angellist" class="form-control" placeholder="http://www.angel.co">
+          <!-- Start Box Body -->
+          <div class="box-body">
+            <div class="form-group">
+              <label class="col-sm-2 control-label">AngelList</label>
+              <div class="col-sm-10">
+                <input type="text" value="{{ $settings->angellist }}" name="angellist" id="angellist" class="form-control" placeholder="http://www.angel.co">
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-  
-      <div class="box-footer">
-        <a href="{{ url('panel/admin') }}" class="btn btn-default">Cancel</a>
-        <button type="submit" class="btn btn-success pull-right">Save</button>
-      </div>
-    </form>
+      
+          <div class="box-footer">
+            <a href="{{ url('panel/admin') }}" class="btn btn-default">Cancel</a>
+            <button type="submit" class="btn btn-success pull-right">Save</button>
+          </div>
   </div>
   
 </div>
 
-</div>
+</div>          
+        </form>
 </section>
 </div>
 @endsection

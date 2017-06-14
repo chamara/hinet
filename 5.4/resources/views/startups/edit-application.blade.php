@@ -48,15 +48,15 @@
 
   <!-- Start Form Group -->
   <div class="form-group">
-    @foreach( App\Models\Questions::where('mode','on')->orderBy('id')->get() as $question )
+    @foreach( App\Models\Questions::all() as $question )
       <div id="TextBoxDiv{{ $loop->iteration }}">
-        <label>{{ $question->$question }}</label>
+        <label>{{ $question->question }}</label>
         <div >
-          <textarea data-limit="300" rows="5" name="response_{{ $loop->iteration }}" id="response_{{ $loop->iteration }}" placeholder="Response" class="form-control input-lg">{{ $data->$response }}</textarea>
+          <textarea data-limit="300" rows="5" name="response_{{ $loop->iteration }}" id="response_{{ $loop->iteration }}" placeholder="Response" class="form-control input-lg">{{ $data->{'response_'.$loop->iteration} }}</textarea>
         </div>
       </div>
       <p></p>
-    @endfor
+    @endforeach
   </div>
 
   <div class="box-footer">

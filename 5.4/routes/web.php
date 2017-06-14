@@ -97,10 +97,11 @@ Route::get('/logout', 'Auth\LoginController@logout');
 // Startup Register
 Route::get('/register/startup', 'Auth\RegisterController@startup');
 
-
 // Investor Register
 Route::get('/register/investor', 'Auth\RegisterController@investor');
 
+// Register
+Route::get('/register', 'Auth\RegisterController@register')->middleware('redirect');
 
 /* 
  |
@@ -303,7 +304,7 @@ Route::group(['middleware' => 'role'], function() {
 
 	// Admin questions
 	Route::get('panel/admin/questions','AdminController@questions');
-	Route::get('panel/admin/questions/add','AdminController@addQuestions');
+	Route::get('panel/admin/questions/add','AdminController@addQuestions')->middleware('startupQuestionsCount');
 	Route::post('panel/admin/questions/add','AdminController@storeQuestions');
 	Route::get('panel/admin/questions/edit/{id}','AdminController@editQuestions')->where(array( 'id' => '[0-9]+'));
 	Route::post('panel/admin/questions/update','AdminController@updateQuestions');

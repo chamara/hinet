@@ -27,40 +27,41 @@
   <section class="content">
     <div class="content">
       <div class="row">
-
+        <div class="col-md-9">
         <!--Admin box-->
-        <div class="box startups">
-          <div class="box-header with-border">
-            <h3 class="box-title">Edit Question</h3>
-          </div>
-          
-          <!--Form Start-->
-          <form class="form-horizontal" method="post" action="{{ url('panel/admin/questions/update') }}" enctype="multipart/form-data">
-           
-            <!--CSRF Token-->        
-            <input type="hidden" name="_token" value="{{ csrf_token() }}">
-            <input type="hidden" name="id" value="{{ $question->id }}">
-
-            <!--Include Form Errors-->
-            @include('errors.errors-forms')
+          <div class="box startups">
+            <div class="box-header with-border">
+              <h3 class="box-title">Edit Question</h3>
+            </div>
             
-            <!--question question-->
-            <div class="box-body">
-              <div class="form-group">
-                <label class="col-sm-2 control-label">Question</label>
-                <div class="col-sm-10">
-                  <input type="text" value="{{ $question->question }}" id="question" name="question" class="form-control" placeholder="question" required>
+            <!--Form Start-->
+            <form class="form-horizontal" method="post" action="{{ url('panel/admin/questions/update') }}" enctype="multipart/form-data">
+             
+              <!--CSRF Token-->        
+              <input type="hidden" name="_token" value="{{ csrf_token() }}">
+              <input type="hidden" name="id" value="{{ $question->id }}">
+
+              <!--Include Form Errors-->
+              @include('errors.errors-forms')
+              
+              <!--question question-->
+              <div class="box-body">
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">Question</label>
+                  <div class="col-sm-10">
+                    <input type="text" value="{{ $question->question }}" id="question" name="question" class="form-control" placeholder="question" required>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <div class="box-footer">
-              <a href="{{ url('panel/admin/questions') }}" class="btn btn-default">Cancel</a>
-              <button type="submit" class="btn btn-success pull-right">Save</button>
-            </div>
+              <div class="box-footer">
+                <a href="{{ url('panel/admin/questions') }}" class="btn btn-default">Cancel</a>
+                <button type="submit" class="btn btn-success pull-right">Save</button>
+              </div>
 
-          </form>
-        </div>			        		
+            </form>
+          </div>
+        </div>    		
       </div>
     </div>
   </section>

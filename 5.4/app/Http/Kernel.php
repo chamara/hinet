@@ -54,5 +54,7 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'role' => \App\Http\Middleware\Role::class,
         'pending' => \App\Http\Middleware\Pending::class,
+        'startupQuestionsCount' => \App\Http\Middleware\CheckStartupQuestionsCount::class,
+        'redirect' => \App\Http\Middleware\SetRedirectOnRegister::class,
     ];
 }

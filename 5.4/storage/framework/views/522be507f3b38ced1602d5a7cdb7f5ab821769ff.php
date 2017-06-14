@@ -18,7 +18,7 @@
 
      <div class="row">
 
-      <div class="col-md-12">
+      <div class="col-md-9">
 
        <div class="box Startups">
         <div class="box-header with-border">
@@ -58,6 +58,7 @@
             <label class="col-sm-2 control-label">Role</label>
             <div class="col-sm-10">
               <select name="role" id="role" class="form-control" required>
+                <option value="">Select One</option>
                 <option value="startup">Startup</option>
                 <option value="investor">Investor</option>
                 <option value="admin">Admin</option>

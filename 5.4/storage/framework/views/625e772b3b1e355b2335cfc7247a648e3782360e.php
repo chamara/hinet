@@ -90,16 +90,14 @@
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
                 <?php else: ?>
-                <hr />
-                <h3 class="text-center no-found">No Results Found</h3>
+                  <hr />
+                  <h3 class="text-center no-found">No Results Found</h3>
 
-                <?php if( isset( $query ) ): ?>
-                <div class="col-md-12 text-center padding-bottom-15">
-                  <a href="<?php echo e(url('panel/admin/startups')); ?>" class="btn btn-sm btn-danger">Back</a>
-                </div>
-
-                <?php endif; ?>
-
+                  <?php if( isset( $query ) ): ?>
+                    <div class="col-md-12 text-center padding-bottom-15">
+                      <a href="<?php echo e(url('panel/admin/startups')); ?>" class="btn btn-sm btn-danger">Back</a>
+                    </div>
+                  <?php endif; ?>
                 <?php endif; ?>
 
               </tbody>
