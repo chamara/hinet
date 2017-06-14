@@ -10,6 +10,9 @@ use App\Models\AdminSettings;
 use App\Models\Startups;
 use App\Models\Investments;
 use App\Models\Categories;
+use App\Models\TaxReliefs;
+use App\Models\Statuses;
+use App\Models\Questions;
 use App\Helper;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -55,7 +58,7 @@ class AdminController extends Controller {
 		if( $query != '' && strlen( $query ) > 2 ) {
 			$data = User::where('role', 'investor')->where('name', 'LIKE', '%'.$query.'%')
 			->orderBy('id','desc')->paginate(20);
-		} 
+		}
 
 		 // Else Data is
 		else {
@@ -92,8 +95,8 @@ class AdminController extends Controller {
 		if( !empty( $request->password ) ) {
 			// Set Validation Rules
 			$rules = array(
-				'name' => 'required|min:3|max:25',
-				'email'     => 'required|email|unique:users,email,'.$id,
+				'name'     => 'required|min:3|max:25',
+				'email'    => 'required|email|unique:users,email,'.$id,
 				'password' => 'min:6',
 				);
 
@@ -106,8 +109,8 @@ class AdminController extends Controller {
 
 			// Set Validation Rules	
 			$rules = array(
-				'name' => 'required|min:3|max:25',
-				'email'     => 'required|email|unique:users,email,'.$id,
+				'name'  => 'required|min:3|max:25',
+				'email' => 'required|email|unique:users,email,'.$id,
 				);
 
 			// No Password Change	
@@ -122,7 +125,7 @@ class AdminController extends Controller {
 		$user->email = $request->email;
 		$user->role = $request->role;
 		$user->password = $password;
-		$user->status = $request->status;
+		$user->status = $request->status_id;
 		$user->save();
 
       	// Success Message
@@ -162,7 +165,7 @@ class AdminController extends Controller {
 	}
 
     // Add User Function
-	public function add_member() {
+	public function addMember() {
     	// Return View
 		return view('admin.add-member');
 	}
@@ -171,10 +174,10 @@ class AdminController extends Controller {
 	public function storeMember(Request $request) {
 		// Validate Rules
 		$this->validate($request, [
-			'name' => 'required|min:3|max:30',
-			'email'     => 'required|email|max:255|unique:users',
+			'name' 	   => 'required|min:3|max:30',
+			'email'    => 'required|email|max:255|unique:users',
 			'password' => 'required|confirmed|min:6',
-			]);
+		]);
 		
 		// Store User
 		$user = new User;
@@ -230,7 +233,7 @@ class AdminController extends Controller {
 			'max_startup_amount'    => 'required|integer|min:1',
 			'min_investment_amount' => 'required|integer|min:1',
 			'max_investment_amount' => 'required|integer|min:1',
-			);
+		);
 		
 		// Validate Request
 		$this->validate($request, $rules);
@@ -254,7 +257,7 @@ class AdminController extends Controller {
 		$sql->min_startup_amount   	= $request->min_startup_amount;
 		$sql->max_startup_amount   	= $request->max_startup_amount;
 		$sql->min_investment_amount = $request->min_investment_amount;
-		$sql->max_investment_amount = $request->max_investment_amount;
+		$sql->max_investment_amount = $request->max_investment_amount;		
 		$sql->save();
 
 		// Success Message
@@ -269,7 +272,7 @@ class AdminController extends Controller {
 	// Social Profiles Function	
 	public function profiles_social(){
 		// Return View
-		return view('admin.profiles-social')->withSettings($this->settings);
+		return view('admin.social-profiles')->withSettings($this->settings);
 	}
 
 	// Update Social Profiles Function	
@@ -305,7 +308,7 @@ class AdminController extends Controller {
 		\Session::flash('success_message', 'Success');
 
 		// Return Redirect
-		return redirect('panel/admin/profiles-social');
+		return redirect('panel/admin/social-profiles');
 	}
 
 	//<<<<--- INVESTMENTS --->>>>//
@@ -329,7 +332,7 @@ class AdminController extends Controller {
 	}
 
 	// Add Investment Function
-	public function add_investment() {
+	public function addInvestment() {
 		// Get Data
 		$data = startups::where('status', 'active')->where('opportunity', '1')->orderBy('id','ASC')->paginate(100);
 
@@ -436,9 +439,10 @@ class AdminController extends Controller {
 	// }
 
 	// Add Investment Function
-	public function add_startup() {
+	public function addStartup() {
 		// Get Data
-		$user = user::where('role', 'startup')->orderBy('name','ASC')->paginate(100);
+		$startups = startups::pluck('user_id')->all();
+		$user = user::where('role', 'startup')->whereNotIn('id', $startups)->orderBy('name','ASC')->paginate(100);
 
     	// Return View
 		return view('admin.add-startup', ['user' => $user, 'settings' => $this->settings] );
@@ -446,6 +450,18 @@ class AdminController extends Controller {
 
 	// Store Investment Function
 	public function storeStartup(Request $request) {
+
+		// Validate Rules
+		$rules = array(
+			'twitter'   => 'url',
+			'facebook'  => 'url',
+			'website' 	=> 'url',
+			'video'  	=> 'url',
+			'linkedin'  => 'url',
+			);
+
+		// Validate Request
+		$this->validate($request, $rules);
 
 		// Decode HTML from textarea
 		$description = html_entity_decode($request->description);
@@ -465,15 +481,45 @@ class AdminController extends Controller {
 		$sql 				= new startups;
 		$sql->title 		= $request->title;
 		$sql->user_id 		= $request->member_name;
+		$sql->oneliner 		= $request->tagline;
+		$sql->website 		= $request->website;
+		$sql->facebook 		= $request->facebook;
+		$sql->linkedin 		= $request->linkedin;
+		$sql->twitter 		= $request->twitter;
+		$sql->video 		= $request->video;
 		$sql->goal 			= $request->goal;
 		$sql->location 		= $request->location;
-		$sql->status 		= $request->status;
+		$sql->status 		= $request->status_id;
 		$sql->description 	= $description;
 		$sql->categories_id = $request->category;
+		$sql->equity 		= $request->equity;
+		$sql->valuation 	= $request->valuation;
+		$sql->tax 			= $request->tax;
 		$sql->featured 		= $request->featured;
 		$sql->opportunity	= $request->opportunity;
 		$sql->portfolio		= $request->portfolio;
+		$sql->response_1	= trim($this->request->response_1);
+		$sql->response_2	= trim($this->request->response_2);
+		$sql->response_3	= trim($this->request->response_3);
+		$sql->response_4	= trim($this->request->response_4);
+		$sql->response_5	= trim($this->request->response_5);
+		$sql->response_6	= trim($this->request->response_6);
+		$sql->response_7	= trim($this->request->response_7);
+		$sql->response_8	= trim($this->request->response_8);
+		$sql->response_9	= trim($this->request->response_9);
+		$sql->response_10	= trim($this->request->response_10);
+		$sql->response_11	= trim($this->request->response_11);
+		$sql->response_12	= trim($this->request->response_12);
+		$sql->response_13	= trim($this->request->response_13);
+		$sql->response_14	= trim($this->request->response_14);
+		$sql->response_15	= trim($this->request->response_15);
 		$sql->save();
+
+		$questions = questions::all();
+		foreach ($questions as $question) {
+			$question_id = questions::find($question->id);
+			$question_id->startups()->save($sql);
+		}
 
 		// Success Message
 		\Session::flash('success_message', 'Success');
@@ -502,17 +548,29 @@ class AdminController extends Controller {
 	}
 
 	// Edit Startup ** Request from Joseph 02/03/2017 - Admin override all content **
-	public function editstartups($id){
-		
+	public function editStartups($id){
 		// Get Data
 		$data = startups::findOrFail($id);
+		$user = user::where('role', 'startup')->whereIn('id', $data)->orderBy('name','ASC')->paginate(15);
 
 		// Return View
-		return view('admin.edit-startup', ['data' => $data, 'settings' => $this->settings]);
+		return view('admin.edit-startup', ['user' => $user, 'data' => $data, 'settings' => $this->settings]);
 	}
 	
 	// Post Edit Startups
-	public function postEditstartups(Request $request) {
+	public function postEditStartups(Request $request) {
+		// Validate Rules
+		$rules = array(
+			'twitter'   => 'url',
+			'facebook'  => 'url',
+			'website' 	=> 'url',
+			'video'  	=> 'url',
+			'linkedin'  => 'url',
+			);
+
+		// Validate Request
+		$this->validate($request, $rules);
+
 		// Set DB
 		$sql = startups::findOrFail($request->id);
 		
@@ -533,14 +591,38 @@ class AdminController extends Controller {
 
 		// Store Request
 		$sql->title 		= $request->title;
+		$sql->oneliner 		= $request->tagline;
+		$sql->website 		= $request->website;
+		$sql->facebook 		= $request->facebook;
+		$sql->linkedin 		= $request->linkedin;
+		$sql->twitter 		= $request->twitter;
+		$sql->video 		= $request->video;
 		$sql->goal 			= $request->goal;
 		$sql->location 		= $request->location;
 		$sql->description 	= $description;
-		$sql->status 		= $request->status;
+		$sql->status 		= $request->status_id;
 		$sql->categories_id = $request->category;
+		$sql->equity 		= $request->equity;
+		$sql->valuation 	= $request->valuation;
+		$sql->tax 			= $request->tax;
 		$sql->featured 		= $request->featured;
 		$sql->opportunity	= $request->opportunity;
 		$sql->portfolio		= $request->portfolio;
+		$sql->response_1	= trim($this->request->response_1);
+		$sql->response_2	= trim($this->request->response_2);
+		$sql->response_3	= trim($this->request->response_3);
+		$sql->response_4	= trim($this->request->response_4);
+		$sql->response_5	= trim($this->request->response_5);
+		$sql->response_6	= trim($this->request->response_6);
+		$sql->response_7	= trim($this->request->response_7);
+		$sql->response_8	= trim($this->request->response_8);
+		$sql->response_9	= trim($this->request->response_9);
+		$sql->response_10	= trim($this->request->response_10);
+		$sql->response_11	= trim($this->request->response_11);
+		$sql->response_12	= trim($this->request->response_12);
+		$sql->response_13	= trim($this->request->response_13);
+		$sql->response_14	= trim($this->request->response_14);
+		$sql->response_15	= trim($this->request->response_15);
 		$sql->save();
 
 		// Success Message
@@ -549,7 +631,7 @@ class AdminController extends Controller {
 	}
 
 	// Delete Startup Function
-	public function deletestartup(Request $request) {
+	public function deleteStartup(Request $request) {
 		// Get Data
 		$data = startups::findOrFail($request->id);
 		
@@ -701,11 +783,11 @@ class AdminController extends Controller {
 	// Update Existing Category Function
 	public function updateCategories( Request $request ) {
 		// Get Data
-		$categories        = Categories::find( $request->id );
+		$categories  = Categories::find( $request->id );
 
 		// Set File Paths
-		$temp            = 'public/temp/'; 
-		$path            = 'public/img-category/';
+		$temp = 'public/temp/'; 
+		$path = 'public/img-category/';
 
 	    // If category is null
 		if( !isset($categories) ) {
@@ -812,5 +894,270 @@ class AdminController extends Controller {
 			return redirect('panel/admin/categories');
 		}	
 	}
+
+	//<<<<--- STATUSES --->>>>//
+
+	// Statuses Function	
+	public function statuses() {
+		// Get Data
+		$data = statuses::orderBy('id','ASC')->paginate(100);
+
+		// Return View
+		return view('admin.statuses', ['data' => $data, 'settings' => $this->settings]);
+	}
+	
+	// Single Function
+	public function viewStatuses($id) {
+		// Get Data
+		$data = statuses::findOrFail($id);
+
+		// Return View
+		return view('admin.viewStatus', ['data' => $data, 'settings' => $this->settings]);
+	}
+
+	// Add Function
+	public function addStatuses() {
+    	// Return View
+		return view('admin.add-status');
+	}
+
+	// Store Function
+	public function storeStatuses(Request $request) {
+
+		$sql 			= new statuses;
+		$sql->status  	= $this->request->status;
+		$sql->table 	= $this->request->table;
+		$sql->mode 		= 'on';
+		$sql->save();
+
+		// Success Message
+		\Session::flash('success_message', 'Success');
+
+		// Return Redirect
+		return redirect('panel/admin/statuses');	
+	}
+
+	// Edit Function
+	public function editStatuses($id) {
+		// Get Data
+		$statuses  = statuses::find( $id );
+
+		// Return View
+		return view('admin.edit-status')->with('status',$statuses);
+	}
+
+	// Update Function	
+	public function updateStatuses(Request $request) {
+		$sql = statuses::find($request->id);
+		
+		// Store Settings
+		$sql->status = $request->status;
+		$sql->table  = $request->table;
+		$sql->mode   = $request->mode;
+
+		// SQL Save
+		$sql->save();
+
+		// Success Message
+		\Session::flash('success_message', 'Success');
+
+		// Return Redirect
+		return redirect('panel/admin/statuses');
+	}
+
+	// Delete Function
+	public function deleteStatuses($id) {
+		// Get data
+		$statuses = statuses::find( $id );
+		
+		// If null
+		if( !isset($statuses) ) {
+			// Retrun Redirect
+			return redirect('panel/admin/statuses');
+		} 
+
+		else {
+			// Delete	
+			$statuses->delete();
+			
+			// Return Redirect
+			return redirect('panel/admin/statuses');
+		}	
+	}
+
+	//<<<<--- TAX RELIEFS --->>>>//
+
+	// Tax Reliefs Function	
+	public function taxReliefs() {
+		// Get Data
+		$data = taxReliefs::orderBy('id','ASC')->paginate(100);
+
+		// Return View
+		return view('admin.tax-reliefs', ['data' => $data, 'settings' => $this->settings]);
+	}
+	
+	// Single Function
+	public function viewTaxReliefs($id) {
+		// Get Data
+		$data = taxReliefs::findOrFail($id);
+
+		// Return View
+		return view('admin.view-tax-reliefs', ['data' => $data, 'settings' => $this->settings]);
+	}
+
+	// Add Function
+	public function addTaxReliefs() {
+    	// Return View
+		return view('admin.add-tax-relief');
+	}
+
+	// Store Function
+	public function storeTaxReliefs(Request $request) {
+		$sql 			= new taxReliefs;
+		$sql->status  	= $this->request->status;
+		$sql->mode 		= 'on';
+		$sql->save();
+
+		// Success Message
+		\Session::flash('success_message', 'Success');
+
+		// Return Redirect
+		return redirect('panel/admin/tax-reliefs');	
+	}
+
+	// Edit Function
+	public function editTaxReliefs($id) {
+		// Get Data
+		$taxReliefs  = taxReliefs::find( $id );
+
+		// Return View
+		return view('admin.edit-tax-reliefs')->with('status',$taxReliefs);
+	}
+
+	// Update Function
+	public function updateTaxReliefs(Request $request) {
+		$sql = taxReliefs::find($request->id);
+		
+		// Store Settings
+		$sql->status = $request->status;
+		$sql->mode   = $request->mode;
+
+		// SQL Save
+		$sql->save();
+
+		// Success Message
+		\Session::flash('success_message', 'Success');
+
+		// Return Redirect
+		return redirect('panel/admin/tax-reliefs');
+	}
+
+	// Delete Function
+	public function deleteTaxReliefs($id) {
+		// Get data
+		$taxReliefs = taxReliefs::find( $id );
+		
+		// If null
+		if( !isset($taxReliefs) ) {
+			// Retrun Redirect
+			return redirect('panel/admin/tax-reliefs');
+		} 
+
+		else {
+			// Delete	
+			$taxReliefs->delete();
+			
+			// Return Redirect
+			return redirect('panel/admin/tax-reliefs');
+		}
+	}
+
+	//<<<<--- QUESTIONS --->>>>//
+
+	// Questions Function	
+	public function questions() {
+		// Get Data
+		$data = questions::orderBy('id','ASC')->paginate(100);
+
+		// Return View
+		return view('admin.questions', ['data' => $data, 'settings' => $this->settings]);
+	}
+	
+	// Single Function
+	public function viewQuestions($id) {
+		// Get Data
+		$data = questions::findOrFail($id);
+
+		// Return View
+		return view('admin.viewQuestion', ['data' => $data, 'settings' => $this->settings]);
+	}
+
+	// Add Function
+	public function addQuestions() {
+		// Get Data
+		$data = questions::orderBy('id','ASC')->paginate(100);
+
+    	// Return View
+		return view('admin.add-question', ['data' => $data, 'settings' => $this->settings]);
+	}
+
+	// Store Function
+	public function storeQuestions(Request $request) {
+		$sql 		   = new questions;
+		$sql->question = $this->request->question;
+		$sql->save();
+
+		// Success Message
+		\Session::flash('success_message', 'Success');
+
+		// Return Redirect
+		return redirect('panel/admin/questions');	
+	}
+
+	// Edit Function
+	public function editQuestions($id) {
+		// Get Data
+		$questions  = questions::find( $id );
+
+		// Return View
+		return view('admin.edit-question')->with('question',$questions);
+	}
+
+	// Update Function	
+	public function updateQuestions(Request $request) {
+		$sql = questions::find($request->id);
+		
+		// Store Settings
+		$sql->question = $request->question;
+
+		// SQL Save
+		$sql->save();
+
+		// Success Message
+		\Session::flash('success_message', 'Success');
+
+		// Return Redirect
+		return redirect('panel/admin/questions');
+	}
+
+	// Delete Function
+	public function deleteQuestions($id) {
+		// Get data
+		$questions = questions::find( $id );
+		
+		// If null
+		if( !isset($questions) ) {
+			// Retrun Redirect
+			return redirect('panel/admin/questions');
+		} 
+
+		else {
+			// Delete	
+			$questions->delete();
+			
+			// Return Redirect
+			return redirect('panel/admin/questions');
+		}	
+	}	
 }
 //<<<<--- END CLASS --->>>>//

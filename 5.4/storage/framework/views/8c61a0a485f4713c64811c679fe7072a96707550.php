@@ -5,7 +5,7 @@
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h4>Admin
-      <i class="fa fa-angle-right margin-separator"></i>Payments
+      <i class="fa fa-angle-right margin-separator"></i>Payment Settings
     </h4>
 
   </section>
@@ -18,7 +18,8 @@
      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
       <span aria-hidden="true">×</span>
     </button>
-    <i class="fa fa-check margin-separator"></i> <?php echo e(Session::get('success_message')); ?>	        
+    <i class="fa fa-check margin-separator"></i> <?php echo e(Session::get('success_message')); ?>
+
   </div>
   <?php endif; ?>
 
@@ -105,7 +106,8 @@
     </div>
 
     <div class="box-footer">
-      <button type="submit" class="btn btn-success">Save</button>
+      <a href="<?php echo e(url('panel/admin')); ?>" class="btn btn-default">Cancel</a>
+      <button type="submit" class="btn btn-success pull-right">Save</button>
     </div>
   </form>
 </div>
@@ -113,8 +115,6 @@
 </div>
 
 </div>
-
-
 
 </section>
 </div>

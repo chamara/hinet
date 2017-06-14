@@ -5,9 +5,10 @@
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h4>Admin
-      <i class="fa fa-angle-right margin-separator"></i>Edit
+      <i class="fa fa-angle-right margin-separator"></i>Members
       <i class="fa fa-angle-right margin-separator"></i><?php echo e($data->name); ?>
 
+      <i class="fa fa-angle-right margin-separator"></i>Edit
     </h4>
   </section>
 
@@ -69,16 +70,10 @@
                 <div class="form-group">
                   <label class="col-sm-2 control-label">Status</label>
                   <div class="col-sm-10">
-                    <select id="status" name="status" class="form-control" required>
-
-                      <?php $__currentLoopData = App\Models\Statuses::where('mode','on')->orderBy('id')->get(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $status): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                          <option value="<?php echo e($status->id); ?>"
-                          <?php if($status == old('status', $model->option)): ?>
-                              selected="selected"
-                          <?php endif; ?>
-                          ><?php echo e($status); ?></option>
+                    <select name="status_id" class="form-control" required>
+                      <?php $__currentLoopData = App\Models\Statuses::where(['mode'=>'on', 'table'=>'users'])->orderBy('status')->get(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $status): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>   
+                      <option <?php if( $status->status == $data->status ): ?> selected="selected" <?php endif; ?> value="<?php echo e($status->status); ?>"><?php echo e(ucfirst(trans($status->status))); ?></option>
                       <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-
                     </select>
                   </div>
                 </div>
@@ -89,7 +84,7 @@
                 <div class="form-group">
                   <label class="col-sm-2 control-label">Password</label>
                   <div class="col-sm-10">
-                    <input type="password" value="" id="password" name="password" class="form-control" placeholder="Leave Empty for no change">
+                    <input type="password" value="" id="password" name="password" class="form-control" placeholder="Leave Empty For No Change">
                   </div>
                 </div>
               </div>

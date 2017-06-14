@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class startupStatus extends Model
+class question_startup extends Model
 {
     //
 }

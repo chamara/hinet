@@ -20,7 +20,7 @@
      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
       <span aria-hidden="true">×</span>
     </button>
-    <i class="fa fa-check margin-separator"></i> {{ Session::get('success_message') }}	        
+    <i class="fa fa-check margin-separator"></i> {{ Session::get('success_message') }}
   </div>
   @endif
   
@@ -43,7 +43,7 @@
             <th class="active">Slug</th>
             <th class="active">Actions</th>
           </tr>
-          
+
           @foreach( $data as $page )
           <tr>
             <td>{{ $page->id }}</td>
@@ -53,9 +53,9 @@
              <a href="{{ route('pages.edit', $page->id) }}" class="btn btn-success btn-xs padding-btn">
               Edit
             </a> 
-            
+
             @if( $data->count() != 1 )
-            
+
             {!! Form::open([
             'method' => 'DELETE',
             'route' => ['pages.destroy', $page->id],
@@ -64,30 +64,26 @@
             ]) !!}
             {!! Form::submit('Delete', ['data-url' => $page->id, 'class' => 'btn btn-danger btn-xs padding-btn actionDelete']) !!}
             {!! Form::close() !!}
-            
+
             @endif
-            
+
           </td>
-          
+
         </tr><!-- /.TR -->
         @endforeach
-        
+
         @else
         <hr />
         <h3 class="text-center no-found">No Results</h3>
         @endif
-        
+
       </tbody>
-      
-      
+
     </table>
   </div>
 </div><!-- /.box -->
 </div>
 </div>        	
-
-
-
 </section>
 </div>
 @endsection
@@ -100,14 +96,15 @@
     e.preventDefault();
     
     var element = $(this);
-    var id     = element.attr('data-url');
+    var id      = element.attr('data-url');
     var form    = $(element).parents('form');
     
     element.blur();
     
     swal(
       {   title: "Confirm",  
-      type: "warning", 
+      text: "Delete Page?",
+      type: "warning",
       showLoaderOnConfirm: true,
       showCancelButton: true,   
       confirmButtonColor: "#DD6B55",  

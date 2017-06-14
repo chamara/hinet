@@ -21,7 +21,8 @@
       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">×</span>
       </button>
-      <i class="fa fa-warning margin-separator"></i>  <?php echo e(Session::get('info_message')); ?>	        
+      <i class="fa fa-warning margin-separator"></i>  <?php echo e(Session::get('info_message')); ?>
+
     </div>
     <?php endif; ?>
 
@@ -30,7 +31,8 @@
       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">×</span>
       </button>
-      <i class="fa fa-check margin-separator"></i>  <?php echo e(Session::get('success_message')); ?>	        
+      <i class="fa fa-check margin-separator"></i>  <?php echo e(Session::get('success_message')); ?>
+
     </div>
     <?php endif; ?>
 
@@ -40,15 +42,15 @@
           <div class="box-header">
             <h3 class="box-title"> 
               <?php if( $data->count() != 0 && $data->currentPage() != 1 ): ?> 
-              <a href="<?php echo e(url('panel/admin/members')); ?>">View All</a>
+                <a href="<?php echo e(url('panel/admin/members')); ?>">View All</a>
               <?php else: ?>
-              Members                 		
+                Members
               <?php endif; ?>
 
             </h3>
             <div class="box-tools">
 
-              <?php if( $data->total() !=  0 ): ?>   
+              <?php if( $data->total() !=  0 ): ?>
               <!-- form -->
               <form role="search" autocomplete="off" action="<?php echo e(url('panel/admin/members')); ?>" method="get">
                 <div class="input-group input-group-sm" style="width: 150px;">
@@ -134,7 +136,7 @@
       <?php echo e($data->appends(['q' => $query])->links()); ?>
 
     </div>
-  </div>        	
+  </div>
 </section>
 </div>
 <?php $__env->stopSection(); ?>
@@ -147,14 +149,14 @@
     e.preventDefault();
 
     var element = $(this);
-    var id     = element.attr('data-url');
+    var id      = element.attr('data-url');
     var form    = $(element).parents('form');
 
     element.blur();
 
     swal(
       {   title: "Confirm",  
-      text: "Delete User",
+      text: "Delete User?",
       type: "warning", 
       showLoaderOnConfirm: true,
       showCancelButton: true,   

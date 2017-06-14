@@ -6,7 +6,7 @@
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h4>
-     Admin<i class="fa fa-angle-right margin-separator"></i>Startups ({{$data->total()}})
+     Admin<i class="fa fa-angle-right margin-separator"></i>Startups<i class="fa fa-angle-right margin-separator"></i>Startup Profiles ({{$data->total()}})
      <a href="{{ url('panel/admin/startup/add') }}" class="btn btn-sm btn-success no-shadow pull-right"><i class="glyphicon glyphicon-plus myicon-right"></i> Add Startup
      </a>
    </h4>    
@@ -56,7 +56,7 @@
                 <tr>
                   <th class="active">ID</th>
                   <th class="active">Title</th>
-                  <th class="active">User</th>
+                  <th class="active">Member</th>
                   <th class="active">Investment Sought</th>
                   <th class="active">Funds Raised</th>
                   <th class="active">Status</th>
@@ -112,7 +112,7 @@
         {{ $data->links() }}
         @endif
       </div>
-    </div>        	
+    </div>
   </section>
 </div>
 @endsection

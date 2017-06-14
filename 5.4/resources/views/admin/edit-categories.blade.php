@@ -5,7 +5,9 @@
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h4>Admin
+      <i class="fa fa-angle-right margin-separator"></i>Picklists
       <i class="fa fa-angle-right margin-separator"></i>Categories
+      <i class="fa fa-angle-right margin-separator"></i>{{ $categories->name }}      
       <i class="fa fa-angle-right margin-separator"></i>Edit
     </h4>
   </section>
@@ -24,8 +26,8 @@
 
           <!-- form start -->
           <form class="form-horizontal" method="post" action="{{ url('panel/admin/categories/update') }}" enctype="multipart/form-data">
-            <input type="hidden" name="_token" value="{{ csrf_token() }}">	
-            <input type="hidden" name="id" value="{{ $categories->id }}">	
+            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+            <input type="hidden" name="id" value="{{ $categories->id }}">
 
             @include('errors.errors-forms')
 

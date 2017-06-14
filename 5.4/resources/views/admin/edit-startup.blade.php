@@ -7,8 +7,10 @@
 <div class="content-wrapper">
   <section class="content-header">
     <h4>Admin
-      <i class="fa fa-angle-right margin-separator"></i>Edit
+      <i class="fa fa-angle-right margin-separator"></i>Startups
+      <i class="fa fa-angle-right margin-separator"></i>Startup Profiles
       <i class="fa fa-angle-right margin-separator"></i>{{ $data->title }}
+      <i class="fa fa-angle-right margin-separator"></i>Edit
     </h4>
   </section>
 
@@ -17,7 +19,6 @@
     <div class="content">
       <div class="row">
         <div class="col-md-9">
-
           <div class="box Startups">
             <div class="box-header with-border">
               <h3 class="box-title">Edit Startup</h3>
@@ -32,12 +33,36 @@
               <!-- Start Box Body -->
               <div class="box-body">
                 <div class="form-group">
-                  <label class="col-sm-2 control-label">Startup Name</label>
+                  <label class="col-sm-2 control-label">Member Name</label>
                   <div class="col-sm-10">
-                    <input type="text" value="{{ $data->title }}" name="title" id="title" class="form-control" placeholder="Name">
+                    <select name="member_name" id="member_name" class="form-control" disabled required>
+                      @foreach( $user as $user )
+                      <option @if( $user->id == $data->user_id ) selected="selected" @endif value="{{$user->id}}">{{ $user->name }}</option>
+                      @endforeach
+                    </select>
                   </div>
                 </div>
               </div>
+
+              <!-- Start Box Body -->
+              <div class="box-body">
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">Startup Name</label>
+                  <div class="col-sm-10">
+                    <input type="text" value="{{ $data->title }}" name="title" id="title" class="form-control" placeholder="Name" required>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Start Box Body -->
+              <div class="box-body">
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">Tagline</label>
+                  <div class="col-sm-10">
+                    <input type="text" value="{{ $data->oneliner }}" name="tagline" id="tagline" class="form-control" placeholder="Tagline" required>
+                  </div>
+                </div>
+              </div>              
 
               <!-- Start Box Body -->
               <div class="box-body">
@@ -57,32 +82,17 @@
                     <input type="file" name="cover" id="cover" class="form-control input-lg" placeholder="Cover Page" >
                   </div>
                 </div>
+              </div>
+
+              <!-- Start Box Body -->
+              <div class="box-body">
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">Startup Description</label>
+                  <div class="col-sm-10">
+                    <textarea name="description" rows="5" id="description" class="form-control  tinymce-txt" placeholder="Description">{{ $data->description }}</textarea>
+                  </div>
+                </div>
               </div>              
-
-              <!-- Start Box Body -->
-              <div class="box-body">
-                <div class="form-group">
-                  <label class="col-sm-2 control-label">Category</label>
-                  <div class="col-sm-10">
-                    <select name="category" name="category" id="category" class="form-control">
-                      <option value="">Select One</option>
-                      @foreach(  App\Models\Categories::where('mode','on')->orderBy('name')->get() as $category ) 	
-                      <option @if( $category->id == $data->categories_id ) selected="selected" @endif value="{{$category->id}}">{{ $category->name }}</option>
-                      @endforeach
-                    </select>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Start Box Body -->
-              <div class="box-body">
-                <div class="form-group">
-                  <label class="col-sm-2 control-label">Investment Sought</label>
-                  <div class="col-sm-10">
-                    <input type="number" min="1" autocomplete="off" value="{{ $data->goal }}" name="goal" id="goal" class="form-control onlyNumber" placeholder="1000000">
-                  </div>
-                </div>
-              </div>
 
               <!-- Start Box Body -->
               <div class="box-body">
@@ -97,9 +107,116 @@
               <!-- Start Box Body -->
               <div class="box-body">
                 <div class="form-group">
-                  <label class="col-sm-2 control-label">Startup Description</label>
+                  <label class="col-sm-2 control-label">Website</label>
                   <div class="col-sm-10">
-                    <textarea name="description" rows="5" id="description" class="form-control  tinymce-txt" placeholder="Description">{{ $data->description }}</textarea>
+                    <input type="url" value="{{ $data->website }}" name="website" id="website" class="form-control" placeholder="https://www.website-name.com">
+                  </div>
+                </div>
+              </div>
+
+              <!-- Start Box Body -->
+              <div class="box-body">
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">Facebook</label>
+                  <div class="col-sm-10">
+                    <input type="url" value="{{ $data->facebook }}" name="facebook" id="facebook" class="form-control" placeholder="https://www.facebook.com/account-name">
+                  </div>
+                </div>
+              </div>
+
+              <!-- Start Box Body -->
+              <div class="box-body">
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">Twitter</label>
+                  <div class="col-sm-10">
+                    <input type="url" value="{{ $data->twitter }}" name="twitter" id="twitter" class="form-control" placeholder="https://www.twitter.com/account-name">
+                  </div>
+                </div>
+              </div>
+
+              <!-- Start Box Body -->
+              <div class="box-body">
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">LinkedIn</label>
+                  <div class="col-sm-10">
+                    <input type="url" value="{{ $data->linkedin }}" name="linkedin" id="linkedin" class="form-control" placeholder="https://www.linkedin.com/account-name">
+                  </div>
+                </div>
+              </div>
+
+              <!-- Start Box Body -->
+              <div class="box-body">
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">Video</label>
+                  <div class="col-sm-10">
+                    <input type="url" value="{{ $data->video }}" name="video" id="video" class="form-control" placeholder="https://www.youtube.com/video-name">
+                  </div>
+                </div>
+              </div>
+
+              <!-- Start Box Body -->
+              <div class="box-body">
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">Category</label>
+                  <div class="col-sm-10">
+                    <select name="category" id="category" class="form-control">
+                      @foreach( App\Models\Categories::where('mode','on')->orderBy('name')->get() as $category ) 	
+                      <option @if( $category->id == $data->categories_id ) selected="selected" @endif value="{{$category->id}}">{{ $category->name }}</option>
+                      @endforeach
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Start Box Body -->
+              <div class="box-body">
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">Investment Sought</label>
+                  <div class="col-sm-10">
+                    <div class="input-group">
+                      <div class="input-group-addon">{{$settings->currency_symbol}}</div>                  
+                      <input type="number" min="1" autocomplete="off" value="{{ $data->goal }}" name="goal" id="goal" class="form-control onlyNumber" placeholder="1000000">
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Start Box Body -->
+              <div class="box-body">
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">Equity</label>
+                  <div class="col-sm-10">
+                    <div class="input-group">
+                    <div class="input-group-addon">%</div>
+                    <input type="number" value="{{ $data->equity }}" name="equity" id="equity" class="form-control" placeholder="Equity">
+                  </div>
+                </div>
+                </div>
+              </div>
+
+              <!-- Start Box Body -->
+              <div class="box-body">
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">Pre-Money Valuation</label>
+                  <div class="col-sm-10">
+                    <div class="input-group">
+                      <div class="input-group-addon">{{$settings->currency_symbol}}</div>
+                      <input type="number" value="{{ $data->valuation }}" name="valuation" id="valuation" class="form-control" placeholder="Valuation">
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Start Form Box Body -->
+              <div class="box-body">
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">Tax Relief</label>
+                  <div class="col-sm-10">
+                    <select name="tax" id="tax" class="form-control" required>
+                      @foreach( App\Models\TaxReliefs::where('mode','on')->orderBy('id')->get() as $taxreliefstatus )
+                        <option @if ( $taxreliefstatus->status == $data->tax ) selected="selected" @endif value="{{$taxreliefstatus->status}}">{{ $taxreliefstatus->status }}</option>
+                      @endforeach
+                    </select>
                   </div>
                 </div>
               </div>
@@ -109,14 +226,38 @@
                 <div class="form-group">
                   <label class="col-sm-2 control-label">Status</label>
                   <div class="col-sm-10">
-                    <select name="status" id="status" class="form-control" >
-                      <option @if($data->finalized == '0' && $data->status == 'pending') selected="selected" @endif value="pending">Pending</option>
-                      <option @if($data->finalized == '0'  && $data->status == 'active') selected="selected" @endif value="active">Active</option>
-                      <option @if($data->finalized == '1'  && $data->status == 'active') selected="selected" @endif value="finalized">Finialized</option>
+                    <select name="status_id" class="form-control" required>
+                      @foreach ( App\Models\Statuses::where(['mode'=>'on', 'table'=>'startups'])->orderBy('status')->get() as $status )   
+                      <option @if ( $status->status == $data->status ) selected="selected" @endif value="{{$status->status}}">{{ ucfirst(trans($status->status)) }}</option>
+                      @endforeach
                     </select>
                   </div>
                 </div>
               </div>
+
+              <!-- Start Box Body -->
+              <div class="box-body">
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">Featured?</label>
+                  <div class="col-sm-10">
+
+                    <div class="radio">
+                      <label class="padding-zero">
+                        <input type="radio" name="featured" id="featured"  @if( $data->featured == '1' ) checked="checked" @endif value="1" checked>
+                        Yes
+                      </label>
+                    </div>
+
+                    <div class="radio">
+                      <label class="padding-zero">
+                        <input type="radio" name="featured" id="featured" @if( $data->featured == '0' ) checked="checked" @endif value="0">
+                        No
+                      </label>
+                    </div>
+
+                  </div>
+                </div>
+              </div>              
 
               <!-- Start Box Body -->
               <div class="box-body">
@@ -164,145 +305,59 @@
                 </div>
               </div>
 
-              <!-- Start Box Body -->
-              <div class="box-body">
-                <div class="form-group">
-                  <label class="col-sm-2 control-label">Featured?</label>
-                  <div class="col-sm-10">
-
-                    <div class="radio">
-                      <label class="padding-zero">
-                        <input type="radio" name="featured" id="featured"  @if( $data->featured == '1' ) checked="checked" @endif value="1" checked>
-                        Yes
-                      </label>
-                    </div>
-
-                    <div class="radio">
-                      <label class="padding-zero">
-                        <input type="radio" name="featured" id="featured" @if( $data->featured == '0' ) checked="checked" @endif value="0">
-                        No
-                      </label>
-                    </div>
-
-                  </div>
-                </div>
-              </div>
+                    @foreach( App\Models\Questions::where('mode','on')->orderBy('id')->get() as $question )
+                      <div id="TextBoxDiv{{ $loop->iteration }}">
+                        <label class="col-sm-2 control-label">Question {{ $loop->iteration }}</label>
+                        <div class="col-sm-10">
+                          <div style="padding-bottom:2px"><input type="text" id="question_{{ $loop->iteration }}" name="question_{{ $loop->iteration }}" value="{{ $question->question }}" placeholder="Question {{ $loop->iteration }}" class="form-control" readOnly></div>
+                          <div style="padding-bottom:10px"><textarea data-limit="300" rows="5" name="response_{{ $loop->iteration }}" id="response_{{ $loop->iteration }}" placeholder="Response {{ $loop->iteration }}" class="form-control">{{ $data->{'response_'.$loop->iteration} }}</textarea></div>
+                        </div>
+                      </div>
+                    @endforeach
 
               <div class="box-footer">
                 <a href="{{ url('panel/admin/startups') }}" class="btn btn-default">Cancel</a>
                 <button type="submit" class="btn btn-success pull-right">Save</button>
               </div>
+
             </form>
-          </div>
 
+          </div>
         </div>
-        <div class="col-md-3">
-
-          <div class="block-block text-center">
-            <img src="{{asset('public/startups/logo').'/'.$data->logo}}" class="thumbnail img-responsive">
-          </div>
-
-          <div class="block-block text-center">
-            {!! Form::open([
-            'method' => 'POST',
-            'url' => 'panel/admin/startup/delete',
-            'class' => 'displayInline'
-            ]) !!}
-            {!! Form::hidden('id',$data->id ); !!}
-            {!! Form::submit('Delete', ['class' => 'btn btn-lg btn-danger btn-block margin-bottom-10 actionDelete']) !!}
-            {!! Form::close() !!}
-          </div>
-        </div>	        		
       </div>
     </div>
   </section>
 </div>
 @endsection
+
 @section('javascript')
 
-<!-- icheck -->
-<script src="{{ asset('public/plugins/iCheck/icheck.min.js') }}" type="text/javascript"></script>
-<script src="{{ asset('public/plugins/tinymce/tinymce.min.js') }}" type="text/javascript"></script>
+  <!-- icheck -->
+  <script src="{{ asset('public/plugins/iCheck/icheck.min.js') }}" type="text/javascript"></script>
+  <script src="{{ asset('public/plugins/tagsinput/jquery.tagsinput.min.js') }}" type="text/javascript"></script>
+  <script src="{{ asset('public/js/style-admin-elements.js') }}"></script>
 
-<script type="text/javascript">
-  $(document).ready(function() {
-    $(".onlyNumber").keydown(function (e) {
-      // Allow: backspace, delete, tab, escape, enter and .
-      if ($.inArray(e.keyCode, [46, 8, 9, 27, 13]) !== -1 ||
-      // Allow: Ctrl+A, Command+A
-      (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) || 
-      // Allow: home, end, left, right, down, up
-      (e.keyCode >= 35 && e.keyCode <= 40)) {
-      // let it happen, don't do anything
-      return;
-      }
-      // Ensure that it is a number and stop the keypress
-      if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
-        e.preventDefault();
-      }
+  <script type="text/javascript">
+    $("#tagInput").tagsInput({
+     'delimiter': [','],   // Or a string with a single delimiter. Ex: ';'
+     'width':'auto',
+     'height':'auto',
+     'removeWithBackspace' : true,
+     'minChars' : 3,
+     'maxChars' : 25,
+     'defaultText':'Add',
+     /*onChange: function() {
+        var input = $(this).siblings('.tagsinput');
+        var maxLen = 4;
+      
+        if( input.children('span.tag').length >= maxLen){
+          input.children('div').hide();
+        }
+        else{
+          input.children('div').show();
+        }
+      },*/
     });
-  });
-
-  $(".actionDelete").click(function(e) {
-    e.preventDefault();
-
-    var element = $(this);
-    var id     = element.attr('data-url');
-    var form    = $(element).parents('form');
-
-    element.blur();
-
-    swal(
-      { title: "Confirm",  
-      text: "Delete Startup",
-      type: "warning", 
-      showLoaderOnConfirm: true,
-      showCancelButton: true,   
-      confirmButtonColor: "#DD6B55",  
-      confirmButtonText: "Confirm",   
-      cancelButtonText: "Cancel",  
-      closeOnConfirm: false, 
-    },
-
-    function(isConfirm){  
-      if (isConfirm) {   
-        form.submit(); 
-        //$('#form' + id).submit();
-      }
-    });
-  });
-</script>
-
-<script src="{{ asset('public/plugins/iCheck/icheck.min.js') }}" type="text/javascript"></script>
-<script src="{{ asset('public/plugins/tagsinput/jquery.tagsinput.min.js') }}" type="text/javascript"></script>
-
-<script type="text/javascript">
-  //Flat red color scheme for iCheck
-  $('input[type="radio"]').iCheck({
-    radioClass: 'iradio_flat-red'
-  });
-  
-  $("#tagInput").tagsInput({
-   
-   'delimiter': [','],   // Or a string with a single delimiter. Ex: ';'
-   'width':'auto',
-   'height':'auto',
-   'removeWithBackspace' : true,
-   'minChars' : 3,
-   'maxChars' : 25,
-   'defaultText':'Add',
-   /*onChange: function() {
-      var input = $(this).siblings('.tagsinput');
-      var maxLen = 4;
-    
-      if( input.children('span.tag').length >= maxLen){
-        input.children('div').hide();
-      }
-      else{
-        input.children('div').show();
-      }
-    },*/
-  });
-</script>
+  </script>
 
 @endsection

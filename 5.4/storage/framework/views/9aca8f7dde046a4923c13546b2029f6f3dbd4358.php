@@ -20,7 +20,8 @@
      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
       <span aria-hidden="true">×</span>
     </button>
-    <i class="fa fa-check margin-separator"></i> <?php echo e(Session::get('success_message')); ?>	        
+    <i class="fa fa-check margin-separator"></i> <?php echo e(Session::get('success_message')); ?>
+
   </div>
   <?php endif; ?>
   
@@ -43,7 +44,7 @@
             <th class="active">Slug</th>
             <th class="active">Actions</th>
           </tr>
-          
+
           <?php $__currentLoopData = $data; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $page): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
           <tr>
             <td><?php echo e($page->id); ?></td>
@@ -53,9 +54,9 @@
              <a href="<?php echo e(route('pages.edit', $page->id)); ?>" class="btn btn-success btn-xs padding-btn">
               Edit
             </a> 
-            
+
             <?php if( $data->count() != 1 ): ?>
-            
+
             <?php echo Form::open([
             'method' => 'DELETE',
             'route' => ['pages.destroy', $page->id],
@@ -67,30 +68,26 @@
 
             <?php echo Form::close(); ?>
 
-            
+
             <?php endif; ?>
-            
+
           </td>
-          
+
         </tr><!-- /.TR -->
         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-        
+
         <?php else: ?>
         <hr />
         <h3 class="text-center no-found">No Results</h3>
         <?php endif; ?>
-        
+
       </tbody>
-      
-      
+
     </table>
   </div>
 </div><!-- /.box -->
 </div>
 </div>        	
-
-
-
 </section>
 </div>
 <?php $__env->stopSection(); ?>
@@ -103,14 +100,15 @@
     e.preventDefault();
     
     var element = $(this);
-    var id     = element.attr('data-url');
+    var id      = element.attr('data-url');
     var form    = $(element).parents('form');
     
     element.blur();
     
     swal(
       {   title: "Confirm",  
-      type: "warning", 
+      text: "Delete Page?",
+      type: "warning",
       showLoaderOnConfirm: true,
       showCancelButton: true,   
       confirmButtonColor: "#DD6B55",  

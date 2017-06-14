@@ -38,71 +38,30 @@
   <!-- Start Form Group -->
   <div class="form-group">
     <label>Tax Relief</label>
-    <select name="tax" class="form-control input-lg">
-      <option value="">Select One</option>
-      <option <?php if($data->tax == 'SEIS'): ?> selected <?php endif; ?> value="SEIS">SEIS</option>
-      <option <?php if($data->tax == 'EIS'): ?> selected <?php endif; ?> value="EIS">EIS</option>
-      <option <?php if($data->tax == 'SEIS/EIS'): ?> selected <?php endif; ?> value="EIS">SEIS/EIS</option>
-      <option <?php if($data->tax == 'N/A'): ?> selected <?php endif; ?> value="n/a">I Don't Know</option>
-    </select>
-  </div>
-
-  <div class="form-group">
-    <label>Describe the problem you are solving?</label>
-    <textarea name="problem" data-limit=300 rows="5" id="problem" class="form-control input-lg" placeholder="Problem"><?php echo e($data->problem); ?></textarea>
-    <span class="pull-right"  id="textarea_feedback"></span>
-  </div>
-
-  <div class="form-group">
-    <label>How does your product/service solve this problem?</label>
-    <textarea name="solution" data-limit=300 rows="5" id="solution" class="form-control input-lg" placeholder="Solution"><?php echo e($data->solution); ?></textarea><span class="pull-right" id="textarea_feedback"></span>
-  </div>
-
-  <div class="form-group">
-    <label>Who is your target market?</label>
-    <textarea name="market" data-limit=300 rows="5" id="market" class="form-control input-lg" placeholder="Target Market"><?php echo e($data->market); ?></textarea><span class="pull-right" id="textarea_feedback"></span>
-  </div>
-
-  <div class="form-group">
-    <label>What is your business model?</label>
-    <textarea name="model" data-limit=300 rows="5" id="model" class="form-control input-lg" placeholder="Business Model"><?php echo e($data->model); ?></textarea><span class="pull-right" id="textarea_feedback"></span>
-  </div>
-
-  <div class="form-group">
-    <label>What is your current traction?</label>
-    <textarea name="traction" data-limit=300 rows="5" id="traction" class="form-control input-lg" placeholder="Traction"><?php echo e($data->traction); ?></textarea><span class="pull-right" id="textarea_feedback"></span>
-  </div>
-
-  <div class="form-group">
-    <label>Who are your main competitors?</label>
-    <textarea name="competitors" data-limit=300 rows="5" id="competitors" class="form-control input-lg" placeholder="Competitors"><?php echo e($data->competitors); ?></textarea><span class="pull-right" id="textarea_feedback"></span>
-  </div>
-
-  <div class="form-group">
-    <label>Provide a management team summary</label>
-    <textarea name="team" data-limit=300 rows="5" id="team" class="form-control input-lg" placeholder="Team"><?php echo e($data->team); ?></textarea><span class="pull-right" id="textarea_feedback"></span>
-  </div>
-
-  <div class="form-group">
-    <label>Please provide a breakdown of use of funds</label>
-    <textarea name="spend" data-limit=300 rows="5" id="spend" class="form-control input-lg" placeholder="Spend"><?php echo e($data->spend); ?></textarea><span class="pull-right" id="textarea_feedback"></span>
+      <select name="tax" id="tax" class="form-control input-lg" required>
+        <option value="">Select One</option>
+        <?php $__currentLoopData = App\Models\TaxReliefs::where('mode','on')->orderBy('id')->get(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $taxreliefstatus): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+          <option <?php if( $taxreliefstatus->status == $data->tax ): ?> selected="selected" <?php endif; ?> value="<?php echo e($taxreliefstatus->status); ?>"><?php echo e($taxreliefstatus->status); ?></option>
+        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+      </select>
   </div>
 
 
+  <!-- Start Form Group -->
 
   <div class="form-group">
-    <label>What are your key strengths?</label>
-    <textarea name="strengths" data-limit=300 rows="5" id="strengths" class="form-control input-lg" placeholder="Strengths"><?php echo e($data->strengths); ?></textarea><span class="pull-right" id="textarea_feedback"></span>
-  </div>
-
-  <div class="form-group">
-    <label>What are your biggest weaknesses?</label>
-    <textarea name="weaknesses" data-limit=300 rows="5" id="weaknesses" class="form-control input-lg" placeholder="Weaknesses"><?php echo e($data->weaknesses); ?></textarea><span class="pull-right" id="textarea_feedback"></span>
-  </div>
-
-  <div class="form-group">
-    <label>Why did you start the company? What excites you about it?</label>
-    <textarea name="why" data-limit=300 rows="5" id="why" class="form-control input-lg" placeholder="Why?"><?php echo e($data->why); ?></textarea><span class="pull-right" id="textarea_feedback"></span>
+    <?php for($i = 1; $i < 16; $i++): ?>
+      <?php $question = 'question_'.$i; ?>
+      <?php $response = 'response_'.$i; ?>
+      <?php if( !empty($data->$question )): ?>
+        <?php $count = $i; ?>
+        <div id="TextBoxDiv<?php echo e($i); ?>">
+            <label><?php echo e($data->$question); ?></label>
+            <div ><textarea data-limit="300" rows="5" name="response_<?php echo e($i); ?>" id="response_<?php echo e($i); ?>" placeholder="Response" class="form-control input-lg"><?php echo e($data->$response); ?></textarea></div>
+          </div>
+          <p></p>
+      <?php endif; ?>
+    <?php endfor; ?>
   </div>
 
   <div class="box-footer">
@@ -125,22 +84,17 @@
 <!-- Calculate Valuation Fuction -->
 <script type="text/javascript">
   function calculateValuation(){
-
     var goal = document.getElementById('goal').value;
     var equity = document.getElementById('equity').value;
     goal = isNaN(goal) ? 0 : goal;
     equity = isNaN(equity) ? 0 : equity;
     var valuation = Math.round(equity > 0 ? goal / (equity/100)-goal: NaN);
     document.getElementById('valuation').value = isNaN(valuation) ? 0 : valuation;
-
   }
   setInterval(function(){
-
     calculateValuation();
   }, 100);
 </script>
-
-
 
 <!-- Limit Textarea Function -->
 <script type="text/javascript">

@@ -45,6 +45,7 @@
                 <label class="col-sm-2 control-label">Startup</label>
                 <div class="col-sm-10">
                   <select name="startup_id" id="startup_id" class="form-control" required>
+                    <option value="">Select One</option>
                     <?php $__currentLoopData = $data; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $startup): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <option value="<?php echo e($startup->id); ?>"><?php echo e($startup->title); ?></option>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -166,11 +167,11 @@
 <script type="text/javascript">
   //Flat red color scheme for iCheck
   $(document).ready(function(){
-  $('input').iCheck({
-    checkboxClass: 'icheckbox_flat-red',
-    radioClass: 'iradio_flat-red'
+    $('input').iCheck({
+      checkboxClass: 'icheckbox_flat-red',
+      radioClass: 'iradio_flat-red'
+    });
   });
-});
 
 function checkInvestor() {
     if ( investor_id.value == '<?php echo e(Auth::user()->id); ?>')

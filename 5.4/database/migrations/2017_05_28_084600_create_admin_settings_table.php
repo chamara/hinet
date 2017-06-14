@@ -46,7 +46,8 @@ class CreateAdminSettingsTable extends Migration
             $table->integer('fee_investment')->unsigned();
             $table->enum('auto_approve_startups', array('0', '1'))->nullabel(false)->default('1')->comment('0 No, 1 Yes');
             $table->enum('disable_startups_reg', array('no', 'yes'))->nullabel(false)->default('no');
-            $table->enum('disable_investors_reg', array('no', 'yes'))->nullabel(false)->default('no');            
+            $table->enum('disable_investors_reg', array('no', 'yes'))->nullabel(false)->default('no');
+            $table->integer('max_startup_questions');
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
         });

@@ -4,6 +4,7 @@
   <section class="content-header">
     <h4>Admin
       <i class="fa fa-angle-right margin-separator"></i>Posts
+      <i class="fa fa-angle-right margin-separator"></i>{{ $data->title }}
       <i class="fa fa-angle-right margin-separator"></i>Edit
     </h4>
   </section>
@@ -51,7 +52,6 @@
               <div class="form-group">
                 <label class="col-sm-2 control-label">Content</label>
                 <div class="col-sm-10">
-
                   <textarea name="content"rows="5" cols="40" id="content" class="form-control" placeholder="Content">{{ $data->content }}</textarea>
                 </div>
               </div>
@@ -78,5 +78,4 @@
 CKEDITOR.replace('content');
 });
 </script>
-
 @endsection

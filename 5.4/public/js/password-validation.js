@@ -132,6 +132,5 @@ jQuery(document).ready(function($){
                 }
             }
         });
-    }    
-
+    }
 });

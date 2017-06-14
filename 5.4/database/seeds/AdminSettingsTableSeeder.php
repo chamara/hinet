@@ -54,6 +54,7 @@ class AdminSettingsTableSeeder extends Seeder
                 'disable_investors_reg' => 'no',                
                 'created_at' => '2017-05-29 06:06:48',
                 'updated_at' => '2017-05-29 06:06:48',
+                'max_startup_questions' => 15,
             ),
         ));
         

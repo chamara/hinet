@@ -35,7 +35,11 @@ class startups extends Model {
 	 	 return $this->belongsTo('App\Models\Statuses', 'status'); 
 	 }
 
-	public function tax_relief() {
+	public function taxRelief() {
 	 	 return $this->belongsTo('App\Models\TaxReliefs', 'status'); 
+	 }
+	public function questions() {
+	 	 //return $this->belongsTo('App\Models\Questions', 'questions_id');
+		return $this->belongsToMany('App\Models\Questions');
 	 }
 }

@@ -205,16 +205,16 @@ class startupsController extends Controller{
 		$input      = $this->request->all();
 
 		// Update database
-		$sql->title          	= trim($this->request->title);
-		$sql->location          = trim($this->request->location);
-		$sql->oneliner         	= trim($this->request->oneliner);
-		$sql->description       = trim($this->request->description);
-		$sql->categories_id  	= $this->request->categories_id;
-		$sql->website  			= $this->request->website;
-		$sql->twitter  			= $this->request->twitter;
-		$sql->facebook  		= $this->request->facebook;
-		$sql->linkedin  		= $this->request->linkedin;
-		$sql->video  			= $this->request->video;
+		$sql->title         = trim($this->request->title);
+		$sql->location      = trim($this->request->location);
+		$sql->oneliner      = trim($this->request->oneliner);
+		$sql->description   = trim($this->request->description);
+		$sql->categories_id = $this->request->categories_id;
+		$sql->website  		= $this->request->website;
+		$sql->twitter  		= $this->request->twitter;
+		$sql->facebook  	= $this->request->facebook;
+		$sql->linkedin  	= $this->request->linkedin;
+		$sql->video  		= $this->request->video;
 		$sql->save();
 
 
@@ -250,31 +250,34 @@ class startupsController extends Controller{
 		$sql = startups::where('id',$this->request->id)->where('finalized','0')->first();
 
 		// Set input as request
-		$input      = $this->request->all();
+		$input = $this->request->all();
 
-	 //    // Remove stuff from description
+	 	// Remove stuff from description
 		// $description = html_entity_decode($this->request->description);
 		// $description = Helper::removeTagScript($description);
 		// $description = Helper::removeTagIframe($description);
 		// $description = trim(Helper::spaces($description));
 
 		// Update database
-		$sql->goal              = trim($this->request->goal);
-		$sql->equity          	= trim($this->request->equity);
-		$sql->valuation 	    = trim($this->request->valuation);
-		$sql->tax		 	    = trim($this->request->tax);
-		$sql->problem		 	= trim($this->request->problem);
-		$sql->solution		 	= trim($this->request->solution);
-		$sql->market		 	= trim($this->request->market);
-		$sql->model		 	    = trim($this->request->model);
-		$sql->traction		 	= trim($this->request->traction);
-		$sql->competitors		= trim($this->request->competitors);
-		$sql->team		 	    = trim($this->request->team);
-		$sql->spend		 	    = trim($this->request->spend);
-		$sql->strengths		 	= trim($this->request->strengths);
-		$sql->weaknesses		= trim($this->request->weaknesses);
-		$sql->why		 	    = trim($this->request->why);
-
+		$sql->goal          = trim($this->request->goal);
+		$sql->equity        = trim($this->request->equity);
+		$sql->valuation 	= trim($this->request->valuation);
+		$sql->tax		 	= trim($this->request->tax);
+		$sql->response_1	= trim($this->request->response_1);
+		$sql->response_2	= trim($this->request->response_2);
+		$sql->response_3	= trim($this->request->response_3);
+		$sql->response_4	= trim($this->request->response_4);
+		$sql->response_5	= trim($this->request->response_5);
+		$sql->response_6	= trim($this->request->response_6);
+		$sql->response_7	= trim($this->request->response_7);
+		$sql->response_8	= trim($this->request->response_8);
+		$sql->response_9	= trim($this->request->response_9);
+		$sql->response_10	= trim($this->request->response_10);
+		$sql->response_11	= trim($this->request->response_11);
+		$sql->response_12	= trim($this->request->response_12);
+		$sql->response_13	= trim($this->request->response_13);
+		$sql->response_14	= trim($this->request->response_14);
+		$sql->response_15	= trim($this->request->response_15);
 		$sql->save();
 		
 		// Set Startup ID

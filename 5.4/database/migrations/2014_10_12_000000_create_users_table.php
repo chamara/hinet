@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration
             $table->char('password', 60);
             $table->string('email')->unique();
             $table->string('avatar', 70);
-            $table->enum('status', array('pending','active','suspended','delete'))->nullabel(false)->default('active')->index();
+            $table->enum('status', array('pending','active','suspended','deleted'))->nullabel(false)->default('active')->index();
             $table->enum('role', array('normal','admin','startup','investor'))->nullabel(false)->default('normal')->index();
             $table->string('remember_token', 100);
             $table->string('token', 80);

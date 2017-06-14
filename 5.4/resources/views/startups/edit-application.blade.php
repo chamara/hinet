@@ -38,70 +38,25 @@
   <!-- Start Form Group -->
   <div class="form-group">
     <label>Tax Relief</label>
-    <select name="tax" class="form-control input-lg">
-      <option value="">Select One</option>
-      @foreach( App\Models\TaxReliefs::where('mode','on')->orderBy('id')->get() as $taxreliefstatus )
-        <option value="{{$taxreliefstatus->id}}">{{ $taxreliefstatus->status }}</option>
-      @endforeach
-    </select>
+      <select name="tax" id="tax" class="form-control input-lg" required>
+        <option value="">Select One</option>
+        @foreach( App\Models\TaxReliefs::where('mode','on')->orderBy('id')->get() as $taxreliefstatus )
+          <option @if ( $taxreliefstatus->status == $data->tax ) selected="selected" @endif value="{{$taxreliefstatus->status}}">{{ $taxreliefstatus->status }}</option>
+        @endforeach
+      </select>
   </div>
 
+  <!-- Start Form Group -->
   <div class="form-group">
-    <label>Describe the problem you are solving?</label>
-    <textarea name="problem" data-limit=300 rows="5" id="problem" class="form-control input-lg" placeholder="Problem">{{ $data->problem}}</textarea>
-    <span class="pull-right"  id="textarea_feedback"></span>
-  </div>
-
-  <div class="form-group">
-    <label>How does your product/service solve this problem?</label>
-    <textarea name="solution" data-limit=300 rows="5" id="solution" class="form-control input-lg" placeholder="Solution">{{ $data->solution }}</textarea><span class="pull-right" id="textarea_feedback"></span>
-  </div>
-
-  <div class="form-group">
-    <label>Who is your target market?</label>
-    <textarea name="market" data-limit=300 rows="5" id="market" class="form-control input-lg" placeholder="Target Market">{{ $data->market }}</textarea><span class="pull-right" id="textarea_feedback"></span>
-  </div>
-
-  <div class="form-group">
-    <label>What is your business model?</label>
-    <textarea name="model" data-limit=300 rows="5" id="model" class="form-control input-lg" placeholder="Business Model">{{ $data->model }}</textarea><span class="pull-right" id="textarea_feedback"></span>
-  </div>
-
-  <div class="form-group">
-    <label>What is your current traction?</label>
-    <textarea name="traction" data-limit=300 rows="5" id="traction" class="form-control input-lg" placeholder="Traction">{{ $data->traction }}</textarea><span class="pull-right" id="textarea_feedback"></span>
-  </div>
-
-  <div class="form-group">
-    <label>Who are your main competitors?</label>
-    <textarea name="competitors" data-limit=300 rows="5" id="competitors" class="form-control input-lg" placeholder="Competitors">{{ $data->competitors }}</textarea><span class="pull-right" id="textarea_feedback"></span>
-  </div>
-
-  <div class="form-group">
-    <label>Provide a management team summary</label>
-    <textarea name="team" data-limit=300 rows="5" id="team" class="form-control input-lg" placeholder="Team">{{ $data->team }}</textarea><span class="pull-right" id="textarea_feedback"></span>
-  </div>
-
-  <div class="form-group">
-    <label>Please provide a breakdown of use of funds</label>
-    <textarea name="spend" data-limit=300 rows="5" id="spend" class="form-control input-lg" placeholder="Spend">{{ $data->spend }}</textarea><span class="pull-right" id="textarea_feedback"></span>
-  </div>
-
-
-
-  <div class="form-group">
-    <label>What are your key strengths?</label>
-    <textarea name="strengths" data-limit=300 rows="5" id="strengths" class="form-control input-lg" placeholder="Strengths">{{ $data->strengths }}</textarea><span class="pull-right" id="textarea_feedback"></span>
-  </div>
-
-  <div class="form-group">
-    <label>What are your biggest weaknesses?</label>
-    <textarea name="weaknesses" data-limit=300 rows="5" id="weaknesses" class="form-control input-lg" placeholder="Weaknesses">{{ $data->weaknesses }}</textarea><span class="pull-right" id="textarea_feedback"></span>
-  </div>
-
-  <div class="form-group">
-    <label>Why did you start the company? What excites you about it?</label>
-    <textarea name="why" data-limit=300 rows="5" id="why" class="form-control input-lg" placeholder="Why?">{{ $data->why }}</textarea><span class="pull-right" id="textarea_feedback"></span>
+    @foreach( App\Models\Questions::where('mode','on')->orderBy('id')->get() as $question )
+      <div id="TextBoxDiv{{ $loop->iteration }}">
+        <label>{{ $question->$question }}</label>
+        <div >
+          <textarea data-limit="300" rows="5" name="response_{{ $loop->iteration }}" id="response_{{ $loop->iteration }}" placeholder="Response" class="form-control input-lg">{{ $data->$response }}</textarea>
+        </div>
+      </div>
+      <p></p>
+    @endfor
   </div>
 
   <div class="box-footer">
@@ -124,22 +79,17 @@
 <!-- Calculate Valuation Fuction -->
 <script type="text/javascript">
   function calculateValuation(){
-
     var goal = document.getElementById('goal').value;
     var equity = document.getElementById('equity').value;
     goal = isNaN(goal) ? 0 : goal;
     equity = isNaN(equity) ? 0 : equity;
     var valuation = Math.round(equity > 0 ? goal / (equity/100)-goal: NaN);
     document.getElementById('valuation').value = isNaN(valuation) ? 0 : valuation;
-
   }
   setInterval(function(){
-
     calculateValuation();
   }, 100);
 </script>
-
-
 
 <!-- Limit Textarea Function -->
 <script type="text/javascript">

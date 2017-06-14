@@ -5,8 +5,9 @@
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h4>Admin
-      <i class="fa fa-angle-right margin-separator"></i>Edit
+      <i class="fa fa-angle-right margin-separator"></i>Members
       <i class="fa fa-angle-right margin-separator"></i>{{ $data->name }}
+      <i class="fa fa-angle-right margin-separator"></i>Edit
     </h4>
   </section>
 
@@ -68,16 +69,10 @@
                 <div class="form-group">
                   <label class="col-sm-2 control-label">Status</label>
                   <div class="col-sm-10">
-                    <select id="status" name="status" class="form-control" required>
-
-                      @foreach (App\Models\Statuses::where('mode','on')->orderBy('id')->get() as $status)
-                          <option value="{{ $status->id }}"
-                          @if ($status == old('status', $model->option))
-                              selected="selected"
-                          @endif
-                          >{{ $status }}</option>
+                    <select name="status_id" class="form-control" required>
+                      @foreach ( App\Models\Statuses::where(['mode'=>'on', 'table'=>'users'])->orderBy('status')->get() as $status )   
+                      <option @if ( $status->status == $data->status ) selected="selected" @endif value="{{$status->status}}">{{ ucfirst(trans($status->status)) }}</option>
                       @endforeach
-
                     </select>
                   </div>
                 </div>
@@ -88,7 +83,7 @@
                 <div class="form-group">
                   <label class="col-sm-2 control-label">Password</label>
                   <div class="col-sm-10">
-                    <input type="password" value="" id="password" name="password" class="form-control" placeholder="Leave Empty for no change">
+                    <input type="password" value="" id="password" name="password" class="form-control" placeholder="Leave Empty For No Change">
                   </div>
                 </div>
               </div>

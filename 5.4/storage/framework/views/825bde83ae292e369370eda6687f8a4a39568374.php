@@ -20,7 +20,7 @@
       <div class="box">
         <div class="box-header">
           <h3 class="box-title"> 
-            Investments                 		
+            Investments
           </h3>
         </div>
 
@@ -70,10 +70,7 @@
 
     <?php endif; ?>
   </div>
-</div>        	
-
-
-
+</div>
 </section>
 </div>
 <?php $__env->stopSection(); ?>

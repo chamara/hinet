@@ -6,7 +6,7 @@
   <!-- Content Header (Page header) -->
     <section class="content-header">
       <h4>
-       Admin<i class="fa fa-angle-right margin-separator"></i>Categories
+       Admin<i class="fa fa-angle-right margin-separator"></i>Picklists<i class="fa fa-angle-right margin-separator"></i>Categories
        <a href="<?php echo e(url('panel/admin/categories/add')); ?>" class="btn btn-sm btn-success no-shadow pull-right"><i class="glyphicon glyphicon-plus myicon-right"></i> Add Category
        </a>
      </h4>    
@@ -40,14 +40,22 @@
                 <tr>
                   <th class='active'>ID</th>
                   <th class='active'>Name</th>
-                  <th class='active'>Actions</th>
                   <th class='active'>Status</th>
+                  <th class='active'>Actions</th>                  
                 </tr>
 
                 <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <tr>
                   <td><?php echo e($category->id); ?></td>
                   <td><?php echo e($category->name); ?></td>
+
+                  <?php if( $category->mode == 'on' ) {
+                    $mode = 'success';
+                  } else {
+                    $mode = 'danger';
+                  } ?>
+                  <td><span class="label label-<?php echo e($mode); ?>"><?php echo e(ucfirst($category->mode)); ?></span></td>
+
                   <td>
                     <a href="<?php echo e(url('panel/admin/categories/edit/').'/'.$category->id); ?>" class="btn btn-success btn-xs padding-btn">
                       Edit
@@ -57,13 +65,7 @@
                       Delete
                     </a>
 
-                  </td>
-                  <?php if( $category->mode == 'on' ) {
-                    $mode = 'success';
-                  } else {
-                    $mode = 'danger';
-                  } ?>
-                  <td><span class="label label-<?php echo e($mode); ?>"><?php echo e(ucfirst($category->mode)); ?></span></td>
+                  </td>                  
                 </tr><!-- /.TR -->
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 

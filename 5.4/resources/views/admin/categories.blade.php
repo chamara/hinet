@@ -6,7 +6,7 @@
   <!-- Content Header (Page header) -->
     <section class="content-header">
       <h4>
-       Admin<i class="fa fa-angle-right margin-separator"></i>Categories
+       Admin<i class="fa fa-angle-right margin-separator"></i>Picklists<i class="fa fa-angle-right margin-separator"></i>Categories
        <a href="{{ url('panel/admin/categories/add') }}" class="btn btn-sm btn-success no-shadow pull-right"><i class="glyphicon glyphicon-plus myicon-right"></i> Add Category
        </a>
      </h4>    
@@ -40,14 +40,22 @@
                 <tr>
                   <th class='active'>ID</th>
                   <th class='active'>Name</th>
-                  <th class='active'>Actions</th>
                   <th class='active'>Status</th>
+                  <th class='active'>Actions</th>                  
                 </tr>
 
                 @foreach( $categories as $category )
                 <tr>
                   <td>{{ $category->id }}</td>
                   <td>{{ $category->name }}</td>
+
+                  <?php if( $category->mode == 'on' ) {
+                    $mode = 'success';
+                  } else {
+                    $mode = 'danger';
+                  } ?>
+                  <td><span class="label label-{{$mode}}">{{ ucfirst($category->mode) }}</span></td>
+
                   <td>
                     <a href="{{ url('panel/admin/categories/edit/').'/'.$category->id }}" class="btn btn-success btn-xs padding-btn">
                       Edit
@@ -57,13 +65,7 @@
                       Delete
                     </a>
 
-                  </td>
-                  <?php if( $category->mode == 'on' ) {
-                    $mode = 'success';
-                  } else {
-                    $mode = 'danger';
-                  } ?>
-                  <td><span class="label label-{{$mode}}">{{ ucfirst($category->mode) }}</span></td>
+                  </td>                  
                 </tr><!-- /.TR -->
                 @endforeach
 

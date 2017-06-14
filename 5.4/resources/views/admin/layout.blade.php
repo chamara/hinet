@@ -91,16 +91,31 @@ $settings = App\Models\AdminSettings::first();
          <li @if( Request::is('panel/admin/settings' )) class="active" @endif> 
            <a href="{{ url('panel/admin/settings') }}"><i class="fa fa-cogs"></i> <span>Settings</span></a>
          </li><!-- ./Links -->
-         
+
          <!-- Links -->
-         <li @if( Request::is('panel/admin/categories' )) class="active" @endif>
+         <!--<li @if( Request::is('panel/admin/categories' )) class="active" @endif>
            <a href="{{ url('panel/admin/categories') }}"><i class="fa fa-list-ul"></i> <span>Categories</span></a>
-         </li><!-- ./Links -->
-         
-         <!-- Links -->
-         <li @if( Request::is('panel/admin/startups' )) class="active" @endif>
-           <a href="{{ url('panel/admin/startups') }}"><i class="ion ion-speakerphone"></i> <span>Startups</span></a>
-         </li><!-- ./Links -->
+         </li>--><!-- ./Links -->
+
+          <!-- Links -->
+          <li @if( Request::is('panel/admin/startups' )) class="treeview" @endif>
+            <a href="#"><i class="on ion-speakerphone"></i> <span>Startups</span> <i class="fa fa-angle-left pull-right"></i></a>
+
+            <ul class="treeview-menu">
+             <li @if( Request::is('panel/admin/startup/add')) @endif>
+               <a href="{{ url('panel/admin/startup/add') }}"><span>Add New Startup</span></a>
+             </li>
+
+             <li @if( Request::is('panel/admin/startups')) @endif>
+               <a href="{{ url('panel/admin/startups') }}"><span>Startup Profiles</span></a>
+             </li>
+
+              <li @if( Request::is('panel/admin/questions')) @endif>
+                <a href="{{ url('panel/admin/questions') }}"><span>Maintain Questions</span></a>
+              </li>
+            </ul>
+
+          </li><!-- ./Links -->         
          
          
          <!-- Links -->
@@ -124,12 +139,30 @@ $settings = App\Models\AdminSettings::first();
          </li><!-- ./Links -->
          
          <!-- Links -->
-         <li @if( Request::is('panel/admin/profiles-social' )) class="active" @endif>
-           <a href="{{ url('panel/admin/profiles-social') }}"><i class="fa fa-share-alt"></i> <span>Social Profiles</span></a>
+         <li @if( Request::is('panel/admin/social-profiles' )) class="active" @endif>
+           <a href="{{ url('panel/admin/social-profiles') }}"><i class="fa fa-share-alt"></i> <span>Social Profiles</span></a>
          </li><!-- ./Links -->
 
+          <!-- Links -->
+          <li @if( Request::is('panel/admin/picklists' )) class="treeview active" @endif>
+            <a href="#"><i class="fa fa-link"></i> <span>Picklists</span> <i class="fa fa-angle-left pull-right"></i></a>
+            <ul class="treeview-menu">
+             <li @if( Request::is('panel/admin/categories' )) class="active" @endif>
+               <a href="{{ url('panel/admin/categories') }}"><span>Categories</span></a>
+             </li>
+
+              <li @if( Request::is('panel/admin/statuses' )) class="active" @endif>
+                <a href="{{ url('panel/admin/statuses') }}"><span>Statuses</span></a>
+              </li>
+
+              <li @if( Request::is('panel/admin/tax-reliefs' )) class="active" @endif>
+                <a href="{{ url('panel/admin/tax-reliefs') }}"><span>Tax Reliefs</span></a>
+              </li>
+            </ul>
+          </li><!-- ./Links -->
+
          <!-- Links -->
-         <li @if( Request::is('panel/admin/profiles-social' )) class="active" @endif>
+         <li @if( Request::is('panel/admin/logout' )) class="active" @endif>
            <a href="{{ url('logout') }}"><i class="glyphicon glyphicon-log-out"></i> <span>Logout</span></a>
          </li><!-- ./Links -->
 

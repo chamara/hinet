@@ -42,7 +42,7 @@ class TaxReliefsTableSeeder extends Seeder
             3 => 
             array (
                 'id' => 4,
-                'status' => 'I Don&#39;t Know',
+                'status' => "I Don't Know",
                 'mode' => 'on',                
                 'created_at' => '2017-05-29 06:06:48',
                 'updated_at' => '2017-05-29 06:06:48',

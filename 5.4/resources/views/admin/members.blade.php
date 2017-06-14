@@ -21,7 +21,7 @@
       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">×</span>
       </button>
-      <i class="fa fa-warning margin-separator"></i>  {{ Session::get('info_message') }}	        
+      <i class="fa fa-warning margin-separator"></i>  {{ Session::get('info_message') }}
     </div>
     @endif
 
@@ -30,7 +30,7 @@
       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">×</span>
       </button>
-      <i class="fa fa-check margin-separator"></i>  {{ Session::get('success_message') }}	        
+      <i class="fa fa-check margin-separator"></i>  {{ Session::get('success_message') }}
     </div>
     @endif
 
@@ -40,15 +40,15 @@
           <div class="box-header">
             <h3 class="box-title"> 
               @if( $data->count() != 0 && $data->currentPage() != 1 ) 
-              <a href="{{url('panel/admin/members')}}">View All</a>
+                <a href="{{url('panel/admin/members')}}">View All</a>
               @else
-              Members                 		
+                Members
               @endif
 
             </h3>
             <div class="box-tools">
 
-              @if( $data->total() !=  0 )   
+              @if( $data->total() !=  0 )
               <!-- form -->
               <form role="search" autocomplete="off" action="{{ url('panel/admin/members') }}" method="get">
                 <div class="input-group input-group-sm" style="width: 150px;">
@@ -130,7 +130,7 @@
       </div>
       {{ $data->appends(['q' => $query])->links() }}
     </div>
-  </div>        	
+  </div>
 </section>
 </div>
 @endsection
@@ -143,14 +143,14 @@
     e.preventDefault();
 
     var element = $(this);
-    var id     = element.attr('data-url');
+    var id      = element.attr('data-url');
     var form    = $(element).parents('form');
 
     element.blur();
 
     swal(
       {   title: "Confirm",  
-      text: "Delete User",
+      text: "Delete User?",
       type: "warning", 
       showLoaderOnConfirm: true,
       showCancelButton: true,   

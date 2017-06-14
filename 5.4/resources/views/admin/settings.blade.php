@@ -88,12 +88,21 @@
                   <div class="form-group">
                     <label class="col-sm-2 control-label">Description</label>
                     <div class="col-sm-10">
-                     
                      <textarea name="description" rows="4" id="description" class="form-control" placeholder="Description">{{ $settings->description }}</textarea>
                    </div>
                  </div>
                </div>
 
+              <!-- Start Box Body -->
+              <div class="box-body">
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">Admin Email</label>
+                  <div class="col-sm-10">
+                    <input type="text" value="{{ $settings->email_admin }}" name="email_admin" class="form-control" placeholder="admin@example.com">
+                  </div>
+                </div>
+              </div>
+              
                <!-- Start Box Body -->
                <div class="box-body">
                 <div class="form-group">
@@ -171,16 +180,6 @@
                       </label>
                     </div>
 
-                  </div>
-                </div>
-              </div>              
-
-              <!-- Start Box Body -->
-              <div class="box-body">
-                <div class="form-group">
-                  <label class="col-sm-2 control-label">Admin Email</label>
-                  <div class="col-sm-10">
-                    <input type="text" value="{{ $settings->email_admin }}" name="email_admin" class="form-control" placeholder="admin@example.com">
                   </div>
                 </div>
               </div>
@@ -272,7 +271,10 @@
                 <div class="form-group">
                   <label class="col-sm-2 control-label">Min Investment Target</label>
                   <div class="col-sm-10">
-                    <input type="number" min="1" autocomplete="off" value="{{ $settings->min_startup_amount }}" name="min_startup_amount" class="form-control onlyNumber" placeholder="1000000">
+                    <div class="input-group">
+                      <div class="input-group-addon">{{$settings->currency_symbol}}</div>                  
+                      <input type="number" min="1" autocomplete="off" value="{{ $settings->min_startup_amount }}" name="min_startup_amount" class="form-control onlyNumber" placeholder="1000000">
+                    </div>
                   </div>
                 </div>
               </div>
@@ -282,7 +284,10 @@
                 <div class="form-group">
                   <label class="col-sm-2 control-label">Max Investmemt Target</label>
                   <div class="col-sm-10">
-                    <input type="number" min="1" autocomplete="off" value="{{ $settings->max_startup_amount }}" name="max_startup_amount" class="form-control onlyNumber" placeholder="10000000000">
+                    <div class="input-group">
+                      <div class="input-group-addon">{{$settings->currency_symbol}}</div>                  
+                      <input type="number" min="1" autocomplete="off" value="{{ $settings->max_startup_amount }}" name="max_startup_amount" class="form-control onlyNumber" placeholder="10000000000">
+                    </div>
                   </div>
                 </div>
               </div>
@@ -292,7 +297,10 @@
                 <div class="form-group">
                   <label class="col-sm-2 control-label">Min Investment Amount</label>
                   <div class="col-sm-10">
-                    <input type="number" min="1" autocomplete="off" value="{{ $settings->min_investment_amount }}" name="min_investment_amount" class="form-control onlyNumber" placeholder="5000">
+                    <div class="input-group">
+                      <div class="input-group-addon">{{$settings->currency_symbol}}</div>                  
+                      <input type="number" min="1" autocomplete="off" value="{{ $settings->min_investment_amount }}" name="min_investment_amount" class="form-control onlyNumber" placeholder="5000">
+                    </div>
                   </div>
                 </div>
               </div>
@@ -302,14 +310,39 @@
                 <div class="form-group">
                   <label class="col-sm-2 control-label">Max Investment Amount</label>
                   <div class="col-sm-10">
-                    <input type="number" min="1" autocomplete="off" value="{{ $settings->max_investment_amount }}" name="max_investment_amount" class="form-control onlyNumber" placeholder="1000000">
+                    <div class="input-group">
+                      <div class="input-group-addon">{{$settings->currency_symbol}}</div>                  
+                      <input type="number" min="1" autocomplete="off" value="{{ $settings->max_investment_amount }}" name="max_investment_amount" class="form-control onlyNumber" placeholder="1000000">
+                    </div>
                   </div>
                 </div>
               </div>
 
-                <div class="box-footer">
-                  <button type="submit" class="btn btn-success">Save</button>
+              <!-- Start Box Body -->
+              <div class="box-body">
+                <div class="form-group">
+                  <div class="input_fields_wrap" id="TextBoxesGroup">
+                  <?php $count = 0; ?>
+                  @for($i = 1; $i < 16; $i++)
+                    <?php $question = 'question_'.$i; ?>
+                    @if( !empty($data->$question ))
+                      <?php $count = $i; ?>
+                      <div id="TextBoxDiv{{ $i }}">
+                        <label class="col-sm-2 control-label">Question {{ $i }}</label>
+                        <div class="col-sm-10">
+                          <div style="padding-bottom:2px"><input type="text" id="question_{{ $i }}" name="question_{{ $i }}" value="{{ $data->$question }}" placeholder="Question {{ $i }}" class="form-control"></div>
+                        </div>
+                      </div>
+                    @endif
+                  @endfor
+                  </div>
                 </div>
+              </div>              
+
+              <div class="box-footer">
+                <a href="{{ url('panel/admin') }}" class="btn btn-default">Cancel</a>
+                <button type="submit" class="btn btn-success pull-right">Save</button>
+              </div>
             </form>
           </div>
         </div>

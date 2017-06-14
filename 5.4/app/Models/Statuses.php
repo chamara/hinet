@@ -10,4 +10,8 @@ class Statuses extends Model {
 	public function startups() {
 		return $this->hasMany('App\Models\startups')->where('table','startups');
 	}
+
+	public function users() {
+		return $this->hasMany('App\Models\user')->where('table','users');
+	}	
 }

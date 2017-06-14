@@ -9,7 +9,7 @@
     
     <!--Header-->
     <section class="content-header">
-      <h4>Admin 
+      <h4>Admin
         <i class="fa fa-angle-right margin-separator"></i> Categories
         <i class="fa fa-angle-right margin-separator"></i> Add New
       </h4>
@@ -77,7 +77,6 @@
                 </div>
               </div>
               
-              
               <div class="box-footer">
                 <a href="<?php echo e(url('panel/admin/categories')); ?>" class="btn btn-default">Cancel</a>
                 <button type="submit" class="btn btn-success pull-right">Save</button>
@@ -90,5 +89,4 @@
     </section>
   </div>
   <?php $__env->stopSection(); ?>
-
 <?php echo $__env->make('admin.layout', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

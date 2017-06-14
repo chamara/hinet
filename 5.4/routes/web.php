@@ -216,18 +216,18 @@ Route::group(['middleware' => 'role'], function() {
 		
 	// Startups
 	Route::get('panel/admin/startups','AdminController@startups');
-	Route::post('panel/admin/startups','AdminController@savestartups');
+	Route::post('panel/admin/startups','AdminController@saveStartups');
 
 	// Add Startup
-	Route::get('panel/admin/startup/add','AdminController@add_startup');
+	Route::get('panel/admin/startup/add','AdminController@addStartup');
 	Route::post('panel/admin/startup/add','AdminController@storeStartup');
 
 	// Edit Startup
-	Route::get('panel/admin/startups/edit/{id}','AdminController@editstartups');
-	Route::post('panel/admin/startups/edit/{id}','AdminController@postEditstartups');
+	Route::get('panel/admin/startups/edit/{id}','AdminController@editStartups');
+	Route::post('panel/admin/startups/edit/{id}','AdminController@postEditStartups');
 			
 	// Delete Startup
-	Route::post('panel/admin/startup/delete','AdminController@deletestartup');
+	Route::post('panel/admin/startup/delete','AdminController@deleteStartup');
 	
 	// Investments
 	Route::get('panel/admin/investments','AdminController@investments');
@@ -238,7 +238,7 @@ Route::group(['middleware' => 'role'], function() {
 	
 
 	// Add Investment
-	Route::get('panel/admin/investment/add','AdminController@add_investment');
+	Route::get('panel/admin/investment/add','AdminController@addInvestment');
 	
 
 	// Members
@@ -258,7 +258,7 @@ Route::group(['middleware' => 'role'], function() {
 	);
 	
 	// Add Member
-	Route::get('panel/admin/member/add','AdminController@add_member');
+	Route::get('panel/admin/member/add','AdminController@addMember');
 	Route::post('panel/admin/member/add','AdminController@storeMember');
 	
 	// Pages
@@ -274,8 +274,8 @@ Route::group(['middleware' => 'role'], function() {
 	Route::post('panel/admin/payments','AdminController@savePayments');
 	
 	// Profiles Social
-	Route::get('panel/admin/profiles-social','AdminController@profiles_social');
-	Route::post('panel/admin/profiles-social','AdminController@update_profiles_social');
+	Route::get('panel/admin/social-profiles','AdminController@profiles_social');
+	Route::post('panel/admin/social-profiles','AdminController@update_profiles_social');
 
 	// Admin categories
 	Route::get('panel/admin/categories','AdminController@categories');
@@ -284,7 +284,30 @@ Route::group(['middleware' => 'role'], function() {
 	Route::get('panel/admin/categories/edit/{id}','AdminController@editCategories')->where(array( 'id' => '[0-9]+'));
 	Route::post('panel/admin/categories/update','AdminController@updateCategories');
 	Route::get('panel/admin/categories/delete/{id}','AdminController@deleteCategories')->where(array( 'id' => '[0-9]+'));
-	
+
+	// Admin statuses
+	Route::get('panel/admin/statuses','AdminController@statuses');
+	Route::get('panel/admin/statuses/add','AdminController@addStatuses');
+	Route::post('panel/admin/statuses/add','AdminController@storeStatuses');
+	Route::get('panel/admin/statuses/edit/{id}','AdminController@editStatuses')->where(array( 'id' => '[0-9]+'));
+	Route::post('panel/admin/statuses/update','AdminController@updateStatuses');
+	Route::get('panel/admin/statuses/delete/{id}','AdminController@deleteStatuses')->where(array( 'id' => '[0-9]+'));
+
+	// Admin Tax-Reliefs
+	Route::get('panel/admin/tax-reliefs','AdminController@taxReliefs');
+	Route::get('panel/admin/tax-reliefs/add','AdminController@addTaxRelief');
+	Route::post('panel/admin/tax-reliefs/add','AdminController@storeTaxRelief');
+	Route::get('panel/admin/tax-reliefs/edit/{id}','AdminController@editTaxRelief')->where(array( 'id' => '[0-9]+'));
+	Route::post('panel/admin/tax-reliefs/update','AdminController@updateTaxRelief');
+	Route::get('panel/admin/tax-reliefs/delete/{id}','AdminController@deleteTaxRelief')->where(array( 'id' => '[0-9]+'));	
+
+	// Admin questions
+	Route::get('panel/admin/questions','AdminController@questions');
+	Route::get('panel/admin/questions/add','AdminController@addQuestions');
+	Route::post('panel/admin/questions/add','AdminController@storeQuestions');
+	Route::get('panel/admin/questions/edit/{id}','AdminController@editQuestions')->where(array( 'id' => '[0-9]+'));
+	Route::post('panel/admin/questions/update','AdminController@updateQuestions');
+	Route::get('panel/admin/questions/delete/{id}','AdminController@deleteQuestions')->where(array( 'id' => '[0-9]+'));
 });
 
 /* 

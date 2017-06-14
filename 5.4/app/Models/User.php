@@ -36,8 +36,11 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Investments');
     }
 	
-	public function country() {
+    public function country() {
         return $this->belongsTo('App\Models\Countries', 'countries_id')->first();
     }
-	
+
+    public function status() {
+        return $this->belongsTo('App\Models\Statuses', 'statuses_id')->first();
+    }
 }

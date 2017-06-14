@@ -45,6 +45,7 @@
                 <label class="col-sm-2 control-label">Startup</label>
                 <div class="col-sm-10">
                   <select name="startup_id" id="startup_id" class="form-control" required>
+                    <option value="">Select One</option>
                     @foreach( $data as $startup )
                     <option value="{{ $startup->id }}">{{ $startup->title }}</option>
                     @endforeach
@@ -166,11 +167,11 @@
 <script type="text/javascript">
   //Flat red color scheme for iCheck
   $(document).ready(function(){
-  $('input').iCheck({
-    checkboxClass: 'icheckbox_flat-red',
-    radioClass: 'iradio_flat-red'
+    $('input').iCheck({
+      checkboxClass: 'icheckbox_flat-red',
+      radioClass: 'iradio_flat-red'
+    });
   });
-});
 
 function checkInvestor() {
     if ( investor_id.value == '{{ Auth::user()->id }}')
