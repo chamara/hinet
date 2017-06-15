@@ -324,7 +324,44 @@
             </form>
 
           </div>
+
         </div>
+
+          <!-- *********** LOGO ************* -->
+          <form action="<?php echo e(url('upload/logo')); ?>" method="POST" id="formLogo" accept-charset="UTF-8" enctype="multipart/form-data">
+            <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
+            <input type="hidden" name="id" value="<?php echo e($data->id); ?>">
+            <div class="text-center">
+              <button type="button" id="logo_file">
+                <img src="<?php echo e(asset('public/startups/logo').'/'.$data->logo); ?>" class="logoUser" width="150" height="150"/>
+              </button>
+              <input type="file" name="photo" id="uploadLogo" accept="image/*" style="visibility: hidden;">
+            </div>
+          </form><!-- *********** LOGO ************* -->
+
+          <!-- *********** COVER ************* -->
+          <form action="<?php echo e(url('upload/cover')); ?>" method="POST" id="formCover" accept-charset="UTF-8" enctype="multipart/form-data">
+            <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
+            <input type="hidden" name="id" value="<?php echo e($data->id); ?>">
+            <div class="text-center">
+              <button type="button" id="cover_file">
+                <img src="<?php echo e(asset('public/startups/cover').'/'.$data->cover); ?>" class="coverUser" height="150px" width="auto"/>
+              </button>
+              <input type="file" name="photo" id="uploadCover" accept="image/*" style="visibility: hidden;">
+            </div>
+          </form><!-- *********** COVER ************* -->
+        <div class="block-block text-center" id="delete" data-field-id="Startup">
+          <?php echo Form::open([
+          'method' => 'DELETE',
+          'route' => ['startups.destroy', $data->id],
+          'class' => 'displayInline'
+          ]); ?>
+
+          <?php echo Form::submit('Delete', ['data-url' => $data->id, 'class' => 'btn btn-lg btn-danger btn-block margin-bottom-10 actionDelete']); ?>
+
+          <?php echo Form::close(); ?>
+
+        </div>          
       </div>
     </div>
   </section>
@@ -333,33 +370,36 @@
 
 <?php $__env->startSection('javascript'); ?>
 
-  <!-- icheck -->
-  <script src="<?php echo e(asset('public/plugins/iCheck/icheck.min.js')); ?>" type="text/javascript"></script>
-  <script src="<?php echo e(asset('public/plugins/tagsinput/jquery.tagsinput.min.js')); ?>" type="text/javascript"></script>
-  <script src="<?php echo e(asset('public/js/style-admin-elements.js')); ?>"></script>
+<!-- Include Javascript -->
+<?php echo $__env->make('includes.javascript-admin-delete', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 
-  <script type="text/javascript">
-    $("#tagInput").tagsInput({
-     'delimiter': [','],   // Or a string with a single delimiter. Ex: ';'
-     'width':'auto',
-     'height':'auto',
-     'removeWithBackspace' : true,
-     'minChars' : 3,
-     'maxChars' : 25,
-     'defaultText':'Add',
-     /*onChange: function() {
-        var input = $(this).siblings('.tagsinput');
-        var maxLen = 4;
-      
-        if( input.children('span.tag').length >= maxLen){
-          input.children('div').hide();
-        }
-        else{
-          input.children('div').show();
-        }
-      },*/
-    });
-  </script>
+<!-- icheck -->
+<script src="<?php echo e(asset('public/plugins/iCheck/icheck.min.js')); ?>" type="text/javascript"></script>
+<script src="<?php echo e(asset('public/plugins/tagsinput/jquery.tagsinput.min.js')); ?>" type="text/javascript"></script>
+<script src="<?php echo e(asset('public/js/style-admin-elements.js')); ?>"></script>
+
+<script type="text/javascript">
+  $("#tagInput").tagsInput({
+   'delimiter': [','],   // Or a string with a single delimiter. Ex: ';'
+   'width':'auto',
+   'height':'auto',
+   'removeWithBackspace' : true,
+   'minChars' : 3,
+   'maxChars' : 25,
+   'defaultText':'Add',
+   /*onChange: function() {
+      var input = $(this).siblings('.tagsinput');
+      var maxLen = 4;
+    
+      if( input.children('span.tag').length >= maxLen){
+        input.children('div').hide();
+      }
+      else{
+        input.children('div').show();
+      }
+    },*/
+  });
+</script>
 
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('admin.layout', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

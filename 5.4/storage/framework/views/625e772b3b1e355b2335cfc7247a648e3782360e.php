@@ -67,8 +67,16 @@
                 <?php $__currentLoopData = $data; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $startup): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <tr>
                   <td><?php echo e($startup->id); ?></td>
-                  <td><img src="<?php echo e(asset('public/startups/logo').'/'.$startup->logo); ?>" width="20" /> 
-                    <a title="<?php echo e($startup->title); ?>" href="<?php echo e(url('startup',$startup->id)); ?>" target="_blank"><?php echo e(str_limit($startup->title,20,'...')); ?> <i class="fa fa-external-link-square"></i></a>
+                  <td><img src="<?php echo e(asset('public/startups/logo').'/'.$startup->logo); ?>" width="20" />
+
+                    <?php if( $startup->status == 'active' && $startup->finalized == 0 ): ?>
+                      <a title="<?php echo e($startup->title); ?>" href="<?php echo e(url('startup', $startup->id)); ?>" target="_blank"><?php echo e(str_limit($startup->title,20,'...')); ?> <i class="fa fa-external-link-square"></i>
+                      </a>
+                    <?php else: ?>
+                      <?php echo e(str_limit($startup->title,20,'...')); ?>
+
+                    <?php endif; ?>
+
                   </td>
                   <td><?php echo e($startup->user()->name); ?></td>
                   <td><?php echo e($settings->currency_symbol.number_format($startup->goal)); ?></td>

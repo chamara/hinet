@@ -51,26 +51,27 @@
             <td><?php echo e($page->title); ?></td>
             <td><?php echo e(strtolower($page->slug)); ?></td>
             <td>
-             <a href="<?php echo e(route('pages.edit', $page->id)); ?>" class="btn btn-success btn-xs padding-btn">
-              Edit
-            </a> 
+              <div id="delete" data-field-id="Post">
+                <a href="<?php echo e(route('pages.edit', $page->id)); ?>" class="btn btn-success btn-xs padding-btn">
+                  Edit
+                </a> 
 
-            <?php if( $data->count() != 1 ): ?>
+                <?php if( $data->count() != 1 ): ?>
 
-            <?php echo Form::open([
-            'method' => 'DELETE',
-            'route' => ['pages.destroy', $page->id],
-            'id' => 'form'.$page->id,
-            'class' => 'displayInline'
-            ]); ?>
+                  <?php echo Form::open([
+                  'method' => 'DELETE',
+                  'route' => ['pages.destroy', $page->id],
+                  'id' => 'form'.$page->id,
+                  'class' => 'displayInline'
+                  ]); ?>
 
-            <?php echo Form::submit('Delete', ['data-url' => $page->id, 'class' => 'btn btn-danger btn-xs padding-btn actionDelete']); ?>
+                  <?php echo Form::submit('Delete', ['data-url' => $page->id, 'class' => 'btn btn-danger btn-xs padding-btn actionDelete']); ?>
 
-            <?php echo Form::close(); ?>
+                  <?php echo Form::close(); ?>
 
 
-            <?php endif; ?>
-
+                <?php endif; ?>
+            </div>
           </td>
 
         </tr><!-- /.TR -->
@@ -94,38 +95,9 @@
 
 <?php $__env->startSection('javascript'); ?>
 
-<script type="text/javascript">
+<!-- Include Javascript -->
+<?php echo $__env->make('includes.javascript-admin-delete', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 
-  $(".actionDelete").click(function(e) {
-    e.preventDefault();
-    
-    var element = $(this);
-    var id      = element.attr('data-url');
-    var form    = $(element).parents('form');
-    
-    element.blur();
-    
-    swal(
-      {   title: "Confirm",  
-      text: "Delete Page?",
-      type: "warning",
-      showLoaderOnConfirm: true,
-      showCancelButton: true,   
-      confirmButtonColor: "#DD6B55",  
-      confirmButtonText: "Confirm",   
-      cancelButtonText: "Cancel",  
-      closeOnConfirm: false, 
-    }, 
-    function(isConfirm){  
-      if (isConfirm) {  
-       form.submit();  
-		    	 	//$('#form' + id).submit();
-          }
-        });
-    
-    
-  });
-</script>
 <?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('admin.layout', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

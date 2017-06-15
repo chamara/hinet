@@ -87,21 +87,20 @@
                   <td>{{ $user->startups()->count() }}</td>
                   <td>{{ date('d M, y', strtotime($user->created_at)) }}</td>
                   <td>
+                   <div id="delete" data-field-id="User">
+                     @if( $user->id <> Auth::user()->id && $user->id <> 1 )
 
-                   @if( $user->id <> Auth::user()->id && $user->id <> 1 )
+                      <a href="{{ route('user.edit', $user->id) }}" class="btn btn-success btn-xs padding-btn">Edit</a>
 
-                   <a href="{{ route('user.edit', $user->id) }}" class="btn btn-success btn-xs padding-btn">
-                    Edit
-                  </a> 
-
-                  {!! Form::open([
-                  'method' => 'DELETE',
-                  'route' => ['user.destroy', $user->id],
-                  'id' => 'form'.$user->id,
-                  'class' => 'displayInline'
-                  ]) !!}
-                  {!! Form::submit('Delete', ['data-url' => $user->id, 'class' => 'btn btn-danger btn-xs padding-btn actionDelete']) !!}
-                  {!! Form::close() !!}
+                      {!! Form::open([
+                      'method' => 'DELETE',
+                      'route' => ['user.destroy', $user->id],
+                      'id' => 'form'.$user->id,
+                      'class' => 'displayInline'
+                      ]) !!}
+                      {!! Form::submit('Delete', ['data-url' => $user->id, 'class' => 'btn btn-danger btn-xs padding-btn actionDelete']) !!}
+                      {!! Form::close() !!}
+                    </div>
 
                   @else
                   ------------
@@ -137,36 +136,7 @@
 
 @section('javascript')
 
-<script type="text/javascript">
+<!-- Include Javascript -->
+@include('includes.javascript-admin-delete')
 
-  $(".actionDelete").click(function(e) {
-    e.preventDefault();
-
-    var element = $(this);
-    var id      = element.attr('data-url');
-    var form    = $(element).parents('form');
-
-    element.blur();
-
-    swal(
-      {   title: "Confirm",  
-      text: "Delete User?",
-      type: "warning", 
-      showLoaderOnConfirm: true,
-      showCancelButton: true,   
-      confirmButtonColor: "#DD6B55",  
-      confirmButtonText: "Confirm",   
-      cancelButtonText: "Cancel",  
-      closeOnConfirm: false, 
-    }, 
-    function(isConfirm){  
-      if (isConfirm) {   
-        form.submit(); 
-//$('#form' + id).submit();
-}
-});
-
-
-  });
-</script>
 @endsection

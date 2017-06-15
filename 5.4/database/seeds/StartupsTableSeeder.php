@@ -26,7 +26,7 @@ class StartupsTableSeeder extends Seeder
                 'logo' => '121492889925v2zkgin04neno9b.jpg',
                 'cover' => '1214928899681gbbqtpkc2ds0ky.jpg',
                 'title' => 'Intupod',
-            'description' => 'INTU Global Shelter (IGS) was established in 2015 to provide innovative design solutions to meet housing and shelter needs worldwide. Over the past 18 months the company has developed and prototyped products ready for market. IGS shelter products are designed to be scalable for global impact.',
+                'description' => 'INTU Global Shelter (IGS) was established in 2015 to provide innovative design solutions to meet housing and shelter needs worldwide. Over the past 18 months the company has developed and prototyped products ready for market. IGS shelter products are designed to be scalable for global impact.',
                 'oneliner' => 'INTU Global Shelter provides innovative design solutions to meet housing and shelter needs worldwide.',
                 'website' => 'http://intupod.com',
                 'twitter' => 'http://www.facebook.com',

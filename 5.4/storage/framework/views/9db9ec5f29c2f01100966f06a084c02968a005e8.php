@@ -89,24 +89,23 @@
                   <td><?php echo e($user->startups()->count()); ?></td>
                   <td><?php echo e(date('d M, y', strtotime($user->created_at))); ?></td>
                   <td>
+                   <div id="delete" data-field-id="User">
+                     <?php if( $user->id <> Auth::user()->id && $user->id <> 1 ): ?>
 
-                   <?php if( $user->id <> Auth::user()->id && $user->id <> 1 ): ?>
+                      <a href="<?php echo e(route('user.edit', $user->id)); ?>" class="btn btn-success btn-xs padding-btn">Edit</a>
 
-                   <a href="<?php echo e(route('user.edit', $user->id)); ?>" class="btn btn-success btn-xs padding-btn">
-                    Edit
-                  </a> 
+                      <?php echo Form::open([
+                      'method' => 'DELETE',
+                      'route' => ['user.destroy', $user->id],
+                      'id' => 'form'.$user->id,
+                      'class' => 'displayInline'
+                      ]); ?>
 
-                  <?php echo Form::open([
-                  'method' => 'DELETE',
-                  'route' => ['user.destroy', $user->id],
-                  'id' => 'form'.$user->id,
-                  'class' => 'displayInline'
-                  ]); ?>
+                      <?php echo Form::submit('Delete', ['data-url' => $user->id, 'class' => 'btn btn-danger btn-xs padding-btn actionDelete']); ?>
 
-                  <?php echo Form::submit('Delete', ['data-url' => $user->id, 'class' => 'btn btn-danger btn-xs padding-btn actionDelete']); ?>
+                      <?php echo Form::close(); ?>
 
-                  <?php echo Form::close(); ?>
-
+                    </div>
 
                   <?php else: ?>
                   ------------
@@ -143,38 +142,9 @@
 
 <?php $__env->startSection('javascript'); ?>
 
-<script type="text/javascript">
+<!-- Include Javascript -->
+<?php echo $__env->make('includes.javascript-admin-delete', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 
-  $(".actionDelete").click(function(e) {
-    e.preventDefault();
-
-    var element = $(this);
-    var id      = element.attr('data-url');
-    var form    = $(element).parents('form');
-
-    element.blur();
-
-    swal(
-      {   title: "Confirm",  
-      text: "Delete User?",
-      type: "warning", 
-      showLoaderOnConfirm: true,
-      showCancelButton: true,   
-      confirmButtonColor: "#DD6B55",  
-      confirmButtonText: "Confirm",   
-      cancelButtonText: "Cancel",  
-      closeOnConfirm: false, 
-    }, 
-    function(isConfirm){  
-      if (isConfirm) {   
-        form.submit(); 
-//$('#form' + id).submit();
-}
-});
-
-
-  });
-</script>
 <?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('admin.layout', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

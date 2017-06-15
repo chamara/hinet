@@ -57,14 +57,14 @@
                   <td><span class="label label-<?php echo e($mode); ?>"><?php echo e(ucfirst($category->mode)); ?></span></td>
 
                   <td>
-                    <a href="<?php echo e(url('panel/admin/categories/edit/').'/'.$category->id); ?>" class="btn btn-success btn-xs padding-btn">
-                      Edit
-                    </a> 
-
-                    <a href="javascript:void(0);" data-url="<?php echo e(url('panel/admin/categories/delete/').'/'.$category->id); ?>" class="btn btn-danger btn-xs padding-btn actionDelete">
-                      Delete
-                    </a>
-
+                    <div id="delete" data-field-id="Category">
+                      <a href="<?php echo e(url('panel/admin/categories/edit/').'/'.$category->id); ?>" class="btn btn-success btn-xs padding-btn">
+                        Edit
+                      </a>
+                      <a href="javascript:void(0);" data-url="<?php echo e(url('panel/admin/categories/delete/').'/'.$category->id); ?>" class="btn btn-danger btn-xs padding-btn actionDelete">
+                        Delete
+                      </a>
+                    </div>
                   </td>                  
                 </tr><!-- /.TR -->
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -86,36 +86,9 @@
 
 <?php $__env->startSection('javascript'); ?>
 
-<script type="text/javascript">
+<!-- Include Javascript -->
+<?php echo $__env->make('includes.javascript-admin-delete', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 
-  $(".actionDelete").click(function(e) {
-    e.preventDefault();
-
-    var element = $(this);
-    var url     = element.attr('data-url');
-
-    element.blur();
-
-    swal(
-      {   title: "Delete",  
-      text: "Delete Category",  
-      type: "warning", 
-      showLoaderOnConfirm: true,  
-      showCancelButton: true,   
-      confirmButtonColor: "#DD6B55",  
-      confirmButtonText: "Confirm",   
-      cancelButtonText: "Cancel",  
-      closeOnConfirm: false,  
-    }, 
-    function(isConfirm){  
-      if (isConfirm) {     
-        window.location.href = url;
-      }
-    });
-
-
-  });
-</script>
 <?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('admin.layout', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

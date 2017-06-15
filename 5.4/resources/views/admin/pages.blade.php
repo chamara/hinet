@@ -50,23 +50,24 @@
             <td>{{ $page->title }}</td>
             <td>{{ strtolower($page->slug) }}</td>
             <td>
-             <a href="{{ route('pages.edit', $page->id) }}" class="btn btn-success btn-xs padding-btn">
-              Edit
-            </a> 
+              <div id="delete" data-field-id="Post">
+                <a href="{{ route('pages.edit', $page->id) }}" class="btn btn-success btn-xs padding-btn">
+                  Edit
+                </a> 
 
-            @if( $data->count() != 1 )
+                @if( $data->count() != 1 )
 
-            {!! Form::open([
-            'method' => 'DELETE',
-            'route' => ['pages.destroy', $page->id],
-            'id' => 'form'.$page->id,
-            'class' => 'displayInline'
-            ]) !!}
-            {!! Form::submit('Delete', ['data-url' => $page->id, 'class' => 'btn btn-danger btn-xs padding-btn actionDelete']) !!}
-            {!! Form::close() !!}
+                  {!! Form::open([
+                  'method' => 'DELETE',
+                  'route' => ['pages.destroy', $page->id],
+                  'id' => 'form'.$page->id,
+                  'class' => 'displayInline'
+                  ]) !!}
+                  {!! Form::submit('Delete', ['data-url' => $page->id, 'class' => 'btn btn-danger btn-xs padding-btn actionDelete']) !!}
+                  {!! Form::close() !!}
 
-            @endif
-
+                @endif
+            </div>
           </td>
 
         </tr><!-- /.TR -->
@@ -90,36 +91,7 @@
 
 @section('javascript')
 
-<script type="text/javascript">
+<!-- Include Javascript -->
+@include('includes.javascript-admin-delete')
 
-  $(".actionDelete").click(function(e) {
-    e.preventDefault();
-    
-    var element = $(this);
-    var id      = element.attr('data-url');
-    var form    = $(element).parents('form');
-    
-    element.blur();
-    
-    swal(
-      {   title: "Confirm",  
-      text: "Delete Page?",
-      type: "warning",
-      showLoaderOnConfirm: true,
-      showCancelButton: true,   
-      confirmButtonColor: "#DD6B55",  
-      confirmButtonText: "Confirm",   
-      cancelButtonText: "Cancel",  
-      closeOnConfirm: false, 
-    }, 
-    function(isConfirm){  
-      if (isConfirm) {  
-       form.submit();  
-		    	 	//$('#form' + id).submit();
-          }
-        });
-    
-    
-  });
-</script>
 @endsection

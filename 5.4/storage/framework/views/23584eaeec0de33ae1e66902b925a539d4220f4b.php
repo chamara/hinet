@@ -339,7 +339,30 @@
             </form>
           </div>
         </div>
-      </div>
+          <!-- *********** LOGO ************* -->
+          <form action="<?php echo e(url('upload/logo')); ?>" method="POST" id="formLogo" accept-charset="UTF-8" enctype="multipart/form-data">
+            <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
+            <input type="hidden" name="id" value="">
+            <div class="text-center">
+              <button type="button" id="logo_file">
+                <img src="" alt="Logo" class="logoUser" width="150" height="150"/>
+              </button>
+              <input type="file" name="photo" id="uploadLogo" accept="image/*" style="visibility: hidden;">
+            </div>
+          </form><!-- *********** LOGO ************* -->
+
+          <!-- *********** cover ************* -->
+          <form action="<?php echo e(url('upload/cover')); ?>" method="POST" id="formCover" accept-charset="UTF-8" enctype="multipart/form-data">
+            <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
+            <input type="hidden" name="id" value="">
+            <div class="text-center">
+              <button type="button" id="cover_file">
+               <img src="" alt="Cover" class="coverUser" height="150px" width="200px">
+             </button>
+             <input type="file" name="photo" id="uploadCover" accept="image/*" style="visibility: hidden;">
+           </div>
+         </form><!-- *********** Cover ************* -->
+        </div>
     </div>
   </section>
 </div>

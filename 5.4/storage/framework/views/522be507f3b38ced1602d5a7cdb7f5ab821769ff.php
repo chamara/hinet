@@ -94,8 +94,16 @@
         </div>
       </form>
     </div>
-
   </div>
+  <form action="<?php echo e(url('upload/avatar')); ?>" method="POST" id="formAvatar" accept-charset="UTF-8" enctype="multipart/form-data">
+    <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
+    <div class="block-block text-center">
+     <button type="button" class="btn btn-default no-padding btn-border btn-sm" id="avatar_file" style="margin-top: 10px;">
+       <img src="" alt="User" width="150" height="150" class="avatarUser"  />
+     </button>
+     <input type="file" name="photo" id="uploadAvatar" accept="image/*" style="visibility: hidden;">
+   </div>
+  </form>
 </div>
 
 </div>

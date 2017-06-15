@@ -323,7 +323,41 @@
             </form>
 
           </div>
+
         </div>
+
+          <!-- *********** LOGO ************* -->
+          <form action="{{url('upload/logo')}}" method="POST" id="formLogo" accept-charset="UTF-8" enctype="multipart/form-data">
+            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+            <input type="hidden" name="id" value="{{ $data->id }}">
+            <div class="text-center">
+              <button type="button" id="logo_file">
+                <img src="{{ asset('public/startups/logo').'/'.$data->logo }}" class="logoUser" width="150" height="150"/>
+              </button>
+              <input type="file" name="photo" id="uploadLogo" accept="image/*" style="visibility: hidden;">
+            </div>
+          </form><!-- *********** LOGO ************* -->
+
+          <!-- *********** COVER ************* -->
+          <form action="{{url('upload/cover')}}" method="POST" id="formCover" accept-charset="UTF-8" enctype="multipart/form-data">
+            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+            <input type="hidden" name="id" value="{{ $data->id }}">
+            <div class="text-center">
+              <button type="button" id="cover_file">
+                <img src="{{ asset('public/startups/cover').'/'.$data->cover }}" class="coverUser" height="150px" width="auto"/>
+              </button>
+              <input type="file" name="photo" id="uploadCover" accept="image/*" style="visibility: hidden;">
+            </div>
+          </form><!-- *********** COVER ************* -->
+        <div class="block-block text-center" id="delete" data-field-id="Startup">
+          {!! Form::open([
+          'method' => 'DELETE',
+          'route' => ['startups.destroy', $data->id],
+          'class' => 'displayInline'
+          ]) !!}
+          {!! Form::submit('Delete', ['data-url' => $data->id, 'class' => 'btn btn-lg btn-danger btn-block margin-bottom-10 actionDelete']) !!}
+          {!! Form::close() !!}
+        </div>          
       </div>
     </div>
   </section>
@@ -332,32 +366,35 @@
 
 @section('javascript')
 
-  <!-- icheck -->
-  <script src="{{ asset('public/plugins/iCheck/icheck.min.js') }}" type="text/javascript"></script>
-  <script src="{{ asset('public/plugins/tagsinput/jquery.tagsinput.min.js') }}" type="text/javascript"></script>
-  <script src="{{ asset('public/js/style-admin-elements.js') }}"></script>
+<!-- Include Javascript -->
+@include('includes.javascript-admin-delete')
 
-  <script type="text/javascript">
-    $("#tagInput").tagsInput({
-     'delimiter': [','],   // Or a string with a single delimiter. Ex: ';'
-     'width':'auto',
-     'height':'auto',
-     'removeWithBackspace' : true,
-     'minChars' : 3,
-     'maxChars' : 25,
-     'defaultText':'Add',
-     /*onChange: function() {
-        var input = $(this).siblings('.tagsinput');
-        var maxLen = 4;
-      
-        if( input.children('span.tag').length >= maxLen){
-          input.children('div').hide();
-        }
-        else{
-          input.children('div').show();
-        }
-      },*/
-    });
-  </script>
+<!-- icheck -->
+<script src="{{ asset('public/plugins/iCheck/icheck.min.js') }}" type="text/javascript"></script>
+<script src="{{ asset('public/plugins/tagsinput/jquery.tagsinput.min.js') }}" type="text/javascript"></script>
+<script src="{{ asset('public/js/style-admin-elements.js') }}"></script>
+
+<script type="text/javascript">
+  $("#tagInput").tagsInput({
+   'delimiter': [','],   // Or a string with a single delimiter. Ex: ';'
+   'width':'auto',
+   'height':'auto',
+   'removeWithBackspace' : true,
+   'minChars' : 3,
+   'maxChars' : 25,
+   'defaultText':'Add',
+   /*onChange: function() {
+      var input = $(this).siblings('.tagsinput');
+      var maxLen = 4;
+    
+      if( input.children('span.tag').length >= maxLen){
+        input.children('div').hide();
+      }
+      else{
+        input.children('div').show();
+      }
+    },*/
+  });
+</script>
 
 @endsection

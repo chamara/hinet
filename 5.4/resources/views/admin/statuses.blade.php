@@ -56,12 +56,14 @@
                   } ?>
                   <td><span class="label label-{{$mode}}">{{ ucfirst($status->mode) }}</span></td>                  
                   <td>
-                    <a href="{{ url('panel/admin/statuses/edit/').'/'.$status->id }}" class="btn btn-success btn-xs padding-btn">
-                      Edit
-                    </a> 
-                    <a href="javascript:void(0);" data-url="{{ url('panel/admin/statuses/delete/').'/'.$status->id }}" class="btn btn-danger btn-xs padding-btn actionDelete">
-                      Delete
-                    </a>
+                    <div id="delete" data-field-id="Status">
+                      <a href="{{ url('panel/admin/statuses/edit/').'/'.$status->id }}" class="btn btn-success btn-xs padding-btn">
+                        Edit
+                      </a> 
+                      <a href="javascript:void(0);" data-url="{{ url('panel/admin/statuses/delete/').'/'.$status->id }}" class="btn btn-danger btn-xs padding-btn actionDelete">
+                        Delete
+                      </a>
+                    </div>
                   </td>
                 </tr><!-- /.TR -->
                 @endforeach
@@ -78,34 +80,7 @@
 
 @section('javascript')
 
-<script type="text/javascript">
+<!-- Include Javascript -->
+@include('includes.javascript-admin-delete')
 
-  $(".actionDelete").click(function(e) {
-    e.preventDefault();
-
-    var element = $(this);
-    var url     = element.attr('data-url');
-
-    element.blur();
-
-    swal(
-      {   title: "Delete",  
-      text: "Delete Status?",  
-      type: "warning", 
-      showLoaderOnConfirm: true,  
-      showCancelButton: true,   
-      confirmButtonColor: "#DD6B55",  
-      confirmButtonText: "Confirm",   
-      cancelButtonText: "Cancel",  
-      closeOnConfirm: false,  
-    }, 
-    function(isConfirm){  
-      if (isConfirm) {     
-        window.location.href = url;
-      }
-    });
-
-
-  });
-</script>
 @endsection

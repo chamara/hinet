@@ -67,8 +67,15 @@
                 @foreach( $data as $startup )
                 <tr>
                   <td>{{ $startup->id }}</td>
-                  <td><img src="{{asset('public/startups/logo').'/'.$startup->logo}}" width="20" /> 
-                    <a title="{{$startup->title}}" href="{{ url('startup',$startup->id) }}" target="_blank">{{ str_limit($startup->title,20,'...') }} <i class="fa fa-external-link-square"></i></a>
+                  <td><img src="{{asset('public/startups/logo').'/'.$startup->logo}}" width="20" />
+
+                    @if( $startup->status == 'active' && $startup->finalized == 0 )
+                      <a title="{{$startup->title}}" href="{{ url('startup', $startup->id) }}" target="_blank">{{ str_limit($startup->title,20,'...') }} <i class="fa fa-external-link-square"></i>
+                      </a>
+                    @else
+                      {{ str_limit($startup->title,20,'...') }}
+                    @endif
+
                   </td>
                   <td>{{ $startup->user()->name }}</td>
                   <td>{{ $settings->currency_symbol.number_format($startup->goal) }}</td>

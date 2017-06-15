@@ -110,9 +110,15 @@
 
         <div class="col-md-3">
 
-          <div class="block-block text-center">
-            <img src="<?php echo e(asset('public/avatar').'/'.$data->avatar); ?>" class="thumbnail img-responsive">
-          </div>
+          <form action="<?php echo e(url('upload/avatar')); ?>" method="POST" id="formAvatar" accept-charset="UTF-8" enctype="multipart/form-data">
+            <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
+            <div class="block-block text-center">
+             <button type="button" class="btn btn-default no-padding btn-border btn-sm" id="avatar_file" style="margin-top: 10px;">
+               <img src="<?php echo e(asset('public/avatar').'/'.$data->avatar); ?>" alt="User" width="150" height="150" class="avatarUser"  />
+             </button>
+             <input type="file" name="photo" id="uploadAvatar" accept="image/*" style="visibility: hidden;">
+           </div>
+          </form>
 
           <ol class="list-group">
             <li class="list-group-item"> Registered <span class="pull-right color-strong"><?php echo e(date('d M, y', strtotime($data->created_at))); ?></span></li>
@@ -126,7 +132,7 @@
             <li class="list-group-item"> Investments <strong class="pull-right color-strong"><?php echo e(App\Helper::formatNumber( $data->investments()->count() )); ?></strong></li>
           </ol>
 
-          <div class="block-block text-center">
+          <div class="block-block text-center" id="delete" data-field-id="User">
             <?php echo Form::open([
             'method' => 'DELETE',
             'route' => ['user.destroy', $data->id],
@@ -147,39 +153,61 @@
 
 <?php $__env->startSection('javascript'); ?>
 
+<!-- Include Javascript -->
+<?php echo $__env->make('includes.javascript-admin-delete', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+<?php echo $__env->make('includes.javascript-password-validation', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+
 <script type="text/javascript">
 
-  $(".actionDelete").click(function(e) {
-    e.preventDefault();
+//<<<<<<<=================== * UPLOAD AVATAR  * ===============>>>>>>>//
+$(document).on('change', '#uploadAvatar', function(){
 
-    var element = $(this);
-    var id     = element.attr('data-url');
-    var form    = $(element).parents('form');
+  $('.wrap-loader').show();
+  
+  (function(){
+    $("#formAvatar").ajaxForm({
+      dataType : 'json',  
+      success:  function(e){
+        if( e ){
+          if( e.success == false ){
+            $('.wrap-loader').hide();
 
-    element.blur();
+            var error = '';
+            for($key in e.errors){
+             error += '' + e.errors[$key] + '';
+          }
+          swal({
+           title: "Error",   
+           text: ""+ error +"",   
+           type: "error",   
+           confirmButtonText: "Ok" 
+          });
 
-    swal(
-      { title: "Confirm",  
-      text: "Delete User",
-      type: "warning", 
-      showLoaderOnConfirm: true,
-      showCancelButton: true,   
-      confirmButtonColor: "#DD6B55",  
-      confirmButtonText: "Confirm",   
-      cancelButtonText: "Cancel",  
-      closeOnConfirm: false, 
-    }, 
-    function(isConfirm){  
-      if (isConfirm) {   
-        form.submit(); 
-      }
-    });
-  });
+          $('#uploadAvatar').val('');
 
+          } else {
+              $('#uploadAvatar').val('');
+              $('.avatarUser').attr('src',e.avatar);
+              $('.wrap-loader').hide();
+            }
+          } //<-- e
+          else {
+            $('.wrap-loader').hide();
+            swal({   
+            title: "Error",   
+            text: 'Error',   
+            type: "error",   
+            confirmButtonText: "Ok" 
+            });
+
+            $('#uploadAvatar').val('');
+          }
+      }//<----- SUCCESS
+    }).submit();
+  })(); //<--- FUNCTION %
+});//<<<<<<<--- * ON * --->>>>>>>>>>>
+//<<<<<<<=================== * UPLOAD AVATAR  * ===============>>>>>>>//
 </script>
 
 <?php $__env->stopSection(); ?>
-
-<!-- Include Javascript -->
-<?php echo $__env->make('includes.javascript-password-validation', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 <?php echo $__env->make('admin.layout', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

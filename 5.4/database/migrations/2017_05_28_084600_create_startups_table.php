@@ -28,7 +28,7 @@ class CreateStartupsTable extends Migration
             $table->string('facebook');
             $table->string('linkedin');
             $table->string('pitchdeck');
-            $table->string('status')->default('active');
+            $table->enum('status', array('active', 'pending', 'finalized'))->nullabel(false)->default('active');
             $table->integer('goal')->unsigned()->index();
             $table->decimal('equity', 6);
             $table->integer('valuation')->unsigned()->index();

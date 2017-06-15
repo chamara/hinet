@@ -61,54 +61,52 @@ if($user->role == 'startup'){
 
 <script type="text/javascript">
 
-	//<<<<<<<=================== * UPLOAD AVATAR  * ===============>>>>>>>//
-  $(document).on('change', '#uploadAvatar', function(){
+//<<<<<<<=================== * UPLOAD AVATAR  * ===============>>>>>>>//
+$(document).on('change', '#uploadAvatar', function(){
 
-    $('.wrap-loader').show();
-    
-    (function(){
-      $("#formAvatar").ajaxForm({
-        dataType : 'json',	
-        success:  function(e){
-          if( e ){
-            if( e.success == false ){
+  $('.wrap-loader').show();
+  
+  (function(){
+    $("#formAvatar").ajaxForm({
+      dataType : 'json',  
+      success:  function(e){
+        if( e ){
+          if( e.success == false ){
+            $('.wrap-loader').hide();
+
+            var error = '';
+            for($key in e.errors){
+             error += '' + e.errors[$key] + '';
+          }
+          swal({
+           title: "Error",   
+           text: ""+ error +"",   
+           type: "error",   
+           confirmButtonText: "Ok" 
+          });
+
+          $('#uploadAvatar').val('');
+
+          } else {
+              $('#uploadAvatar').val('');
+              $('.avatarUser').attr('src',e.avatar);
               $('.wrap-loader').hide();
+            }
+          } //<-- e
+          else {
+            $('.wrap-loader').hide();
+            swal({   
+            title: "Error",   
+            text: 'Error',   
+            type: "error",   
+            confirmButtonText: "Ok" 
+            });
 
-              var error = '';
-              for($key in e.errors){
-               error += '' + e.errors[$key] + '';
-             }
-             swal({   
-               title: "Error",   
-               text: ""+ error +"",   
-               type: "error",   
-               confirmButtonText: "Ok" 
-             });
-
-             $('#uploadAvatar').val('');
-
-           } else {
-
-             $('#uploadAvatar').val('');
-             $('.avatarUser').attr('src',e.avatar);
-             $('.wrap-loader').hide();
-           }
-
-		}//<-- e
-   else {
-    $('.wrap-loader').hide();
-    swal({   
-     title: "Error",   
-     text: 'Error',   
-     type: "error",   
-     confirmButtonText: "Ok" 
-   });
-
-    $('#uploadAvatar').val('');
-  }
-		   }//<----- SUCCESS
+            $('#uploadAvatar').val('');
+          }
+      }//<----- SUCCESS
     }).submit();
-    })(); //<--- FUNCTION %
+  })(); //<--- FUNCTION %
 });//<<<<<<<--- * ON * --->>>>>>>>>>>
 //<<<<<<<=================== * UPLOAD AVATAR  * ===============>>>>>>>//
 </script>
