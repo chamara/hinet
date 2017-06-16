@@ -101,7 +101,7 @@ Route::get('/register/startup', 'Auth\RegisterController@startup');
 Route::get('/register/investor', 'Auth\RegisterController@investor');
 
 // Register
-Route::get('/register', 'Auth\RegisterController@register')->middleware('redirect');
+Route::get('/register', 'Auth\RegisterController@register');
 
 /* 
  |

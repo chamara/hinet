@@ -5,7 +5,7 @@
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h4>Admin
-      <i class="fa fa-angle-right margin-separator"></i>Picklists
+      <i class="fa fa-angle-right margin-separator"></i>Maintain Lookups
       <i class="fa fa-angle-right margin-separator"></i>Categories
       <i class="fa fa-angle-right margin-separator"></i>{{ $categories->name }}      
       <i class="fa fa-angle-right margin-separator"></i>Edit

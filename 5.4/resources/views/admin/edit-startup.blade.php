@@ -337,27 +337,19 @@
               <input type="file" name="photo" id="uploadLogo" accept="image/*" style="visibility: hidden;">
             </div>
           </form><!-- *********** LOGO ************* -->
-
-          <!-- *********** COVER ************* -->
+          <p></p>
+          <!-- *********** cover ************* -->
           <form action="{{url('upload/cover')}}" method="POST" id="formCover" accept-charset="UTF-8" enctype="multipart/form-data">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <input type="hidden" name="id" value="{{ $data->id }}">
             <div class="text-center">
               <button type="button" id="cover_file">
-                <img src="{{ asset('public/startups/cover').'/'.$data->cover }}" class="coverUser" height="150px" width="auto"/>
-              </button>
-              <input type="file" name="photo" id="uploadCover" accept="image/*" style="visibility: hidden;">
-            </div>
-          </form><!-- *********** COVER ************* -->
-        <div class="block-block text-center" id="delete" data-field-id="Startup">
-          {!! Form::open([
-          'method' => 'DELETE',
-          'route' => ['startups.destroy', $data->id],
-          'class' => 'displayInline'
-          ]) !!}
-          {!! Form::submit('Delete', ['data-url' => $data->id, 'class' => 'btn btn-lg btn-danger btn-block margin-bottom-10 actionDelete']) !!}
-          {!! Form::close() !!}
-        </div>          
+               <img src="{{ asset('public/startups/cover').'/'.$data->cover }}" class="coverUser" height="150px" width="auto"/>
+             </button>
+             <input type="file" name="photo" id="uploadCover" accept="image/*" style="visibility: hidden;">
+           </div>
+         </form><!-- *********** Cover ************* -->
+        
       </div>
     </div>
   </section>
@@ -394,6 +386,130 @@
         input.children('div').show();
       }
     },*/
+  });
+</script>
+
+<script type="text/javascript">
+
+//<<<<<<<=================== * UPLOAD COVER  * ===============>>>>>>>//
+$(document).on('change', '#uploadCover', function(){
+
+  $('.wrap-loader').show();
+
+  (function(){
+    $("#formCover").ajaxForm({
+      dataType : 'json', 
+      success:  function(e){
+        if( e ){
+          if( e.success == false ){
+            $('.wrap-loader').hide();
+
+            var error = '';
+            for($key in e.errors){
+              error += '' + e.errors[$key] + '';
+            }
+            swal({   
+              title: "Error",   
+              text: ""+ error +"",   
+              type: "error",   
+              confirmButtonText: "Ok" 
+            });
+
+            $('#uploadCover').val('');
+
+          } else {
+
+            $('#uploadCover').val('');
+            $('.coverUser').attr('src',e.cover);
+            $('.wrap-loader').hide();
+          }
+
+}//<-- e
+else {
+  $('.wrap-loader').hide();
+  swal({   
+    title: "Error",   
+    text: 'Error',   
+    type: "error",   
+    confirmButtonText: "Ok" 
+  });
+
+  $('#uploadCover').val('');
+}
+}//<----- SUCCESS
+}).submit();
+})(); //<--- FUNCTION %
+});//<<<<<<<--- * ON * --->>>>>>>>>>>
+//<<<<<<<=================== * UPLOAD COVER  * ===============>>>>>>>//
+</script>
+
+<script type="text/javascript">
+
+//<<<<<<<=================== * UPLOAD LOGO  * ===============>>>>>>>//
+$(document).on('change', '#uploadLogo', function(){
+
+  $('.wrap-loader').show();
+
+  (function(){
+    $("#formLogo").ajaxForm({
+      dataType : 'json', 
+      success:  function(e){
+        if( e ){
+          if( e.success == false ){
+            $('.wrap-loader').hide();
+
+            var error = '';
+            for($key in e.errors){
+              error += '' + e.errors[$key] + '';
+            }
+            swal({   
+              title: "Error",   
+              text: ""+ error +"",   
+              type: "error",   
+              confirmButtonText: "Ok" 
+            });
+
+            $('#uploadLogo').val('');
+
+          } else {
+
+            $('#uploadLogo').val('');
+            $('.logoUser').attr('src',e.logo);
+            $('.wrap-loader').hide();
+          }
+
+}//<-- e
+else {
+  $('.wrap-loader').hide();
+  swal({   
+    title: "Error",   
+    text: 'Error',   
+    type: "error",   
+    confirmButtonText: "Ok" 
+  });
+
+  $('#uploadLogo').val('');
+}
+}//<----- SUCCESS
+}).submit();
+})(); //<--- FUNCTION %
+});//<<<<<<<--- * ON * --->>>>>>>>>>>
+//<<<<<<<=================== * UPLOAD LOGO  * ===============>>>>>>>//
+</script>
+
+<!-- Limit Textarea Function -->
+<script type="text/javascript">
+  $(document).ready(function () {
+    $('textarea').on("propertychange keyup input paste",
+
+      function () {
+        var limit = $(this).data("limit");
+        var remainingChars = limit - $(this).val().length;
+        if (remainingChars <= 0) {
+          $(this).val($(this).val().substring(0, limit));
+        }
+        $(this).next('span').text(remainingChars<=0?0:remainingChars);
+      });
   });
 </script>
 

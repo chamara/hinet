@@ -1,4 +1,3 @@
-<?php $settings = App\Models\AdminSettings::first(); ?>
 
 
 <?php $__env->startSection('title'); ?>Dashboard - <?php $__env->stopSection(); ?>
@@ -263,5 +262,3 @@ else {
 </script>
 
 <?php $__env->stopSection(); ?>
-
-<?php echo $__env->make('app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

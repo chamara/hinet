@@ -149,8 +149,8 @@ $settings = App\Models\AdminSettings::first();
          </li><!-- ./Links -->
 
           <!-- Links -->
-          <li @if( Request::is('panel/admin/picklists' )) class="treeview active" @endif>
-            <a href="#"><i class="fa fa-link"></i> <span>Picklists</span> <i class="fa fa-angle-left pull-right"></i></a>
+          <li @if( Request::is('panel/admin/lookups' )) class="treeview active" @endif>
+            <a href="#"><i class="fa fa-link"></i> <span>Maintain Lookups</span> <i class="fa fa-angle-left pull-right"></i></a>
             <ul class="treeview-menu">
              <li @if( Request::is('panel/admin/categories' )) class="active" @endif>
                <a href="{{ url('panel/admin/categories') }}"><span>Categories</span></a>
@@ -203,9 +203,9 @@ $settings = App\Models\AdminSettings::first();
 
 @yield('javascript')
 
-    <!-- Optionally, you can add Slimscroll and FastClick plugins.
-          Both of these plugins are recommended to enhance the
-          user experience. Slimscroll is required when using the
-          fixed layout. -->
-        </body>
-        </html>
+<!-- Optionally, you can add Slimscroll and FastClick plugins.
+Both of these plugins are recommended to enhance the
+user experience. Slimscroll is required when using the
+fixed layout. -->
+</body>
+</html>

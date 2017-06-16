@@ -4,13 +4,12 @@
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h4>
-       Admin<i class="fa fa-angle-right margin-separator"></i>Picklists<i class="fa fa-angle-right margin-separator"></i>Categories
-       <a href="{{ url('panel/admin/categories/add') }}" class="btn btn-sm btn-success no-shadow pull-right"><i class="glyphicon glyphicon-plus myicon-right"></i> Add Category
-       </a>
-     </h4>    
-    </section>
+  <section class="content-header">
+    <h4>Admin
+      <i class="fa fa-angle-right margin-separator"></i>Maintain Lookups
+      <i class="fa fa-angle-right margin-separator"></i>Categories<a href="{{ url('panel/admin/categories/add') }}" class="btn btn-sm btn-success no-shadow pull-right"><i class="glyphicon glyphicon-plus myicon-right"></i>Add Category</a>
+   </h4>    
+  </section>
 
   <!-- Main content -->
   <section class="content">

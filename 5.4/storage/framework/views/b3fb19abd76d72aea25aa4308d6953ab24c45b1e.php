@@ -6,7 +6,7 @@
   <!-- Content Header (Page header) -->
     <section class="content-header">
       <h4>
-       Admin<i class="fa fa-angle-right margin-separator"></i>Picklists<i class="fa fa-angle-right margin-separator"></i>Statuses
+       Admin<i class="fa fa-angle-right margin-separator"></i>Maintain Lookups<i class="fa fa-angle-right margin-separator"></i>Statuses
        <a href="<?php echo e(url('panel/admin/statuses/add')); ?>" class="btn btn-sm btn-success no-shadow pull-right"><i class="glyphicon glyphicon-plus myicon-right"></i> Add Status
        </a>
      </h4>    

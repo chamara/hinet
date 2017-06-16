@@ -10,8 +10,9 @@
   <!--Header-->
   <section class="content-header">
     <h4>Admin 
-      <i class="fa fa-angle-right margin-separator"></i> Statuses
-      <i class="fa fa-angle-right margin-separator"></i> Add New
+      <i class="fa fa-angle-right margin-separator"></i>Maintain Lookups
+      <i class="fa fa-angle-right margin-separator"></i>Statuses
+      <i class="fa fa-angle-right margin-separator"></i>Add New
     </h4>
   </section>
 

@@ -1,5 +1,4 @@
-<?php $settings = App\Models\AdminSettings::first(); ?>
-@extends('app')
+
 
 @section('title')Dashboard - @endsection
 

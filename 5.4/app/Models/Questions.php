@@ -9,6 +9,6 @@ class Questions extends Model {
 	
 	public function startups() {
 		//return $this->hasMany('App\Models\startups')->where('status','active');
-		return $this->belongsToMany('App\Models\Startups')->where('status','active')->withTimestamps();
+		return $this->belongsToMany('App\Models\Startups')->where('status','active')->withTimestamps()->withPivot('response_1', 'response_2');
 	}
 }
