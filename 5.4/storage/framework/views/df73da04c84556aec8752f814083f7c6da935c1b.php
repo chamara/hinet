@@ -112,6 +112,7 @@
 
           <form action="<?php echo e(url('upload/avatar')); ?>" method="POST" id="formAvatar" accept-charset="UTF-8" enctype="multipart/form-data">
             <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
+            <input type="hidden" name="id" value="<?php echo e($data->id); ?>">
             <div class="block-block text-center">
              <button type="button" class="btn btn-default no-padding btn-border btn-sm" id="avatar_file" style="margin-top: 10px;">
                <img src="<?php echo e(asset('public/avatar').'/'.$data->avatar); ?>" alt="User" width="150" height="150" class="avatarUser"  />
@@ -155,7 +156,7 @@
 
 <!-- Include Javascript -->
 <?php echo $__env->make('includes.javascript-admin-delete', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
-<?php echo $__env->make('includes.javascript-password-validation', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+<?php echo $__env->make('includes.javascript_image_upload', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 
 <script type="text/javascript">
 

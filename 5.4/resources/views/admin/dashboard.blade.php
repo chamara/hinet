@@ -47,7 +47,7 @@ $total_investments = App\Models\investments::count();
         <!-- small box -->
         <div class="small-box bg-green">
           <div class="inner">
-            <h3>{{ $settings->currency_symbol }}{{ number_format( $total_raised_funds, 2 ) }}</h3>
+            <h3>{{ $settings->currency_symbol }}{{ \App\Helper::formatNumber( $total_raised_funds ) }}</h3>
             <p>Raised</p>
           </div>
           <div class="icon">
@@ -88,7 +88,7 @@ $total_investments = App\Models\investments::count();
       <section class="col-md-12">
         <div class="nav-tabs-custom">
           <ul class="nav nav-tabs pull-right ui-sortable-handle">
-            <li class="pull-left header"><i class="ion ion-cash"></i>Investments las 30 days</li>
+            <li class="pull-left header"><i class="ion ion-cash"></i>Investments in last 30 days</li>
           </ul>
           <div class="tab-content">
             <div class="tab-pane active">

@@ -6,7 +6,7 @@
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h4>
-     Admin<i class="fa fa-angle-right margin-separator"></i>Startups<i class="fa fa-angle-right margin-separator"></i>Startup Profiles (<?php echo e($data->total()); ?>)
+     Admin<i class="fa fa-angle-right margin-separator"></i>Startups<i class="fa fa-angle-right margin-separator"></i>Maintain Startups (<?php echo e($data->total()); ?>)
      <a href="<?php echo e(url('panel/admin/startup/add')); ?>" class="btn btn-sm btn-success no-shadow pull-right"><i class="glyphicon glyphicon-plus myicon-right"></i> Add Startup
      </a>
    </h4>    

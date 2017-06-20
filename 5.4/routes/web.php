@@ -95,13 +95,10 @@ Auth::routes();
 Route::get('/logout', 'Auth\LoginController@logout');
 
 // Startup Register
-Route::get('/register/startup', 'Auth\RegisterController@startup');
+Route::get('/register/startup', 'Auth\RegisterController@startup')->middleware('redirect');
 
 // Investor Register
-Route::get('/register/investor', 'Auth\RegisterController@investor');
-
-// Register
-Route::get('/register', 'Auth\RegisterController@register');
+Route::get('/register/investor', 'Auth\RegisterController@investor')->middleware('redirect');
 
 /* 
  |
@@ -147,7 +144,6 @@ Route::group(['middleware' => 'auth'], function() {
 	// Edit startup application
 	Route::get('edit/startup/application/{id}','startupsController@edit_application');
 	Route::post('edit/startup/application/{id}','startupsController@post_edit_application');
-	
 
 	// Post a document
 	Route::get('edit/startup/documents/{id}','startupsController@edit_documents');
@@ -155,18 +151,17 @@ Route::group(['middleware' => 'auth'], function() {
 	Route::post('edit/startup/documents/add/{id}','startupsController@post_edit_documents');
 	Route::get('edit/startup/documents/delete/{id}','startupsController@deleteDocuments');
 
-	// Post a teams
+	// Post a team
 	Route::get('edit/startup/teams/{id}','startupsController@edit_teams');
 	Route::get('edit/startup/teams/add/{id}','startupsController@edit_teams_add');
 	Route::post('edit/startup/teams/add/{id}','startupsController@post_edit_teams');
 	Route::get('edit/startup/teams/delete/{id}','startupsController@deleteTeams');
-	
 
-	// Post a Update
+	// Post an update
 	Route::get('update/startup/{id}','startupsController@update');
 	Route::post('update/startup/{id}','startupsController@post_update');
 
-	// Edit post a Update
+	// Edit post an Update
 	Route::get('edit/update/{id}','startupsController@edit_update');
 	Route::post('edit/update/{id}','startupsController@post_edit_update');
 	
@@ -222,10 +217,13 @@ Route::group(['middleware' => 'role'], function() {
 	// Add Startup
 	Route::get('panel/admin/startup/add','AdminController@addStartup');
 	Route::post('panel/admin/startup/add','AdminController@storeStartup');
+	Route::post('panel/admin/startups/edit/{id}','AdminController@post_edit_application');
 
 	// Edit Startup
 	Route::get('panel/admin/startups/edit/{id}','AdminController@editStartups');
 	Route::post('panel/admin/startups/edit/{id}','AdminController@postEditStartups');
+	Route::get('edit/startup/application/{id}','startupsController@edit_application');
+	
 			
 	// Delete Startup
 	Route::post('panel/admin/startup/delete','AdminController@deleteStartup');

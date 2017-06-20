@@ -9,7 +9,7 @@
 
 <!--Container-->
 <div class="container margin-bottom-40 margin-top-40">
-  <div class="text-center margin-bottom-40">
+  <div class="text-center margin-bottom-40 margin-top-60">
     <img src="{{ asset('public/img/logo-dark.png') }}" class="login-logo"/>
   </div>
 

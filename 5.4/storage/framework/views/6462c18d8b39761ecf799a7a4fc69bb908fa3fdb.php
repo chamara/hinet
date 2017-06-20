@@ -12,7 +12,7 @@
 
 <!--Container-->
 <div class="container margin-bottom-40 margin-top-40">
-  <div class="text-center">
+  <div class="text-center margin-top-60">
     <img src="<?php echo e(asset('public/img/logo-dark.png')); ?>" class="login-logo"/>
   </div>
   <div class="login-form">

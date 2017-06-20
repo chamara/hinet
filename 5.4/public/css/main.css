@@ -1892,10 +1892,11 @@ h1.title_api {
  * *************************
  */
  .navbar-inverse {
-  background: transparent;
+  /*background: transparent;*/
+  background: #1e2d3d;
   border: none;
   margin-bottom: 0;
-  height: 60px;
+  /*height: 60px;*/
 }
 .navbar-px {
     position: absolute;
@@ -1905,6 +1906,7 @@ h1.title_api {
 .jumbotron_set {
     margin-bottom: 40px;
 }
+
 /******* MIN 768  **********/
 @media screen and (min-width: 768px) {
 
@@ -1917,10 +1919,22 @@ h1.title_api {
   margin: 0 auto;
 }
 
+.account {
+	visibility: hidden;
+	clear: both;
+	display: none!important;
+}
+
+#avatar {
+	visibility: visible;
+}
+
 .jumbotron-bottom {
   padding: 65px 10px;
 }
 }
+
+/******* MAX 991  **********/
 
 @media screen and (max-width: 991px){
 
@@ -1939,11 +1953,15 @@ h1.title_api {
     margin-bottom: 40px;
 }
 
+.account {
+	visibility: visible;
 }
 
-/****** MAX 768 ******/
-@media screen and (max-width: 768px) {
-
+#avatar {
+	visibility: hidden;
+	clear: both;
+	display: none!important;
+}
 
 }
 
@@ -1954,6 +1972,16 @@ h1.title_api {
     background: #1e2d3d;
     text-align: right;
     z-index: 99999;
+}
+
+#avatar {
+	visibility: hidden;
+	clear: both;
+	display: none!important;
+}
+
+.account {
+	visibility: visible;
 }
 
 .profile-user-over {
@@ -2068,6 +2096,7 @@ h2.title-site {
 .navbar-inverse .navbar-toggle {
     border: none;
 }
+
 .dropdown-menu {
     background-color: #FFF;
     font-size: 16px;
@@ -2380,8 +2409,6 @@ a:active.btn-trans {
     max-height: 1500px;
     background-position: center center;
 }
-
-
 
 .radius-image {
     border-top-left-radius: 3px;

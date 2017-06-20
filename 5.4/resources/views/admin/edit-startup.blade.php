@@ -8,8 +8,8 @@
   <section class="content-header">
     <h4>Admin
       <i class="fa fa-angle-right margin-separator"></i>Startups
-      <i class="fa fa-angle-right margin-separator"></i>Startup Profiles
-      <i class="fa fa-angle-right margin-separator"></i>{{ $data->title }}
+      <i class="fa fa-angle-right margin-separator"></i>Maintain Startups
+      @if( $data->title != '') <i class="fa fa-angle-right margin-separator"></i>{{ $data->title }} @endif
       <i class="fa fa-angle-right margin-separator"></i>Edit
     </h4>
   </section>
@@ -60,26 +60,6 @@
                   <label class="col-sm-2 control-label">Tagline</label>
                   <div class="col-sm-10">
                     <input type="text" value="{{ $data->oneliner }}" name="tagline" id="tagline" class="form-control" placeholder="Tagline" required>
-                  </div>
-                </div>
-              </div>              
-
-              <!-- Start Box Body -->
-              <div class="box-body">
-                <div class="form-group">
-                  <label class="col-sm-2 control-label">Logo</label>
-                  <div class="col-sm-10">
-                    <input type="file" name="logo" id="logo" class="form-control input-lg" placeholder="Logo" >
-                  </div>
-                </div>
-              </div>
-
-              <!-- Start Box Body -->
-              <div class="box-body">
-                <div class="form-group">
-                  <label class="col-sm-2 control-label">Cover</label>
-                  <div class="col-sm-10">
-                    <input type="file" name="cover" id="cover" class="form-control input-lg" placeholder="Cover Page" >
                   </div>
                 </div>
               </div>
@@ -319,13 +299,12 @@
                 <a href="{{ url('panel/admin/startups') }}" class="btn btn-default">Cancel</a>
                 <button type="submit" class="btn btn-success pull-right">Save</button>
               </div>
-
             </form>
-
           </div>
-
         </div>
 
+
+        <div class="col-md-3">
           <!-- *********** LOGO ************* -->
           <form action="{{url('upload/logo')}}" method="POST" id="formLogo" accept-charset="UTF-8" enctype="multipart/form-data">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -349,7 +328,7 @@
              <input type="file" name="photo" id="uploadCover" accept="image/*" style="visibility: hidden;">
            </div>
          </form><!-- *********** Cover ************* -->
-        
+        </div>        
       </div>
     </div>
   </section>
@@ -359,6 +338,7 @@
 @section('javascript')
 
 <!-- Include Javascript -->
+@include('includes.javascript_image_upload')
 @include('includes.javascript-admin-delete')
 
 <!-- icheck -->

@@ -112,7 +112,7 @@ $settings = App\Models\AdminSettings::first();
              </li>
 
              <li <?php if( Request::is('panel/admin/startups')): ?> <?php endif; ?>>
-               <a href="<?php echo e(url('panel/admin/startups')); ?>"><span>Startup Profiles</span></a>
+               <a href="<?php echo e(url('panel/admin/startups')); ?>"><span>Maintain Startups</span></a>
              </li>
 
               <li <?php if( Request::is('panel/admin/questions')): ?> <?php endif; ?>>

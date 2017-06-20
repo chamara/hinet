@@ -95,15 +95,6 @@
       </form>
     </div>
   </div>
-  <form action="{{url('upload/avatar')}}" method="POST" id="formAvatar" accept-charset="UTF-8" enctype="multipart/form-data">
-    <input type="hidden" name="_token" value="{{ csrf_token() }}">
-    <div class="block-block text-center">
-     <button type="button" class="btn btn-default no-padding btn-border btn-sm" id="avatar_file" style="margin-top: 10px;">
-       <img src="" alt="User" width="150" height="150" class="avatarUser"  />
-     </button>
-     <input type="file" name="photo" id="uploadAvatar" accept="image/*" style="visibility: hidden;">
-   </div>
-  </form>
 </div>
 
 </div>
@@ -112,6 +103,10 @@
 @endsection
 
 @section('javascript')
+
+<!-- Include Javascript -->
+@include('includes.javascript_image_upload')
+
 <script type="text/javascript">
 
   $(".actionDelete").click(function(e) {
@@ -143,6 +138,3 @@
   });
 </script>
 @endsection
-
-<!-- Include Javascript -->
-@include('includes.javascript-password-validation')

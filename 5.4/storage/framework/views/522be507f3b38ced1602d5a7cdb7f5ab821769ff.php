@@ -95,15 +95,6 @@
       </form>
     </div>
   </div>
-  <form action="<?php echo e(url('upload/avatar')); ?>" method="POST" id="formAvatar" accept-charset="UTF-8" enctype="multipart/form-data">
-    <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
-    <div class="block-block text-center">
-     <button type="button" class="btn btn-default no-padding btn-border btn-sm" id="avatar_file" style="margin-top: 10px;">
-       <img src="" alt="User" width="150" height="150" class="avatarUser"  />
-     </button>
-     <input type="file" name="photo" id="uploadAvatar" accept="image/*" style="visibility: hidden;">
-   </div>
-  </form>
 </div>
 
 </div>
@@ -112,6 +103,10 @@
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('javascript'); ?>
+
+<!-- Include Javascript -->
+<?php echo $__env->make('includes.javascript_image_upload', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+
 <script type="text/javascript">
 
   $(".actionDelete").click(function(e) {
@@ -143,8 +138,4 @@
   });
 </script>
 <?php $__env->stopSection(); ?>
-
-<!-- Include Javascript -->
-<?php echo $__env->make('includes.javascript-password-validation', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
-
 <?php echo $__env->make('admin.layout', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

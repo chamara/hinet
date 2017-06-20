@@ -112,7 +112,7 @@ $settings = App\Models\AdminSettings::first();
              </li>
 
              <li @if( Request::is('panel/admin/startups')) @endif>
-               <a href="{{ url('panel/admin/startups') }}"><span>Startup Profiles</span></a>
+               <a href="{{ url('panel/admin/startups') }}"><span>Maintain Startups</span></a>
              </li>
 
               <li @if( Request::is('panel/admin/questions')) @endif>
